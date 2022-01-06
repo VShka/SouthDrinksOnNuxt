@@ -14,12 +14,12 @@
           :key="item.id"
           class="filter__list-item"
           :class="[
-            { filter__list_active: currentJuice.id === item.id },
-            { 'filter__list-item_shadow': currentJuice.id === item.id },
+            { filter__list_active: currentFirstFilter.id === item.id },
+            { 'filter__list-item_shadow': currentFirstFilter.id === item.id },
           ]"
           @click="selectVariant(item)"
         >
-          <div v-show="currentJuice.id === item.id" class="filter__item-border_active"></div>
+          <div v-show="currentFirstFilter.id === item.id" class="filter__item-border_active"></div>
 
           <svg
             v-show="item.id === 'pocket'"
@@ -185,10 +185,63 @@
         </li>
       </ul>
     </section>
+
+    <section class="slider">
+      <hooper
+        ref="carousel"
+        :vertical="true"
+        style="height: 676px; width: 241px"
+        :items-to-show="6"
+        :infinite-scroll="true"
+        :center-mode="true"
+        @slide="updateCarousel"
+      >
+        <slide v-for="(juice, index) in juices" :key="index" :index="index">
+          <SliderJuiceMiniature :juice="juice" @chooseSlide="chooseSlide(index)" />
+        </slide>
+
+        <template #hooper-addons>
+          <button class="slider-arrow slider-prev" @click.prevent="slidePrev">
+            <svg
+              width="27"
+              height="17"
+              viewBox="0 0 27 17"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M11.3121 1.33199C12.4972 0.0688275 14.5028 0.068826 15.6879 1.33198L25.6471 11.9474C27.4445 13.8631 26.0861 17 23.4593 17H3.54071C0.913862 17 -0.444463 13.8631 1.35285 11.9474L11.3121 1.33199Z"
+                fill="#C4C4C4"
+              />
+            </svg>
+          </button>
+
+          <button class="slider-arrow slider-next" @click.prevent="slideNext">
+            <svg
+              width="27"
+              height="17"
+              viewBox="0 0 27 17"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M11.3121 15.668C12.4972 16.9312 14.5028 16.9312 15.6879 15.668L25.6471 5.05264C27.4445 3.13692 26.0861 0 23.4593 0H3.54071C0.913862 0 -0.444463 3.13691 1.35285 5.05263L11.3121 15.668Z"
+                fill="#C4C4C4"
+              />
+            </svg>
+          </button>
+        </template>
+      </hooper>
+    </section>
   </main>
 </template>
 
 <script>
+import { Hooper, Slide } from 'hooper';
+import 'hooper/dist/hooper.css';
+
+import SliderJuiceMiniature from '~/components/SliderJuiceMiniature';
+
 const containerVolumeFilter = [
   {
     id: 'pocket',
@@ -228,12 +281,38 @@ const filterValueSecond = [
 export default {
   name: 'Product',
 
+  components: {
+    Hooper,
+    Slide,
+    SliderJuiceMiniature,
+  },
+
   data() {
     return {
       containerVolumeFilter: [...containerVolumeFilter],
       filterValueSecond: [...filterValueSecond],
+      juices: [
+        {
+          imageSrc: 'juice_apple',
+        },
+        {
+          imageSrc: 'juice_apple_strawberry',
+        },
+        {
+          imageSrc: 'juice_apricot',
+        },
+        {
+          imageSrc: 'juice_cherries',
+        },
+        {
+          imageSrc: 'juice_garnet',
+        },
+        {
+          imageSrc: 'juice_orange',
+        },
+      ],
 
-      currentJuice: {},
+      currentFirstFilter: {},
       currentSecondFilter: '',
     };
   },
@@ -244,14 +323,28 @@ export default {
 
   methods: {
     selectVariant(item) {
-      this.currentJuice = item;
+      this.currentFirstFilter = item;
+    },
+
+    slidePrev() {
+      this.$refs.carousel.slidePrev();
+    },
+    slideNext() {
+      this.$refs.carousel.slideNext();
+    },
+    updateCarousel(payload) {
+      this.myCarouselData = payload.currentSlide;
+    },
+    chooseSlide(index) {
+      this.$refs.carousel.slideTo(index);
     },
   },
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 $primaryFontColor: #4b4961;
+
 .main {
   font-family: Montserrat Alternates;
 }
@@ -425,5 +518,29 @@ $primaryFontColor: #4b4961;
   line-height: 28px;
 
   color: #525252;
+}
+
+.slider {
+  margin-top: 20px;
+  padding: 0 60px;
+}
+.slider-arrow {
+  background-color: transparent;
+  padding: 10px;
+}
+.slider-prev {
+  position: absolute;
+  left: 16px;
+  top: -40px;
+}
+.slider-next {
+  position: absolute;
+  left: 14px;
+  top: 690px;
+}
+.hooper-slide.is-current {
+  .juice-miniature {
+    border: 2px solid #ffc52b;
+  }
 }
 </style>
