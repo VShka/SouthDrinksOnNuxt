@@ -197,7 +197,7 @@
         @slide="updateCarousel"
       >
         <slide v-for="(juice, index) in juices" :key="index" :index="index">
-          <SliderJuiceMiniature :juice="juice" @chooseSlide="chooseSlide(index)" />
+          <SliderJuiceMiniature :juice="juice" @chooseSlide="chooseSlide(juice, index)" />
         </slide>
 
         <template #hooper-addons>
@@ -232,6 +232,8 @@
           </button>
         </template>
       </hooper>
+
+      <ChosenJuiceDetailInfo :juice="chosenJuice" />
     </section>
   </main>
 </template>
@@ -241,6 +243,7 @@ import { Hooper, Slide } from 'hooper';
 import 'hooper/dist/hooper.css';
 
 import SliderJuiceMiniature from '~/components/SliderJuiceMiniature';
+import ChosenJuiceDetailInfo from '~/components/ChosenJuiceDetailInfo';
 
 const containerVolumeFilter = [
   {
@@ -285,6 +288,7 @@ export default {
     Hooper,
     Slide,
     SliderJuiceMiniature,
+    ChosenJuiceDetailInfo,
   },
 
   data() {
@@ -293,32 +297,283 @@ export default {
       filterValueSecond: [...filterValueSecond],
       juices: [
         {
-          imageSrc: 'juice_apple',
+          name: '0.5 л "Прогулка по саду" напиток б/а "яблоко"',
+          description: `Сок “Прогулка по саду” “Яблоко”  содержит природные пищевые волокна,
+                        которые являются отличным средством нормализации работы желудочно-кишечного
+                        тракта.`,
+          benefit: 'Калий, входящий всостав нектара, помогает укрепить сердце и укрепляет сосуды.',
+          macronutrients: [
+            {
+              name: 'Калории',
+              value: '40 ккал',
+            },
+            {
+              name: 'Белки',
+              value: '0 г',
+            },
+            {
+              name: 'Жиры',
+              value: '0 г',
+            },
+            {
+              name: 'Углеводы',
+              value: '0 г',
+            },
+          ],
+          composition: 'Сок яблочный восстановленный осветленный',
+          microelements: [
+            {
+              element: 'Что-то содержит',
+            },
+            {
+              element: 'Что-то содержит',
+            },
+            {
+              element: 'Что-то содержит',
+            },
+          ],
+          package: 'Асептический пакет торговой марки IPI, производство Италия.',
+          energyValue: '44,8ккал/100г (190,4 кДж)',
+          expirationDate: `12 месяцев со дня выработки. Хранить при температуре от 0°С до 25°С и
+                           относительной важности воздуха не более 75%.`,
+          image: 'orange',
+          fruitImage: '',
+          slideMiniature: 'juice_orange',
         },
         {
-          imageSrc: 'juice_apple_strawberry',
+          name: '0.5 л "Прогулка по саду" напиток б/а "яблоко"',
+          description: `Сок “Прогулка по саду” “Яблоко”  содержит природные пищевые волокна,
+                        которые являются отличным средством нормализации работы желудочно-кишечного
+                        тракта.`,
+          benefit: 'Калий, входящий всостав нектара, помогает укрепить сердце и укрепляет сосуды.',
+          macronutrients: [
+            {
+              name: 'Калории',
+              value: '40 ккал',
+            },
+            {
+              name: 'Белки',
+              value: '0 г',
+            },
+            {
+              name: 'Жиры',
+              value: '0 г',
+            },
+            {
+              name: 'Углеводы',
+              value: '0 г',
+            },
+          ],
+          composition: 'Сок яблочный восстановленный осветленный',
+          microelements: [
+            {
+              element: 'Что-то содержит',
+            },
+            {
+              element: 'Что-то содержит',
+            },
+            {
+              element: 'Что-то содержит',
+            },
+          ],
+          package: 'Асептический пакет торговой марки IPI, производство Италия.',
+          energyValue: '44,8ккал/100г (190,4 кДж)',
+          expirationDate: `12 месяцев со дня выработки. Хранить при температуре от 0°С до 25°С и
+                           относительной важности воздуха не более 75%.`,
+          image: 'orange',
+          fruitImage: '',
+          slideMiniature: 'juice_orange',
         },
         {
-          imageSrc: 'juice_apricot',
+          name: '0.5 л "Прогулка по саду" напиток б/а "яблоко"',
+          description: `Сок “Прогулка по саду” “Яблоко”  содержит природные пищевые волокна,
+                        которые являются отличным средством нормализации работы желудочно-кишечного
+                        тракта.`,
+          benefit: 'Калий, входящий всостав нектара, помогает укрепить сердце и укрепляет сосуды.',
+          macronutrients: [
+            {
+              name: 'Калории',
+              value: '40 ккал',
+            },
+            {
+              name: 'Белки',
+              value: '0 г',
+            },
+            {
+              name: 'Жиры',
+              value: '0 г',
+            },
+            {
+              name: 'Углеводы',
+              value: '0 г',
+            },
+          ],
+          composition: 'Сок яблочный восстановленный осветленный',
+          microelements: [
+            {
+              element: 'Что-то содержит',
+            },
+            {
+              element: 'Что-то содержит',
+            },
+            {
+              element: 'Что-то содержит',
+            },
+          ],
+          package: 'Асептический пакет торговой марки IPI, производство Италия.',
+          energyValue: '44,8ккал/100г (190,4 кДж)',
+          expirationDate: `12 месяцев со дня выработки. Хранить при температуре от 0°С до 25°С и
+                           относительной важности воздуха не более 75%.`,
+          image: 'orange',
+          fruitImage: '',
+          slideMiniature: 'juice_orange',
         },
         {
-          imageSrc: 'juice_cherries',
+          name: '0.5 л "Прогулка по саду" напиток б/а "яблоко"',
+          description: `Сок “Прогулка по саду” “Яблоко”  содержит природные пищевые волокна,
+                        которые являются отличным средством нормализации работы желудочно-кишечного
+                        тракта.`,
+          benefit: 'Калий, входящий всостав нектара, помогает укрепить сердце и укрепляет сосуды.',
+          macronutrients: [
+            {
+              name: 'Калории',
+              value: '40 ккал',
+            },
+            {
+              name: 'Белки',
+              value: '0 г',
+            },
+            {
+              name: 'Жиры',
+              value: '0 г',
+            },
+            {
+              name: 'Углеводы',
+              value: '0 г',
+            },
+          ],
+          composition: 'Сок яблочный восстановленный осветленный',
+          microelements: [
+            {
+              element: 'Что-то содержит',
+            },
+            {
+              element: 'Что-то содержит',
+            },
+            {
+              element: 'Что-то содержит',
+            },
+          ],
+          package: 'Асептический пакет торговой марки IPI, производство Италия.',
+          energyValue: '44,8ккал/100г (190,4 кДж)',
+          expirationDate: `12 месяцев со дня выработки. Хранить при температуре от 0°С до 25°С и
+                           относительной важности воздуха не более 75%.`,
+          image: 'orange',
+          fruitImage: '',
+          slideMiniature: 'juice_orange',
         },
         {
-          imageSrc: 'juice_garnet',
+          name: '0.5 л "Прогулка по саду" напиток б/а "яблоко"',
+          description: `Сок “Прогулка по саду” “Яблоко”  содержит природные пищевые волокна,
+                        которые являются отличным средством нормализации работы желудочно-кишечного
+                        тракта.`,
+          benefit: 'Калий, входящий всостав нектара, помогает укрепить сердце и укрепляет сосуды.',
+          macronutrients: [
+            {
+              name: 'Калории',
+              value: '40 ккал',
+            },
+            {
+              name: 'Белки',
+              value: '0 г',
+            },
+            {
+              name: 'Жиры',
+              value: '0 г',
+            },
+            {
+              name: 'Углеводы',
+              value: '0 г',
+            },
+          ],
+          composition: 'Сок яблочный восстановленный осветленный',
+          microelements: [
+            {
+              element: 'Что-то содержит',
+            },
+            {
+              element: 'Что-то содержит',
+            },
+            {
+              element: 'Что-то содержит',
+            },
+          ],
+          package: 'Асептический пакет торговой марки IPI, производство Италия.',
+          energyValue: '44,8ккал/100г (190,4 кДж)',
+          expirationDate: `12 месяцев со дня выработки. Хранить при температуре от 0°С до 25°С и
+                           относительной важности воздуха не более 75%.`,
+          image: 'orange',
+          fruitImage: '',
+          slideMiniature: 'juice_orange',
         },
         {
-          imageSrc: 'juice_orange',
+          name: '0.5 л "Прогулка по саду" напиток б/а "яблоко"',
+          description: `Сок “Прогулка по саду” “Яблоко”  содержит природные пищевые волокна,
+                        которые являются отличным средством нормализации работы желудочно-кишечного
+                        тракта.`,
+          benefit: 'Калий, входящий всостав нектара, помогает укрепить сердце и укрепляет сосуды.',
+          macronutrients: [
+            {
+              name: 'Калории',
+              value: '40 ккал',
+            },
+            {
+              name: 'Белки',
+              value: '0 г',
+            },
+            {
+              name: 'Жиры',
+              value: '0 г',
+            },
+            {
+              name: 'Углеводы',
+              value: '0 г',
+            },
+          ],
+          composition: 'Сок яблочный восстановленный осветленный',
+          microelements: [
+            {
+              element: 'Что-то содержит',
+            },
+            {
+              element: 'Что-то содержит',
+            },
+            {
+              element: 'Что-то содержит',
+            },
+          ],
+          package: 'Асептический пакет торговой марки IPI, производство Италия.',
+          energyValue: '44,8ккал/100г (190,4 кДж)',
+          expirationDate: `12 месяцев со дня выработки. Хранить при температуре от 0°С до 25°С и
+                           относительной важности воздуха не более 75%.`,
+          image: 'orange',
+          fruitImage: '',
+          slideMiniature: 'juice_orange',
         },
       ],
 
       currentFirstFilter: {},
       currentSecondFilter: '',
+      chosenJuice: {},
     };
   },
 
   head: {
     title: 'Продукты',
+  },
+
+  created() {
+    this.chosenJuice = this.juices[0];
   },
 
   methods: {
@@ -333,10 +588,13 @@ export default {
       this.$refs.carousel.slideNext();
     },
     updateCarousel(payload) {
-      this.myCarouselData = payload.currentSlide;
+      this.juices.forEach((juice, index) => {
+        if (index === payload.currentSlide) this.chosenJuice = juice;
+      });
     },
-    chooseSlide(index) {
+    chooseSlide(juice, index) {
       this.$refs.carousel.slideTo(index);
+      this.chosenJuice = juice;
     },
   },
 };
@@ -521,6 +779,8 @@ $primaryFontColor: #4b4961;
 }
 
 .slider {
+  display: flex;
+
   margin-top: 20px;
   padding: 0 60px;
 }
