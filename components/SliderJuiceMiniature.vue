@@ -1,7 +1,7 @@
 <template>
   <div class="juice-miniature" @click="$emit('chooseSlide')">
     <img
-      :src="require(`../assets/img/juices/${juice.slideMiniature.toLowerCase()}.png`)"
+      :src="require(`../assets/img/slider-miniature/${juice.slideMiniature.toLowerCase()}.png`)"
       alt="Миниатюра сока"
       class="miniature"
     />
