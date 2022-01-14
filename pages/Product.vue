@@ -9,23 +9,23 @@
 
       <ul class="filter__list">
         <li
-          v-for="item in containerVolumeFilter"
+          v-for="item in volumeFilters"
           :id="item.id"
           :key="item.id"
           class="filter__list-item"
           :class="[
-            { filter__list_active: currentFirstFilter.id === item.id },
-            { 'filter__list-item_shadow': currentFirstFilter.id === item.id },
+            { filter__list_active: filterByVolume.id === item.id },
+            { 'filter__list-item_shadow': filterByVolume.id === item.id },
           ]"
-          @click="selectVariant(item)"
+          @click="selectVolume(item)"
         >
-          <div v-show="currentFirstFilter.id === item.id" class="filter__item-border_active"></div>
+          <div v-show="filterByVolume.id === item.id" class="filter__item-border_active"></div>
 
           <svg
-            v-show="item.id === 'pocket'"
-            width="34"
-            height="68"
-            viewBox="0 0 34 68"
+            v-show="item.id === 'bottleSmall_1'"
+            width="24"
+            height="75"
+            viewBox="0 0 24 75"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
@@ -34,25 +34,22 @@
               <stop offset="50%" stop-color="#ffd25a" />
             </linearGradient>
             <path
-              d="M32.964 1.87782L32.9868 61.2836L28.7504 66.2694L1.20801 64.7718V3.46392"
+              d="M18.1793 8.61799C18.5214 10.3641 18.6403 10.5901 19.509 11.8699C20.3776 13.1497 22.7579 16.0828 22.7579 20.2958C22.7579 24.5088 22.7579 29.7232 22.7579 30.601C22.7579 33.0084 21.4792 33.7863 21.4792 34.5618C21.4792 35.3373 22.1707 35.8654 21.9645 38.123C21.7606 40.3805 20.8386 47.4766 21.4792 52.741C22.1197 58.0054 22.5274 60.715 22.5031 63.3722C22.4764 66.0293 22.3624 68.9696 20.8605 70.4802C20.8605 70.4802 20.4844 71.082 20.3097 71.4579C20.1374 71.8337 18.7495 73.0303 17.2403 73.1635C17.2403 73.1635 16.7405 73.1826 16.4541 73.0636C16.4541 73.0636 16.3522 73.2896 16.0514 73.4514C15.7505 73.6131 13.3605 73.9414 12.0017 73.6393C10.643 73.939 8.25298 73.6131 7.95211 73.4514C7.65124 73.2896 7.54933 73.0636 7.54933 73.0636C7.26059 73.1826 6.76318 73.1635 6.76318 73.1635C5.25397 73.0327 3.86608 71.8337 3.69381 71.4579C3.52154 71.082 3.14302 70.4802 3.14302 70.4802C1.64109 68.9696 1.52462 66.0293 1.50036 63.3722C1.47367 60.715 1.88373 58.0054 2.52429 52.741C3.16486 47.4766 2.24283 40.3805 2.03902 38.123C1.8352 35.8654 2.52429 35.3397 2.52429 34.5618C2.52429 33.7839 1.24316 33.0084 1.24316 30.601C1.24316 29.7232 1.24316 24.5088 1.24316 20.2958C1.24316 16.0828 3.62102 13.1497 4.49209 11.8699C5.36316 10.5901 5.48205 10.3664 5.82175 8.61799L5.95034 6.67922V6.35331L5.32919 6.17728C5.32919 6.17728 4.84391 1.73119 5.7805 1.49569C6.71708 1.26018 12.0187 1.23877 12.0187 1.23877H11.9823C11.9823 1.23877 17.284 1.26494 18.223 1.49806C19.1596 1.73119 18.6743 6.12732 18.6743 6.12732L18.0531 6.35331V6.67922L18.1793 8.61799Z"
               stroke="#B9B9B9"
               stroke-width="2"
               stroke-miterlimit="10"
-              stroke-linejoin="round"
             />
             <path
-              d="M32.964 1.87854L6.18219 1.04231L1.20801 3.46463L28.7504 4.34299"
+              d="M2.52148 34.561C2.52148 34.561 5.67335 35.6696 12.0014 35.6696C18.3294 35.6696 21.4812 34.561 21.4812 34.561"
               stroke="#B9B9B9"
               stroke-width="2"
               stroke-miterlimit="10"
-              stroke-linejoin="round"
             />
             <path
-              d="M28.75 66.2694V4.34227L32.9635 1.87782L31.1915 8.41388L28.75 4.34227"
+              d="M5.94727 6.35254C5.94727 6.35254 7.30847 6.86162 11.9987 6.86162C16.6889 6.86162 18.0501 6.35254 18.0501 6.35254"
               stroke="#B9B9B9"
               stroke-width="2"
               stroke-miterlimit="10"
-              stroke-linejoin="round"
             />
           </svg>
 
@@ -173,11 +170,11 @@
 
       <ul class="filter__list_second">
         <li
-          v-for="item in filterValueSecond"
+          v-for="item in typeFilters"
           :key="item.id"
           class="filter__item_second"
-          :class="{ filter__item_second_active: currentSecondFilter === item.name }"
-          @click="currentSecondFilter = item.name"
+          :class="{ filter__item_second_active: filterByType.name === item.name }"
+          @click="selectType(item)"
         >
           <span class="filter__item-name">
             {{ item.name }}
@@ -190,13 +187,14 @@
       <hooper
         ref="carousel"
         :vertical="true"
-        style="height: 676px; width: 241px"
+        style="height: 676px; width: 440px"
+        :wheel-control="false"
         :items-to-show="6"
         :infinite-scroll="true"
         :center-mode="true"
         @slide="updateCarousel"
       >
-        <slide v-for="(juice, index) in juices" :key="index" :index="index">
+        <slide v-for="(juice, index) in sortingJuicesByType" :key="index" :index="index">
           <SliderJuiceMiniature :juice="juice" @chooseSlide="chooseSlide(juice, index)" />
         </slide>
 
@@ -234,6 +232,18 @@
       </hooper>
 
       <ChosenJuiceDetailInfo :juice="chosenJuice" />
+
+      <div class="slider__bottom-bg">
+        <svg
+          width="100%"
+          height="1353"
+          viewBox="0 0 1920 1353"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <ellipse cx="962" cy="1165.5" rx="2809" ry="1165.5" fill="#FFFCF3" />
+        </svg>
+      </div>
     </section>
   </main>
 </template>
@@ -245,40 +255,47 @@ import 'hooper/dist/hooper.css';
 import SliderJuiceMiniature from '~/components/SliderJuiceMiniature';
 import ChosenJuiceDetailInfo from '~/components/ChosenJuiceDetailInfo';
 
-const containerVolumeFilter = [
+const volumeFilters = [
   {
-    id: 'pocket',
+    id: 'bottleSmall_1',
+    value: '1',
     volume: '1л',
-    container: 'Пакет',
+    container: 'Бутылка',
   },
   {
     id: 'bottleSmall',
+    value: '0,5',
     volume: '0,5л',
     container: 'Бутылка',
   },
   {
     id: 'bottleMiddle',
+    value: '3',
     volume: '3л',
     container: 'Бутылка',
   },
   {
     id: 'bottleBig',
+    value: '5',
     volume: '5л',
     container: 'Бутылка',
   },
 ];
-const filterValueSecond = [
+const typeFilters = [
   {
     id: 1,
-    name: 'Сок тетра пакет 1л',
+    name: 'Напитки',
+    type: 'juice',
   },
   {
     id: 2,
-    name: 'Напитки «Прогулка по саду» 0,5л',
+    name: 'Узвары',
+    type: 'uzvar',
   },
   {
     id: 3,
-    name: 'Напитки «Прогулка по саду» 1л',
+    name: 'Сиропы',
+    type: 'syrup',
   },
 ];
 export default {
@@ -293,13 +310,12 @@ export default {
 
   data() {
     return {
-      containerVolumeFilter: [...containerVolumeFilter],
-      filterValueSecond: [...filterValueSecond],
+      volumeFilters: [...volumeFilters],
+      typeFilters: [...typeFilters],
       juices: [
         {
           type: 'juice',
-          packageType: 'bottle',
-          packageVolume: '0,5',
+          volume: '0,5',
           name: 'Напиток б/а негазированный неосветленный со вкусом апельсина',
           description: `Сок “Прогулка по саду” “Апельсин”  содержит природные пищевые волокна,
                         которые являются отличным средством нормализации работы желудочно-кишечного
@@ -308,19 +324,11 @@ export default {
           macronutrients: [
             {
               name: 'Калории',
-              value: '40 ккал',
-            },
-            {
-              name: 'Белки',
-              value: '0 г',
-            },
-            {
-              name: 'Жиры',
-              value: '0 г',
+              value: '9 ккал/ 37,8 кДж.',
             },
             {
               name: 'Углеводы',
-              value: '0 г',
+              value: '– 2 (± 0,2) г',
             },
           ],
           composition: 'Сок апельсиновый восстановленный осветленный',
@@ -336,17 +344,14 @@ export default {
             },
           ],
           package: 'Асептический пакет торговой марки IPI, производство Италия.',
-          energyValue: '44,8ккал/100г (190,4 кДж)',
-          expirationDate: `12 месяцев со дня выработки. Хранить при температуре от 0°С до 25°С и
-                           относительной важности воздуха не более 75%.`,
+          energyValue: '9 ккал/ 37,8 кДж',
           image: 'orange_0.5',
           fruitImage: 'orange',
           slideMiniature: 'juice_orange',
         },
         {
           type: 'juice',
-          packageType: 'bottle',
-          packageVolume: '0,5',
+          volume: '0,5',
           name: '0.5 л "Прогулка по саду" напиток б/а "Абрикос"',
           description: `Сок “Прогулка по саду” “Абрикос”  содержит природные пищевые волокна,
                         которые являются отличным средством нормализации работы желудочно-кишечного
@@ -355,45 +360,34 @@ export default {
           macronutrients: [
             {
               name: 'Калории',
-              value: '40 ккал',
-            },
-            {
-              name: 'Белки',
-              value: '0 г',
-            },
-            {
-              name: 'Жиры',
-              value: '0 г',
+              value: '9 ккал/ 37,8 кДж.',
             },
             {
               name: 'Углеводы',
-              value: '0 г',
+              value: '– 2 (± 0,2) г',
             },
           ],
           composition: 'Сок абрикосовый восстановленный осветленный',
           microelements: [
             {
-              element: 'Что-то содержит',
+              element: 'А,С',
             },
             {
-              element: 'Что-то содержит',
+              element: 'К,В',
             },
             {
-              element: 'Что-то содержит',
+              element: 'β- каротин',
             },
           ],
           package: 'Асептический пакет торговой марки IPI, производство Италия.',
-          energyValue: '44,8ккал/100г (190,4 кДж)',
-          expirationDate: `12 месяцев со дня выработки. Хранить при температуре от 0°С до 25°С и
-                           относительной важности воздуха не более 75%.`,
+          energyValue: '9 ккал/ 37,8 кДж',
           image: 'apricot_0.5',
           fruitImage: 'apricot',
           slideMiniature: 'juice_apricot',
         },
         {
           type: 'juice',
-          packageType: 'bottle',
-          packageVolume: '0,5',
+          volume: '0,5',
           name: '0.5 л "Прогулка по саду" напиток б/а "Гранат"',
           description: `Сок “Прогулка по саду” “Гранат”  содержит природные пищевые волокна,
                         которые являются отличным средством нормализации работы желудочно-кишечного
@@ -402,37 +396,27 @@ export default {
           macronutrients: [
             {
               name: 'Калории',
-              value: '40 ккал',
-            },
-            {
-              name: 'Белки',
-              value: '0 г',
-            },
-            {
-              name: 'Жиры',
-              value: '0 г',
+              value: '9 ккал/ 37,8 кДж.',
             },
             {
               name: 'Углеводы',
-              value: '0 г',
+              value: '– 2 (± 0,2) г',
             },
           ],
           composition: 'Сок гранатовый восстановленный осветленный',
           microelements: [
             {
-              element: 'Что-то содержит',
+              element: 'А,С',
             },
             {
-              element: 'Что-то содержит',
+              element: 'К,В',
             },
             {
-              element: 'Что-то содержит',
+              element: 'β- каротин',
             },
           ],
           package: 'Асептический пакет торговой марки IPI, производство Италия.',
-          energyValue: '44,8ккал/100г (190,4 кДж)',
-          expirationDate: `12 месяцев со дня выработки. Хранить при температуре от 0°С до 25°С и
-                           относительной важности воздуха не более 75%.`,
+          energyValue: '9 ккал/ 37,8 кДж',
           image: 'garnet_0.5',
           fruitImage: 'garnet',
           slideMiniature: 'juice_garnet',
@@ -440,7 +424,7 @@ export default {
         {
           type: 'juice',
           packageType: 'tetrapak',
-          packageVolume: '1',
+          volume: '1',
           name: '1 л "Прогулка по саду" напиток б/а "яблоко"',
           description: `Сок “Прогулка по саду” “Яблоко”  содержит природные пищевые волокна,
                         которые являются отличным средством нормализации работы желудочно-кишечного
@@ -449,45 +433,34 @@ export default {
           macronutrients: [
             {
               name: 'Калории',
-              value: '40 ккал',
-            },
-            {
-              name: 'Белки',
-              value: '0 г',
-            },
-            {
-              name: 'Жиры',
-              value: '0 г',
+              value: '9 ккал/ 37,8 кДж.',
             },
             {
               name: 'Углеводы',
-              value: '0 г',
+              value: '– 2 (± 0,2) г',
             },
           ],
           composition: 'Сок яблочный восстановленный осветленный',
           microelements: [
             {
-              element: 'Что-то содержит',
+              element: 'А,С',
             },
             {
-              element: 'Что-то содержит',
+              element: 'К,В',
             },
             {
-              element: 'Что-то содержит',
+              element: 'β- каротин',
             },
           ],
           package: 'Асептический пакет торговой марки IPI, производство Италия.',
-          energyValue: '44,8ккал/100г (190,4 кДж)',
-          expirationDate: `12 месяцев со дня выработки. Хранить при температуре от 0°С до 25°С и
-                           относительной важности воздуха не более 75%.`,
+          energyValue: '9 ккал/ 37,8 кДж',
           image: 'apple_1',
           fruitImage: 'apple',
           slideMiniature: 'juice_apple',
         },
         {
           type: 'juice',
-          packageType: 'bottle',
-          packageVolume: '5',
+          volume: '5',
           name: '0.5 л "Прогулка по саду" напиток б/а "Апельсин"',
           description: `Сок “Прогулка по саду” “Апельсина”  содержит природные пищевые волокна,
                         которые являются отличным средством нормализации работы желудочно-кишечного
@@ -496,45 +469,34 @@ export default {
           macronutrients: [
             {
               name: 'Калории',
-              value: '40 ккал',
-            },
-            {
-              name: 'Белки',
-              value: '0 г',
-            },
-            {
-              name: 'Жиры',
-              value: '0 г',
+              value: '9 ккал/ 37,8 кДж.',
             },
             {
               name: 'Углеводы',
-              value: '0 г',
+              value: '– 2 (± 0,2) г',
             },
           ],
           composition: 'Сок апельсина восстановленный осветленный',
           microelements: [
             {
-              element: 'Что-то содержит',
+              element: 'А,С',
             },
             {
-              element: 'Что-то содержит',
+              element: 'К,В',
             },
             {
-              element: 'Что-то содержит',
+              element: 'β- каротин',
             },
           ],
           package: 'Асептический пакет торговой марки IPI, производство Италия.',
-          energyValue: '44,8ккал/100г (190,4 кДж)',
-          expirationDate: `12 месяцев со дня выработки. Хранить при температуре от 0°С до 25°С и
-                           относительной важности воздуха не более 75%.`,
+          energyValue: '9 ккал/ 37,8 кДж',
           image: 'orange_5',
           fruitImage: 'orange',
           slideMiniature: 'juice_orange',
         },
         {
           type: 'syrup',
-          packageType: 'bottle',
-          packageVolume: '3',
+          volume: '3',
           name: '0.5 л "Прогулка по саду" напиток б/а "яблоко"',
           description: `Сок “Прогулка по саду” “Яблоко”  содержит природные пищевые волокна,
                         которые являются отличным средством нормализации работы желудочно-кишечного
@@ -543,45 +505,35 @@ export default {
           macronutrients: [
             {
               name: 'Калории',
-              value: '40 ккал',
-            },
-            {
-              name: 'Белки',
-              value: '0 г',
-            },
-            {
-              name: 'Жиры',
-              value: '0 г',
+              value: '220 ккал/ 920 кДж.',
             },
             {
               name: 'Углеводы',
-              value: '0 г',
+              value: '– 2 (± 0,2) г',
             },
           ],
           composition: 'Сок яблочный восстановленный осветленный',
           microelements: [
             {
-              element: 'Что-то содержит',
+              element: 'А,С',
             },
             {
-              element: 'Что-то содержит',
+              element: 'К,В',
             },
             {
-              element: 'Что-то содержит',
+              element: 'β- каротин',
             },
           ],
           package: 'Асептический пакет торговой марки IPI, производство Италия.',
-          energyValue: '44,8ккал/100г (190,4 кДж)',
-          expirationDate: `12 месяцев со дня выработки. Хранить при температуре от 0°С до 25°С и
-                           относительной важности воздуха не более 75%.`,
+          energyValue: '220 ккал/ 920 кДж',
           image: 'strawberry_syrup_3',
           fruitImage: 'strawberry',
           slideMiniature: 'juice_apple_strawberry',
         },
       ],
 
-      currentFirstFilter: {},
-      currentSecondFilter: '',
+      filterByVolume: {},
+      filterByType: '',
       chosenJuice: {},
     };
   },
@@ -590,13 +542,27 @@ export default {
     title: 'Продукты',
   },
 
+  computed: {
+    sortingJuicesByVolume() {
+      return this.juices.filter((juice) => juice.volume === this.filterByVolume.value);
+    },
+    sortingJuicesByType() {
+      return this.sortingJuicesByVolume.filter((juice) => juice.type === this.filterByType.type);
+    },
+  },
+
   created() {
-    this.chosenJuice = this.juices[0];
+    this.selectVolume(this.volumeFilters[0]);
+    this.selectType(this.typeFilters[0]);
   },
 
   methods: {
-    selectVariant(item) {
-      this.currentFirstFilter = item;
+    selectVolume(item) {
+      this.filterByVolume = item;
+    },
+    selectType(item) {
+      this.filterByType = item;
+      this.chosenJuice = this.sortingJuicesByType[0];
     },
 
     slidePrev() {
@@ -627,11 +593,11 @@ $primaryFontColor: #4b4961;
 .filter {
   position: relative;
 
-  height: 588px;
+  height: 670px;
 
   overflow: hidden;
   margin-bottom: 50px;
-  padding: 100px 60px 0;
+  padding: 100px 100px 0;
 }
 .filter__wave-bg {
   position: absolute;
@@ -716,6 +682,7 @@ $primaryFontColor: #4b4961;
   position: relative;
 }
 .filter__list-item {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -797,10 +764,22 @@ $primaryFontColor: #4b4961;
 }
 
 .slider {
+  position: relative;
   display: flex;
 
   margin-top: 20px;
-  padding: 0 60px;
+  padding: 0 100px 160px;
+
+  border-bottom: 1px solid #eaeaea;
+}
+.slider__bottom-bg {
+  width: 100%;
+  height: 500px;
+  position: absolute;
+  bottom: -60px;
+  left: 0;
+
+  z-index: -1;
 }
 .slider-arrow {
   background-color: transparent;

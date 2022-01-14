@@ -77,6 +77,22 @@
         class="juice__fruit-image"
       />
     </div>
+
+    <div class="juice__detail-bottom__additional">
+      <div class="juice__detail-bottom-container">
+        <p class="juice__detail-bottom-title">Срок годности</p>
+
+        <p class="juice__detail-bottom-text">12 месяцев со дня розлива указанного на этикетке</p>
+      </div>
+
+      <div class="juice__detail-bottom-container">
+        <p class="juice__detail-bottom-title">Энергетическая ценность</p>
+
+        <p class="juice__detail-bottom-text">
+          {{ juice.energyValue }}
+        </p>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -120,9 +136,9 @@ export default {
 }
 .juice__macronutrients {
   display: flex;
-  gap: 85px;
+  gap: 90px;
 
-  max-width: 580px;
+  max-width: 458px;
 
   border-top: 1px solid #dadada;
   border-bottom: 1px solid #dadada;
@@ -194,7 +210,7 @@ export default {
 
 .juice__detail-bottom {
   display: flex;
-  position: relative;
+  gap: 200px;
 
   margin: 180px 0 100px;
 }
@@ -247,11 +263,48 @@ export default {
   color: #4b4961;
 
   border: 2px solid #ffd25a;
-  border-radius: 57px;
+  border-radius: 0 90px 0 90px;
 }
-.juice__fruit-image {
-  position: absolute;
-  top: -10px;
-  right: 290px;
+
+.juice__detail-bottom__additional {
+  display: flex;
+  gap: 360px;
+  margin-top: 163px;
+}
+.juice__detail-bottom-container {
+  max-width: 580px;
+}
+.juice__detail-bottom-title {
+  position: relative;
+  font-family: Montserrat Alternates;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 29px;
+
+  color: #484848;
+
+  padding-bottom: 13px;
+
+  &:after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    content: '';
+    width: 123px;
+    height: 3px;
+    background: linear-gradient(269.21deg, #ffd25a 0.49%, #ffc52b 100%);
+  }
+}
+.juice__detail-bottom-text {
+  font-family: Rubik;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 28px;
+
+  color: #a6a6a6;
+
+  margin-top: 14px;
 }
 </style>
