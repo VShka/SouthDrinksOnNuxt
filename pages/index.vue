@@ -147,6 +147,19 @@
       <div class="products__raspberries-bg"></div>
       <div class="products__leaflet-bg"></div>
     </section>
+
+    <section class="partners">
+      <h2 class="partners__title">Наши партнеры</h2>
+
+      <ul class="partners__list">
+        <li v-for="partner in partners" :key="partner.id" class="partners-list__item">
+          <img
+            :src="require(`../assets/img/${partner.icon.toLowerCase()}.svg`)"
+            :alt="partner.name"
+          />
+        </li>
+      </ul>
+    </section>
   </main>
 </template>
 
@@ -190,6 +203,33 @@ const products = [
     text: 'Сиропы «Прогулка по саду» 5л',
   },
 ];
+const partners = [
+  {
+    id: 1,
+    icon: 'partner_globus',
+    name: 'Глобус',
+  },
+  {
+    id: 2,
+    icon: 'partner_bread',
+    name: 'Челны Хлеб',
+  },
+  {
+    id: 3,
+    icon: 'partner_luck',
+    name: 'Универсам Удача',
+  },
+  {
+    id: 4,
+    icon: 'partner_shamsa',
+    name: 'ГК Шамса',
+  },
+  {
+    id: 5,
+    icon: 'partner_ambar',
+    name: 'Амбар',
+  },
+];
 export default {
   name: 'Home',
 
@@ -202,6 +242,7 @@ export default {
   data() {
     return {
       products: [...products],
+      partners: [...partners],
     };
   },
 
@@ -609,6 +650,28 @@ export default {
   background-position: center;
   background-repeat: no-repeat;
 }
+
+.partners {
+  padding: 0 100px;
+  margin-bottom: 150px;
+}
+.partners__list {
+  display: flex;
+  column-gap: 150px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.partners__title {
+  font-family: Montserrat Alternates;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 72px;
+  line-height: 88px;
+  color: #484848;
+
+  margin-bottom: 130px;
+}
 </style>
 
 <style lang="scss">
@@ -636,6 +699,10 @@ export default {
     width: 30px;
     height: 30px;
     background: linear-gradient(269.21deg, #ffd25a 0.49%, #ffc52b 100%);
+  }
+
+  &:hover {
+    background-color: #ffd25a;
   }
 }
 </style>
