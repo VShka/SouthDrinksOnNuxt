@@ -128,12 +128,68 @@
         </li>
       </ul>
     </section>
+
+    <section class="products">
+      <h2 class="products__title">Продукция</h2>
+
+      <ul class="products__list">
+        <li v-for="product in products" :key="product.id" class="products-list__item">
+          <img
+            :src="require(`../assets/img/${product.img.toLowerCase()}.png`)"
+            alt="Вид продукции"
+            class="products__item-img"
+          />
+
+          <p class="products__item-text">{{ product.text }}</p>
+        </li>
+      </ul>
+
+      <div class="products__raspberries-bg"></div>
+      <div class="products__leaflet-bg"></div>
+    </section>
   </main>
 </template>
 
 <script>
 import { Hooper, Slide, Pagination as HooperPagination } from 'hooper';
 import 'hooper/dist/hooper.css';
+const products = [
+  {
+    id: 1,
+    img: 'juices_tetrapak',
+    text: 'Сок тетра пакет (ipi), 1л',
+  },
+  {
+    id: 2,
+    img: 'juices_walk_on_garden',
+    text: 'Напитки «Прогулка по саду» 0,5л',
+  },
+  {
+    id: 3,
+    img: 'uzvar_walk_on_garden',
+    text: 'Узвары «Прогулка по саду» 3л',
+  },
+  {
+    id: 4,
+    img: 'juices_walk_on_garden_3l',
+    text: 'Напитки «Прогулка по саду» 3л',
+  },
+  {
+    id: 5,
+    img: 'juices_walk_on_garden_5l',
+    text: 'Напитки «Прогулка по саду» 5л',
+  },
+  {
+    id: 6,
+    img: 'uzvar_walk_on_garden_5l',
+    text: 'Узвары «Прогулка по саду» 5л',
+  },
+  {
+    id: 7,
+    img: 'syrup_walk_on_garden',
+    text: 'Сиропы «Прогулка по саду» 5л',
+  },
+];
 export default {
   name: 'Home',
 
@@ -141,6 +197,12 @@ export default {
     Hooper,
     Slide,
     HooperPagination,
+  },
+
+  data() {
+    return {
+      products: [...products],
+    };
   },
 
   head: {
@@ -395,7 +457,7 @@ export default {
   height: 300px;
 
   padding: 0 100px;
-  margin-bottom: 400px;
+  margin-bottom: 300px;
 }
 .successful__bg {
   position: absolute;
@@ -482,6 +544,70 @@ export default {
 }
 .icon__checkmark {
   background-image: url('~/assets/img/successful_checkmark.svg');
+}
+
+.products {
+  position: relative;
+  padding: 0 100px;
+  margin-bottom: 167px;
+}
+.products__title {
+  font-family: Montserrat Alternates;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 72px;
+  line-height: 88px;
+  color: #484848;
+
+  margin-bottom: 130px;
+}
+.products__list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  column-gap: 30px;
+  row-gap: 90px;
+}
+.products__item-img {
+  width: 403px;
+}
+.products__item-text {
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 23px;
+  color: #525252;
+
+  background: #faf9f8;
+  border-radius: 0 0 10px 10px;
+  padding: 19px 18px 36px;
+}
+.products__raspberries-bg {
+  position: absolute;
+  bottom: -175px;
+  left: -98px;
+
+  width: 405px;
+  height: 405px;
+
+  background-image: url('~/assets/img/raspberries_bg.png');
+  background-size: auto;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.products__leaflet-bg {
+  position: absolute;
+  bottom: -180px;
+  right: 0;
+
+  width: 232px;
+  height: 144px;
+
+  background-image: url('~/assets/img/products_leaflet.png');
+  background-size: auto;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 </style>
 
