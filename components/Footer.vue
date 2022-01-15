@@ -19,9 +19,11 @@
                 <input type="text" placeholder="Номер телефона" class="input input__up" />
               </div>
 
-              <input type="text" placeholder="Комментарий" class="input input__down" />
-              <input type="text" placeholder="Комментарий" class="input input__down" />
-              <input type="text" placeholder="Комментарий" class="input input__down" />
+              <textarea
+                style="height: 110px; width: 100%"
+                placeholder="Комментарий"
+                class="input textarea"
+              />
 
               <div class="form__checkbox-align">
                 <input type="checkbox" />
@@ -183,6 +185,9 @@ export default {
   line-height: 28px;
 
   color: #d0cec4;
+}
+.textarea {
+  resize: none;
 }
 
 .form__checkbox-align {
