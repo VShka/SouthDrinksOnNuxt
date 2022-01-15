@@ -27,7 +27,12 @@
                   class="input input__up"
                 />
               </div>
-              <textarea rows="10" cols="45" name="text"  class="input input__down" placeholder="Комментарий"></textarea>
+
+              <textarea
+                style="height: 110px; width: 100%"
+                placeholder="Комментарий"
+                class="input textarea"
+              />
 
               <div class="form__checkbox-align">
                 <input type="checkbox" v-model="toggle" class="checkbox"/>
@@ -216,6 +221,9 @@ export default {
 .checkbox{
   height: 24px;
   width: 24px;
+}
+.textarea {
+  resize: none;
 }
 
 
