@@ -80,6 +80,54 @@
         <hooper-pagination slot="hooper-addons"></hooper-pagination>
       </hooper>
     </section>
+
+    <section class="successful">
+      <div class="successful__bg_peach"></div>
+      <div class="successful__bg"></div>
+
+      <h2 class="successful__title">Наш залог успеха</h2>
+
+      <ul class="successful__list">
+        <li class="successful-list__item">
+          <div class="successful-list__icon icon__locally"></div>
+
+          <div class="successful-list__info">
+            <h4 class="successful-list__title">Лучшая география</h4>
+
+            <p class="successful-list__text">
+              При изготовлении соков и напитков мы используем вкусные сочные фрукты, которыми так
+              знаменит Краснодарский край.
+            </p>
+          </div>
+        </li>
+
+        <li class="successful-list__item">
+          <div class="successful-list__icon icon__belt"></div>
+
+          <div class="successful-list__info">
+            <h4 class="successful-list__title">Лучшее оборудование</h4>
+
+            <p class="successful-list__text">
+              Продукция производится на итальянском оборудовании с соблюдением всех технологических
+              стандартов.
+            </p>
+          </div>
+        </li>
+
+        <li class="successful-list__item">
+          <div class="successful-list__icon icon__checkmark"></div>
+
+          <div class="successful-list__info">
+            <h4 class="successful-list__title">Известный бренд</h4>
+
+            <p class="successful-list__text">
+              Нашу продукцию знают и любят покупатели по всей России благодаря ее высокому качеству
+              и насыщенному, натуральному вкусу.
+            </p>
+          </div>
+        </li>
+      </ul>
+    </section>
   </main>
 </template>
 
@@ -243,7 +291,7 @@ export default {
 
 .guarantee {
   position: relative;
-  margin: 230px 0 200px;
+  margin: 230px 0 400px;
   height: 923px;
 }
 .guarantee__some-bg {
@@ -340,6 +388,100 @@ export default {
 }
 .guarantee__slide-text_pl {
   padding-left: 70px;
+}
+
+.successful {
+  position: relative;
+  height: 300px;
+
+  padding: 0 100px;
+  margin-bottom: 400px;
+}
+.successful__bg {
+  position: absolute;
+  top: -550px;
+  right: 0;
+
+  width: 100%;
+  height: 1100px;
+
+  background-image: url('~/assets/img/successful_bg.png');
+  background-size: auto;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  z-index: -1;
+}
+.successful__bg_peach {
+  position: absolute;
+  top: -430px;
+  right: 0;
+
+  width: 574px;
+  height: 758px;
+
+  background-image: url('~/assets/img/peach_bg.png');
+  background-size: auto;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.successful__title {
+  font-family: Montserrat Alternates;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 72px;
+  line-height: 88px;
+  color: #484848;
+
+  margin-bottom: 127px;
+}
+.successful__list {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.successful-list__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 25px;
+}
+.successful-list__info {
+  max-width: 427px;
+}
+.successful-list__title {
+  font-family: Rubik;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 28px;
+  line-height: 33px;
+  color: #484848;
+
+  margin-bottom: 16px;
+}
+.successful-list__text {
+  font-family: Rubik;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 24px;
+  color: #484848;
+}
+.successful-list__icon {
+  width: 102px;
+  height: 102px;
+
+  background-size: auto;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.icon__locally {
+  background-image: url('~/assets/img/successful_locally.svg');
+}
+.icon__belt {
+  background-image: url('~/assets/img/successful_belt.svg');
+}
+.icon__checkmark {
+  background-image: url('~/assets/img/successful_checkmark.svg');
 }
 </style>
 
