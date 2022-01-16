@@ -3,7 +3,7 @@
     <div class="juice__detail-top">
       <img
         :src="require(`../assets/img/juices/${juice.image.toLowerCase()}.png`)"
-        alt="Изображение сока"
+        :alt="juice.tooltip"
         class="juice__image"
       />
 

@@ -26,7 +26,7 @@
               />
 
               <div class="form__checkbox-align">
-                <input v-model="toggle" type="checkbox" class="checkbox" />
+                <input type="checkbox" class="checkbox" />
                 <p>
                   Даю согласие на обработку персональных данных и подтверждаю свое ознакомление с
                   <a href="" class="link link__orange">политикой обработки персональных данных</a>
