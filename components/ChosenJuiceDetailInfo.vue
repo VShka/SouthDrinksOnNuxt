@@ -3,7 +3,7 @@
     <div class="juice__detail-top">
       <img
         :src="require(`../assets/img/juices/${juice.image.toLowerCase()}.png`)"
-        alt="Изображение сока"
+        :alt="juice.tooltip"
         class="juice__image"
       />
 
@@ -112,10 +112,12 @@ export default {
 <style lang="scss" scoped>
 .juice__detail-top {
   display: flex;
+  align-items: center;
+  gap: 145px;
 }
 .juice__title {
   font-weight: bold;
-  font-size: 48px;
+  font-size: 36px;
   line-height: 59px;
   color: #4b4961;
 
@@ -210,9 +212,9 @@ export default {
 
 .juice__detail-bottom {
   display: flex;
-  gap: 200px;
+  gap: 115px;
 
-  margin: 180px 0 100px;
+  margin: 140px 0 100px;
 }
 .juice__composition-title {
   font-weight: bold;
@@ -268,7 +270,7 @@ export default {
 
 .juice__detail-bottom__additional {
   display: flex;
-  gap: 360px;
+  gap: 230px;
   margin-top: 163px;
 }
 .juice__detail-bottom-container {
