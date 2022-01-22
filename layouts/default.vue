@@ -21,6 +21,9 @@ export default {
 </script>
 
 <style>
+body {
+  overflow-x: hidden;
+}
 html {
   font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
     'Helvetica Neue', Arial, sans-serif;

@@ -48,6 +48,7 @@ export default {
 
     .juice__tooltip {
       opacity: 1;
+      left: 100px;
       transform: translateX(-5px);
       transition: all 0.6s;
     }
@@ -55,7 +56,7 @@ export default {
 }
 .juice__tooltip {
   position: absolute;
-  left: 100px;
+  left: 70px;
   bottom: 25px;
   opacity: 0;
   background: #20b84f;
