@@ -1,12 +1,12 @@
 <template>
   <div class="juice-miniature" @click="$emit('chooseSlide')">
     <img
-      :src="require(`../assets/img/slider-miniature/${juice.slideMiniature.toLowerCase()}.png`)"
+      :src="require(`../assets/img/slider-miniature/${juiceMiniature.toLowerCase()}.png`)"
       alt="Миниатюра сока"
       class="miniature"
     />
     <div class="juice__tooltip">
-      <span>{{ juice.tooltip }}</span>
+      <span>{{ juiceTooltip }}</span>
     </div>
   </div>
 </template>
@@ -16,8 +16,12 @@ export default {
   name: 'SliderJuiceMiniature',
 
   props: {
-    juice: {
-      type: Object,
+    juiceMiniature: {
+      type: String,
+      required: true,
+    },
+    juiceTooltip: {
+      type: String,
       required: true,
     },
   },

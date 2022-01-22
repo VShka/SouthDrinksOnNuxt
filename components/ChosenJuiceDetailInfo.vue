@@ -8,7 +8,7 @@
       />
 
       <div class="juice__info">
-        <h2 class="juice__title">{{ juice.name }}</h2>
+        <h2 class="juice__title">{{ juice.name.toLowerCase() }}</h2>
 
         <p class="juice__description">{{ juice.description }}</p>
 
@@ -140,7 +140,7 @@ export default {
   display: flex;
   gap: 90px;
 
-  max-width: 458px;
+  max-width: 460px;
 
   border-top: 1px solid #dadada;
   border-bottom: 1px solid #dadada;

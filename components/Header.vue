@@ -39,7 +39,7 @@
               <a class="link__phone" href="tel:+79182893779">8 (918) 289-37-79</a>
             </li>
           </ol>
-          <button class="header__button">Заказать звонок</button>
+          <a class="header__button" href="#form">Заказать звонок</a>
         </div>
       </div>
     </div>
@@ -161,6 +161,8 @@ body {
 
 .header__button {
   font-family: 'comfortaa';
+  text-decoration: none;
+  color: #000;
   padding: 20px 43px;
   background: linear-gradient(269.21deg, #ffd25a 0.49%, #ffc52b 100%);
   border-radius: 10px;

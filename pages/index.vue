@@ -19,7 +19,7 @@
         сухофруктов, безалкогольную и газированную продукцию.
       </p>
 
-      <button class="header__button">Смотреть продукцию</button>
+      <a class="header__button" href="#products">Смотреть продукцию</a>
     </section>
 
     <section class="guarantee">
@@ -129,11 +129,16 @@
       </ul>
     </section>
 
-    <section class="products">
+    <section id="products" class="products">
       <h2 class="products__title">Продукция</h2>
 
       <ul class="products__list">
-        <li v-for="product in products" :key="product.id" class="products-list__item">
+        <li
+          v-for="product in products"
+          :key="product.id"
+          class="products-list__item"
+          @click="goTo(product)"
+        >
           <img
             :src="require(`../assets/img/${product.img.toLowerCase()}.png`)"
             alt="Вид продукции"
@@ -169,38 +174,66 @@ import 'hooper/dist/hooper.css';
 const products = [
   {
     id: 1,
+    idForFilter: 'bottleSmall_1',
     img: 'juices_tetrapak',
     text: 'Сок тетра пакет (ipi), 1л',
+    value: '1',
+    type: 'juice',
+    name: 'Напитки',
   },
   {
     id: 2,
+    idForFilter: 'bottleSmall',
     img: 'juices_walk_on_garden',
     text: 'Напитки «Прогулка по саду» 0,5л',
+    value: '0,5',
+    type: 'juice',
+    name: 'Напитки',
   },
   {
     id: 3,
+    idForFilter: 'bottleMiddle',
     img: 'uzvar_walk_on_garden',
     text: 'Узвары «Прогулка по саду» 3л',
+    value: '3',
+    type: 'uzvar',
+    name: 'Узвары',
   },
   {
     id: 4,
+    idForFilter: 'bottleMiddle',
     img: 'juices_walk_on_garden_3l',
     text: 'Напитки «Прогулка по саду» 3л',
+    value: '3',
+    type: 'juice',
+    name: 'Напитки',
   },
   {
     id: 5,
+    idForFilter: 'bottleBig',
     img: 'juices_walk_on_garden_5l',
     text: 'Напитки «Прогулка по саду» 5л',
+    value: '5',
+    type: 'juice',
+    name: 'Напитки',
   },
   {
     id: 6,
+    idForFilter: 'bottleBig',
     img: 'uzvar_walk_on_garden_5l',
     text: 'Узвары «Прогулка по саду» 5л',
+    value: '5',
+    type: 'uzvar',
+    name: 'Узвары',
   },
   {
     id: 7,
+    idForFilter: 'bottleMiddle',
     img: 'syrup_walk_on_garden',
-    text: 'Сиропы «Прогулка по саду» 5л',
+    text: 'Сиропы «Прогулка по саду» 3л',
+    value: '3',
+    type: 'syrup',
+    name: 'Сиропы',
   },
 ];
 const partners = [
@@ -249,6 +282,13 @@ export default {
   head: {
     title: 'Главная',
   },
+
+  methods: {
+    goTo(product) {
+      localStorage.setItem('product', JSON.stringify(product));
+      this.$router.push('/Product');
+    },
+  },
 };
 </script>
 
@@ -278,7 +318,10 @@ export default {
   max-width: 915px;
 }
 .header__button {
+  display: inline-block;
   font-family: 'comfortaa';
+  text-decoration: none;
+  color: #000;
   background: linear-gradient(269.21deg, #ffd25a 0.49%, #ffc52b 100%);
   border-radius: 10px;
   font-size: 20px;
@@ -377,6 +420,7 @@ export default {
   background-size: auto;
   background-position: center;
   background-repeat: no-repeat;
+  z-index: -1;
 }
 .header__bg-juice {
   position: absolute;
@@ -390,6 +434,7 @@ export default {
   background-size: auto;
   background-position: center;
   background-repeat: no-repeat;
+  z-index: -1;
 }
 
 .guarantee {
@@ -609,8 +654,23 @@ export default {
   column-gap: 30px;
   row-gap: 90px;
 }
+.products-list__item {
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: transform 0.4s;
+  border-bottom: 6px solid transparent;
+  border-radius: 0 0 10px 10px;
+  &:hover {
+    border-bottom: 6px solid #ffd25a;
+    border-radius: 0 0 10px 10px;
+
+    transform: translateY(-10px);
+    transition: transform 0.2s;
+  }
+}
 .products__item-img {
   width: 403px;
+  border-radius: 10px 10px 0 0;
 }
 .products__item-text {
   font-family: Raleway;

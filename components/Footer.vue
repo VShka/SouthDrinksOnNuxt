@@ -11,7 +11,7 @@
           </p>
         </div>
 
-        <div class="footer__form">
+        <div id="form" class="footer__form">
           <form @submit.prevent>
             <div class="form__align">
               <div class="form__align-row">
