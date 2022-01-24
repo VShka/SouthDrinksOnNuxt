@@ -181,60 +181,16 @@
     </section>
 
     <section class="slider">
-      <hooper
-        v-if="chosenJuice !== undefined"
-        ref="carousel"
-        :vertical="true"
-        style="height: 676px; width: 490px"
-        :wheel-control="false"
-        :touch-drag="false"
-        :keys-control="false"
-        :short-drag="false"
-        :items-to-show="6"
-        :infinite-scroll="true"
-        :center-mode="true"
-        @slide="updateCarousel"
-      >
-        <slide v-for="(juice, index) in sortingJuicesByType" :key="index" :index="index">
+      <swiper v-if="chosenJuice !== undefined" class="swiper" direction="vertical">
+        <swiper-slide v-for="(juice, index) in sortingJuicesByType" :key="index" :index="index">
           <SliderJuiceMiniature
             :juice-miniature="juice.slideMiniature"
             :juice-tooltip="juice.tooltip"
             @chooseSlide="chooseSlide(juice, index)"
           />
-        </slide>
-
-        <template #hooper-addons>
-          <button class="slider-arrow slider-prev" @click.prevent="slidePrev">
-            <svg
-              width="27"
-              height="17"
-              viewBox="0 0 27 17"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M11.3121 1.33199C12.4972 0.0688275 14.5028 0.068826 15.6879 1.33198L25.6471 11.9474C27.4445 13.8631 26.0861 17 23.4593 17H3.54071C0.913862 17 -0.444463 13.8631 1.35285 11.9474L11.3121 1.33199Z"
-                fill="#C4C4C4"
-              />
-            </svg>
-          </button>
-
-          <button class="slider-arrow slider-next" @click.prevent="slideNext">
-            <svg
-              width="27"
-              height="17"
-              viewBox="0 0 27 17"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M11.3121 15.668C12.4972 16.9312 14.5028 16.9312 15.6879 15.668L25.6471 5.05264C27.4445 3.13692 26.0861 0 23.4593 0H3.54071C0.913862 0 -0.444463 3.13691 1.35285 5.05263L11.3121 15.668Z"
-                fill="#C4C4C4"
-              />
-            </svg>
-          </button>
-        </template>
-      </hooper>
+        </swiper-slide>
+        <div slot="pagination" class="swiper-pagination"></div>
+      </swiper>
 
       <ChosenJuiceDetailInfo v-if="chosenJuice !== undefined" :juice="chosenJuice" />
 
@@ -256,8 +212,8 @@
 </template>
 
 <script>
-import { Hooper, Slide } from 'hooper';
-import 'hooper/dist/hooper.css';
+import { Swiper, SwiperSlide } from 'vue-awesome-swiper';
+import 'swiper/css/swiper.css';
 
 import SliderJuiceMiniature from '~/components/SliderJuiceMiniature';
 import ChosenJuiceDetailInfo from '~/components/ChosenJuiceDetailInfo';
@@ -309,10 +265,11 @@ export default {
   name: 'Product',
 
   components: {
-    Hooper,
-    Slide,
     SliderJuiceMiniature,
     ChosenJuiceDetailInfo,
+
+    Swiper,
+    SwiperSlide,
   },
 
   data() {
