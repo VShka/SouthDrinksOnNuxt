@@ -179,18 +179,17 @@
         </li>
       </ul>
     </section>
-
     <section class="slider">
-      <swiper v-if="chosenJuice !== undefined" class="swiper" direction="vertical">
-        <swiper-slide v-for="(juice, index) in sortingJuicesByType" :key="index" :index="index">
+      <Flicking ref="flicking" :options="{ circular: true, horizontal: false }">
+        <template v-for="(juice, index) in sortingJuicesByType">
           <SliderJuiceMiniature
+            :key="juice.tooltip"
             :juice-miniature="juice.slideMiniature"
             :juice-tooltip="juice.tooltip"
             @chooseSlide="chooseSlide(juice, index)"
           />
-        </swiper-slide>
-        <div slot="pagination" class="swiper-pagination"></div>
-      </swiper>
+        </template>
+      </Flicking>
 
       <ChosenJuiceDetailInfo v-if="chosenJuice !== undefined" :juice="chosenJuice" />
 
@@ -212,9 +211,7 @@
 </template>
 
 <script>
-import { Swiper, SwiperSlide } from 'vue-awesome-swiper';
-import 'swiper/css/swiper.css';
-
+import { Flicking } from '@egjs/vue-flicking';
 import SliderJuiceMiniature from '~/components/SliderJuiceMiniature';
 import ChosenJuiceDetailInfo from '~/components/ChosenJuiceDetailInfo';
 
@@ -265,17 +262,23 @@ export default {
   name: 'Product',
 
   components: {
+    Flicking,
     SliderJuiceMiniature,
     ChosenJuiceDetailInfo,
-
-    Swiper,
-    SwiperSlide,
   },
 
   data() {
     return {
       volumeFilters: [...volumeFilters],
       typeFilters: [...typeFilters],
+      sliderOptions: {
+        dots: true,
+        infinite: true,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        vertical: true,
+        verticalSwiping: true,
+      },
       // 39 элементов
       juices: [
         {
@@ -1669,7 +1672,7 @@ export default {
       });
     },
     chooseSlide(juice, index) {
-      this.$refs.carousel.slideTo(index);
+      this.$refs.flicking.moveTo(index);
       this.chosenJuice = juice;
     },
   },
@@ -1677,8 +1680,12 @@ export default {
 </script>
 
 <style lang="scss">
+@import url('node_modules/@egjs/vue-flicking/dist/flicking.css');
 $primaryFontColor: #4b4961;
-
+.slick {
+  width: 400px;
+  height: 690px;
+}
 .juice__undefined {
   font-family: Montserrat Alternates;
   font-style: normal;

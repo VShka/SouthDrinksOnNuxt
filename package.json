@@ -14,12 +14,11 @@
     "prettier": "prettier  — write \".js,.vue\" --ignore-path .gitignore ."
   },
   "dependencies": {
+    "@egjs/vue-flicking": "^4.5.1",
     "@nuxtjs/axios": "^5.12.5",
     "core-js": "^3.8.3",
     "hooper": "^0.3.4",
-    "nuxt": "^2.14.12",
-    "swiper": "^5.4.5",
-    "vue-awesome-swiper": "^4.1.1"
+    "nuxt": "^2.14.12"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^5.0.0",
