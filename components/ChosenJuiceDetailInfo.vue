@@ -58,7 +58,9 @@
           {{ juice.composition }}
         </p>
 
-        <h4 class="juice__composition-microelement-title">Один стакан напитка (250мл) содержит:</h4>
+        <h4 class="juice__composition-microelement-title">
+          Один стакан напитка (250мл) содержит витамины:
+        </h4>
 
         <ul class="juice__microelements">
           <li

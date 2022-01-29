@@ -180,7 +180,11 @@
       </ul>
     </section>
     <section class="slider">
-      <Flicking ref="flicking" :options="{ circular: true, horizontal: false }">
+      <Flicking
+        ref="flicking"
+        class="slick"
+        :options="{ defaultIndex: 0, align: 'center', circular: false, horizontal: false }"
+      >
         <template v-for="(juice, index) in sortingJuicesByType">
           <SliderJuiceMiniature
             :key="juice.tooltip"
@@ -281,7 +285,10 @@ export default {
       },
       // 39 элементов
       juices: [
+        // соки
+        // апельсин
         {
+          id: 1,
           type: 'juice',
           volume: '0,5',
           tooltip: 'Апельсин',
@@ -318,6 +325,7 @@ export default {
           slideMiniature: 'orange',
         },
         {
+          id: 2,
           type: 'juice',
           volume: '1',
           tooltip: 'Апельсин',
@@ -354,6 +362,7 @@ export default {
           slideMiniature: 'orange',
         },
         {
+          id: 3,
           type: 'juice',
           volume: '3',
           tooltip: 'Апельсин',
@@ -390,6 +399,7 @@ export default {
           slideMiniature: 'orange',
         },
         {
+          id: 4,
           type: 'juice',
           volume: '5',
           tooltip: 'Апельсин',
@@ -425,7 +435,9 @@ export default {
           fruitImage: 'orange',
           slideMiniature: 'orange',
         },
+        // абрикос
         {
+          id: 5,
           type: 'juice',
           volume: '0,5',
           tooltip: 'Абрикос',
@@ -462,6 +474,7 @@ export default {
           slideMiniature: 'apricot',
         },
         {
+          id: 6,
           type: 'juice',
           volume: '1',
           tooltip: 'Абрикос',
@@ -498,6 +511,7 @@ export default {
           slideMiniature: 'apricot',
         },
         {
+          id: 7,
           type: 'juice',
           volume: '3',
           tooltip: 'Абрикос',
@@ -534,6 +548,7 @@ export default {
           slideMiniature: 'apricot',
         },
         {
+          id: 8,
           type: 'juice',
           volume: '5',
           tooltip: 'Абрикос',
@@ -569,7 +584,9 @@ export default {
           fruitImage: 'apricot',
           slideMiniature: 'apricot',
         },
+        // гранат
         {
+          id: 9,
           type: 'juice',
           volume: '1',
           tooltip: 'Гранат',
@@ -603,6 +620,7 @@ export default {
           slideMiniature: 'garnet',
         },
         {
+          id: 10,
           type: 'juice',
           volume: '3',
           tooltip: 'Гранат',
@@ -635,7 +653,9 @@ export default {
           fruitImage: 'garnet',
           slideMiniature: 'garnet',
         },
+        // яблоко
         {
+          id: 11,
           type: 'juice',
           volume: '0,5',
           tooltip: 'Яблоко',
@@ -669,6 +689,7 @@ export default {
           slideMiniature: 'apple',
         },
         {
+          id: 12,
           type: 'juice',
           volume: '1',
           tooltip: 'Яблоко',
@@ -702,6 +723,7 @@ export default {
           slideMiniature: 'apple',
         },
         {
+          id: 13,
           type: 'juice',
           volume: '3',
           tooltip: 'Яблоко',
@@ -735,6 +757,7 @@ export default {
           slideMiniature: 'apple',
         },
         {
+          id: 14,
           type: 'juice',
           volume: '5',
           tooltip: 'Яблоко',
@@ -767,7 +790,9 @@ export default {
           fruitImage: 'apple',
           slideMiniature: 'apple',
         },
+        // вишня
         {
+          id: 15,
           type: 'juice',
           volume: '0,5',
           tooltip: 'Вишня',
@@ -801,6 +826,7 @@ export default {
           slideMiniature: 'cherries',
         },
         {
+          id: 16,
           type: 'juice',
           volume: '1',
           tooltip: 'Вишня',
@@ -834,6 +860,7 @@ export default {
           slideMiniature: 'cherries',
         },
         {
+          id: 17,
           type: 'juice',
           volume: '3',
           tooltip: 'Вишня',
@@ -867,6 +894,7 @@ export default {
           slideMiniature: 'cherries',
         },
         {
+          id: 18,
           type: 'juice',
           volume: '5',
           tooltip: 'Вишня',
@@ -899,7 +927,9 @@ export default {
           fruitImage: 'cherry',
           slideMiniature: 'cherries',
         },
+        // мультифрукт
         {
+          id: 19,
           type: 'juice',
           volume: '0,5',
           tooltip: 'Мультифрукт',
@@ -936,6 +966,7 @@ export default {
           slideMiniature: 'multifruct',
         },
         {
+          id: 20,
           type: 'juice',
           volume: '1',
           tooltip: 'Мультифрукт',
@@ -972,6 +1003,7 @@ export default {
           slideMiniature: 'multifruct',
         },
         {
+          id: 21,
           type: 'juice',
           volume: '3',
           tooltip: 'Мультифрукт',
@@ -1008,6 +1040,7 @@ export default {
           slideMiniature: 'multifruct',
         },
         {
+          id: 22,
           type: 'juice',
           volume: '5',
           tooltip: 'Мультифрукт',
@@ -1043,11 +1076,13 @@ export default {
           fruitImage: 'multifruct',
           slideMiniature: 'multifruct',
         },
+        // яблоко-клубника
         {
+          id: 23,
           type: 'juice',
           volume: '3',
           tooltip: 'Яблоко-клубника',
-          name: '3 л НАПИТОК б/а НЕГАЗИРОВАННЫЙ ОСВЕТЛЕННЫЙ СО ВКУСОМ ЯБЛОКА -КЛУБНИКИ',
+          name: '3 л НАПИТОК б/а НЕГАЗИРОВАННЫЙ ОСВЕТЛЕННЫЙ СО ВКУСОМ ЯБЛОКА-КЛУБНИКИ',
           description: `Сок “Прогулка по саду” “яблоко-клубника”  содержит природные пищевые волокна,
                         которые являются отличным средством нормализации работы желудочно-кишечного
                         тракта.`,
@@ -1077,10 +1112,11 @@ export default {
           slideMiniature: 'apple_strawberry',
         },
         {
+          id: 24,
           type: 'juice',
           volume: '5',
           tooltip: 'Яблоко-клубника',
-          name: '5 л НАПИТОК б/а НЕГАЗИРОВАННЫЙ ОСВЕТЛЕННЫЙ СО ВКУСОМ ЯБЛОКА -КЛУБНИКИ',
+          name: '5 л НАПИТОК б/а НЕГАЗИРОВАННЫЙ ОСВЕТЛЕННЫЙ СО ВКУСОМ ЯБЛОКА-КЛУБНИКИ',
           description: `Сок “Прогулка по саду” “яблоко-клубника”  содержит природные пищевые волокна,
                         которые являются отличным средством нормализации работы желудочно-кишечного
                         тракта.`,
@@ -1109,7 +1145,9 @@ export default {
           fruitImage: 'strawberry',
           slideMiniature: 'apple_strawberry',
         },
+        // сиропы
         {
+          id: 25,
           type: 'syrup',
           volume: '3',
           tooltip: 'Барбарис',
@@ -1145,6 +1183,7 @@ export default {
           slideMiniature: 'barberry',
         },
         {
+          id: 26,
           type: 'syrup',
           volume: '3',
           tooltip: 'Лимон',
@@ -1180,6 +1219,7 @@ export default {
           slideMiniature: 'lemon',
         },
         {
+          id: 27,
           type: 'syrup',
           volume: '3',
           tooltip: 'Апельсин',
@@ -1215,6 +1255,7 @@ export default {
           slideMiniature: 'orange',
         },
         {
+          id: 28,
           type: 'syrup',
           volume: '3',
           tooltip: 'Дюшес',
@@ -1250,6 +1291,7 @@ export default {
           slideMiniature: 'duchesse_pear',
         },
         {
+          id: 29,
           type: 'syrup',
           volume: '3',
           tooltip: 'Малина',
@@ -1285,6 +1327,7 @@ export default {
           slideMiniature: 'raspberries',
         },
         {
+          id: 30,
           type: 'syrup',
           volume: '3',
           tooltip: 'Клубника',
@@ -1320,6 +1363,7 @@ export default {
           slideMiniature: 'strawberry',
         },
         {
+          id: 31,
           type: 'syrup',
           volume: '3',
           tooltip: 'Тархун',
@@ -1354,7 +1398,9 @@ export default {
           fruitImage: 'tarragon',
           slideMiniature: 'tarragon',
         },
+        // узвары
         {
+          id: 32,
           type: 'uzvar',
           volume: '0,5',
           tooltip: 'Ассорти',
@@ -1387,6 +1433,7 @@ export default {
           slideMiniature: 'assorted',
         },
         {
+          id: 33,
           type: 'uzvar',
           volume: '1',
           tooltip: 'Ассорти',
@@ -1419,6 +1466,7 @@ export default {
           slideMiniature: 'assorted',
         },
         {
+          id: 34,
           type: 'uzvar',
           volume: '3',
           tooltip: 'Ассорти',
@@ -1451,6 +1499,7 @@ export default {
           slideMiniature: 'assorted',
         },
         {
+          id: 35,
           type: 'uzvar',
           volume: '5',
           tooltip: 'Ассорти',
@@ -1483,6 +1532,7 @@ export default {
           slideMiniature: 'assorted',
         },
         {
+          id: 36,
           type: 'uzvar',
           volume: '0,5',
           tooltip: 'Груша-дичка',
@@ -1515,6 +1565,7 @@ export default {
           slideMiniature: 'wild_pear',
         },
         {
+          id: 37,
           type: 'uzvar',
           volume: '1',
           tooltip: 'Груша-дичка',
@@ -1547,6 +1598,7 @@ export default {
           slideMiniature: 'wild_pear',
         },
         {
+          id: 38,
           type: 'uzvar',
           volume: '3',
           tooltip: 'Груша-дичка',
@@ -1579,6 +1631,7 @@ export default {
           slideMiniature: 'wild_pear',
         },
         {
+          id: 39,
           type: 'uzvar',
           volume: '5',
           tooltip: 'Груша-дичка',
@@ -1609,6 +1662,218 @@ export default {
           image: 'uzvar_pear_5',
           fruitImage: 'pear',
           slideMiniature: 'wild_pear',
+        },
+        // мохито
+        {
+          id: 40,
+          type: 'juice',
+          volume: '0,5',
+          tooltip: 'Мохито',
+          name: '0.5 л НАПИТОК б/а НЕГАЗИРОВАННЫЙ НЕОСВЕТЛЕННЫЙ МОХИТО',
+          description: `Сок “Прогулка по саду” “Мохито”  содержит природные пищевые волокна,
+                        которые являются отличным средством нормализации работы желудочно-кишечного
+                        тракта.`,
+          benefit: 'Калий, входящий всостав нектара, помогает укрепить сердце и укрепляет сосуды.',
+          macronutrients: [
+            {
+              name: 'Калории',
+              value: '9 ккал/ 37,8 кДж.',
+            },
+            {
+              name: 'Углеводы',
+              value: '– 2 (± 0,2) г',
+            },
+          ],
+          composition: 'Сок мохито восстановленный неосветленный',
+          microelements: [
+            {
+              element: 'А,С',
+            },
+            {
+              element: 'К,В',
+            },
+          ],
+          energyValue: '9 ккал/ 37,8 кДж',
+          image: 'no_name',
+          fruitImage: 'no_name',
+          slideMiniature: 'mojito',
+        },
+        {
+          id: 41,
+          type: 'juice',
+          volume: '1',
+          tooltip: 'Мохито',
+          name: '1 л НАПИТОК б/а НЕГАЗИРОВАННЫЙ НЕОСВЕТЛЕННЫЙ МОХИТО',
+          description: `Сок “Прогулка по саду” “Мохито”  содержит природные пищевые волокна,
+                        которые являются отличным средством нормализации работы желудочно-кишечного
+                        тракта.`,
+          benefit: 'Калий, входящий всостав нектара, помогает укрепить сердце и укрепляет сосуды.',
+          macronutrients: [
+            {
+              name: 'Калории',
+              value: '9 ккал/ 37,8 кДж.',
+            },
+            {
+              name: 'Углеводы',
+              value: '– 2 (± 0,2) г',
+            },
+          ],
+          composition: 'Сок мохито восстановленный неосветленный',
+          microelements: [
+            {
+              element: 'А,С',
+            },
+            {
+              element: 'К,В',
+            },
+          ],
+          energyValue: '9 ккал/ 37,8 кДж',
+          image: 'no_name',
+          fruitImage: 'no_name',
+          slideMiniature: 'mojito',
+        },
+        {
+          id: 42,
+          type: 'juice',
+          volume: '3',
+          tooltip: 'Мохито',
+          name: '3 л НАПИТОК б/а НЕГАЗИРОВАННЫЙ НЕОСВЕТЛЕННЫЙ МОХИТО',
+          description: `Сок “Прогулка по саду” “Мохито”  содержит природные пищевые волокна,
+                        которые являются отличным средством нормализации работы желудочно-кишечного
+                        тракта.`,
+          benefit: 'Калий, входящий всостав нектара, помогает укрепить сердце и укрепляет сосуды.',
+          macronutrients: [
+            {
+              name: 'Калории',
+              value: '9 ккал/ 37,8 кДж.',
+            },
+            {
+              name: 'Углеводы',
+              value: '– 2 (± 0,2) г',
+            },
+          ],
+          composition: 'Сок мохито восстановленный неосветленный',
+          microelements: [
+            {
+              element: 'А,С',
+            },
+            {
+              element: 'К,В',
+            },
+          ],
+          energyValue: '9 ккал/ 37,8 кДж',
+          image: 'no_name',
+          fruitImage: 'no_name',
+          slideMiniature: 'mojito',
+        },
+        {
+          id: 43,
+          type: 'juice',
+          volume: '5',
+          tooltip: 'Мохито',
+          name: '5 л НАПИТОК б/а НЕГАЗИРОВАННЫЙ НЕОСВЕТЛЕННЫЙ МОХИТО',
+          description: `Сок “Прогулка по саду” “Мохито”  содержит природные пищевые волокна,
+                        которые являются отличным средством нормализации работы желудочно-кишечного
+                        тракта.`,
+          benefit: 'Калий, входящий всостав нектара, помогает укрепить сердце и укрепляет сосуды.',
+          macronutrients: [
+            {
+              name: 'Калории',
+              value: '9 ккал/ 37,8 кДж.',
+            },
+            {
+              name: 'Углеводы',
+              value: '– 2 (± 0,2) г',
+            },
+          ],
+          composition: 'Сок мохито восстановленный неосветленный',
+          microelements: [
+            {
+              element: 'А,С',
+            },
+            {
+              element: 'К,В',
+            },
+          ],
+          energyValue: '9 ккал/ 37,8 кДж',
+          image: 'no_name',
+          fruitImage: 'no_name',
+          slideMiniature: 'mojito',
+        },
+        // томат
+        {
+          id: 44,
+          type: 'juice',
+          volume: '0,5',
+          tooltip: 'Томат',
+          name: '0.5 л НАПИТОК б/а НЕГАЗИРОВАННЫЙ НЕОСВЕТЛЕННЫЙ НА РАСТИТЕЛЬНОМ СЫРЬЕ «ТОМАТ»',
+          description: `Сок “Прогулка по саду” “томат”  содержит природные пищевые волокна,
+                        которые являются отличным средством нормализации работы желудочно-кишечного
+                        тракта.`,
+          benefit: 'Калий, входящий всостав нектара, помогает укрепить сердце и укрепляет сосуды.',
+          macronutrients: [
+            {
+              name: 'Калории',
+              value: '18 ккал/ 75,8 кДж.',
+            },
+            {
+              name: 'Углеводы',
+              value: '4 г',
+            },
+          ],
+          composition: 'Сок томатов восстановленный неосветленный',
+          microelements: [
+            {
+              element: 'А,С',
+            },
+            {
+              element: 'К,В',
+            },
+            {
+              element: 'P',
+            },
+          ],
+          energyValue: '18 ккал/ 75,8 кДж.',
+          image: 'no_name',
+          fruitImage: 'no_name',
+          slideMiniature: 'tomato',
+        },
+        {
+          id: 45,
+          type: 'juice',
+          volume: '1',
+          tooltip: 'Томат',
+          name: '1 л НАПИТОК б/а НЕГАЗИРОВАННЫЙ НЕОСВЕТЛЕННЫЙ НА РАСТИТЕЛЬНОМ СЫРЬЕ «ТОМАТ»',
+          description: `Сок “Прогулка по саду” “томат”  содержит природные пищевые волокна,
+                        которые являются отличным средством нормализации работы желудочно-кишечного
+                        тракта.`,
+          benefit: 'Калий, входящий всостав нектара, помогает укрепить сердце и укрепляет сосуды.',
+          macronutrients: [
+            {
+              name: 'Калории',
+              value: '18 ккал/ 75,8 кДж.',
+            },
+            {
+              name: 'Углеводы',
+              value: '4 г',
+            },
+          ],
+          composition: 'Сок томатов восстановленный неосветленный',
+          microelements: [
+            {
+              element: 'А,С',
+            },
+            {
+              element: 'К,В',
+            },
+            {
+              element: 'P',
+            },
+          ],
+          energyValue: '18 ккал/ 75,8 кДж.',
+          image: 'no_name',
+          fruitImage: 'no_name',
+          slideMiniature: 'tomato',
         },
       ],
 
@@ -1683,8 +1948,8 @@ export default {
 @import url('node_modules/@egjs/vue-flicking/dist/flicking.css');
 $primaryFontColor: #4b4961;
 .slick {
-  width: 400px;
-  height: 690px;
+  width: 480px;
+  height: 940px;
 }
 .juice__undefined {
   font-family: Montserrat Alternates;
@@ -1901,31 +2166,35 @@ $primaryFontColor: #4b4961;
 
   z-index: -1;
 }
-.slider-arrow {
-  background-color: transparent;
-  padding: 10px;
+
+.flicking-viewport.vertical > .flicking-camera {
+  gap: 24px;
 }
-.slider-prev {
-  position: absolute;
-  left: 16px;
-  top: -40px;
-}
-.slider-next {
-  position: absolute;
-  left: 14px;
-  top: 690px;
-}
-.hooper {
-  margin-top: 120px;
-}
-.hooper-slide.is-current {
-  .juice-miniature {
-    border: 2px solid #ffc52b;
-    transform: translateX(30px);
-    pointer-events: none;
-  }
-  .juice__tooltip {
-    opacity: 1;
-  }
-}
+//.slider-arrow {
+//  background-color: transparent;
+//  padding: 10px;
+//}
+//.slider-prev {
+//  position: absolute;
+//  left: 16px;
+//  top: -40px;
+//}
+//.slider-next {
+//  position: absolute;
+//  left: 14px;
+//  top: 690px;
+//}
+//.hooper {
+//  margin-top: 120px;
+//}
+//.hooper-slide.is-current {
+//  .juice-miniature {
+//    border: 2px solid #ffc52b;
+//    transform: translateX(30px);
+//    pointer-events: none;
+//  }
+//  .juice__tooltip {
+//    opacity: 1;
+//  }
+//}
 </style>

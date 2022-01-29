@@ -139,9 +139,6 @@ export default {
   padding: 100px 100px;
 }
 .contacts__bg {
-  width: 1905px;
-  height: 732px;
-
   position: absolute;
   top: -270px;
   left: 0;

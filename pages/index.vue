@@ -32,7 +32,7 @@
         :wheel-control="false"
         :auto-play="true"
         :play-speed="10000"
-        :transition="3000"
+        :transition="2000"
       >
         <slide>
           <div class="guarantee__slide-container">
@@ -174,19 +174,19 @@ import 'hooper/dist/hooper.css';
 const products = [
   {
     id: 1,
-    idForFilter: 'bottleSmall_1',
-    img: 'juices_tetrapak',
-    text: 'Сок тетра пакет (ipi), 1л',
-    value: '1',
+    idForFilter: 'bottleSmall',
+    img: 'juices_walk_on_garden',
+    text: 'Напитки «Прогулка по саду» 0,5л',
+    value: '0,5',
     type: 'juice',
     name: 'Напитки',
   },
   {
     id: 2,
-    idForFilter: 'bottleSmall',
-    img: 'juices_walk_on_garden',
-    text: 'Напитки «Прогулка по саду» 0,5л',
-    value: '0,5',
+    idForFilter: 'bottleSmall_1',
+    img: 'juices_walk_on_garden_1',
+    text: 'Напитки «Прогулка по саду» 1л',
+    value: '1',
     type: 'juice',
     name: 'Напитки',
   },
@@ -470,7 +470,7 @@ export default {
 .guarantee__slide-container {
   display: flex;
   align-items: center;
-  gap: 96px;
+  justify-content: space-between;
   height: 889px;
 }
 .guarantee__slide-container_space-between {
@@ -554,7 +554,7 @@ export default {
   height: 1100px;
 
   background-image: url('~/assets/img/successful_bg.png');
-  background-size: auto;
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 
@@ -732,6 +732,18 @@ export default {
 
   margin-bottom: 130px;
 }
+
+@media (min-width: 2000px) {
+  .guarantee__slide-img-bg {
+    left: 200px;
+  }
+  .guarantee__slide-img-bg_1 {
+    right: 230px;
+  }
+  .guarantee__slide-img_2 {
+    margin-right: 0;
+  }
+}
 </style>
 
 <style lang="scss">
@@ -763,6 +775,12 @@ export default {
 
   &:hover {
     background-color: #ffd25a;
+  }
+}
+
+@media (min-width: 2000px) {
+  .hooper-slide {
+    padding: 0 200px;
   }
 }
 </style>
