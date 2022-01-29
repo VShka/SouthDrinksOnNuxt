@@ -177,6 +177,15 @@
             {{ item.name }}
           </span>
         </li>
+
+        <li
+          v-show="filterByVolume.id === 'bottleMiddle'"
+          class="filter__item_second"
+          :class="{ filter__item_second_active: filterByType.name === 'Сиропы' }"
+          @click="selectSyrupType"
+        >
+          <span class="filter__item-name"> Сиропы </span>
+        </li>
       </ul>
     </section>
     <section class="slider">
@@ -195,9 +204,7 @@
         </template>
       </Flicking>
 
-      <ChosenJuiceDetailInfo v-if="chosenJuice !== undefined" :juice="chosenJuice" />
-
-      <div v-else class="juice__undefined">В ассортименте нет выбранных продуктов.</div>
+      <ChosenJuiceDetailInfo :juice="chosenJuice" />
 
       <div class="slider__bottom-bg">
         <svg
@@ -256,11 +263,6 @@ const typeFilters = [
     name: 'Узвары',
     type: 'uzvar',
   },
-  {
-    id: 3,
-    name: 'Сиропы',
-    type: 'syrup',
-  },
 ];
 export default {
   name: 'Product',
@@ -275,14 +277,6 @@ export default {
     return {
       volumeFilters: [...volumeFilters],
       typeFilters: [...typeFilters],
-      sliderOptions: {
-        dots: true,
-        infinite: true,
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        vertical: true,
-        verticalSwiping: true,
-      },
       // 39 элементов
       juices: [
         // соки
@@ -1919,9 +1913,22 @@ export default {
     selectVolume(item) {
       this.filterByVolume = item;
       this.chosenJuice = this.sortingJuicesByType[0];
+
+      if (this.filterByType.type === 'syrup') {
+        this.filterByType = this.typeFilters[0];
+        this.chosenJuice = this.sortingJuicesByType[0];
+      }
     },
     selectType(item) {
       this.filterByType = item;
+      this.chosenJuice = this.sortingJuicesByType[0];
+    },
+    selectSyrupType() {
+      this.filterByType = {
+        id: 3,
+        name: 'Сиропы',
+        type: 'syrup',
+      };
       this.chosenJuice = this.sortingJuicesByType[0];
     },
 
@@ -1950,16 +1957,6 @@ $primaryFontColor: #4b4961;
 .slick {
   width: 480px;
   height: 940px;
-}
-.juice__undefined {
-  font-family: Montserrat Alternates;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 40px;
-  line-height: 59px;
-  color: #4b4961;
-
-  margin-top: 50px;
 }
 .main {
   font-family: Montserrat Alternates;
@@ -2136,6 +2133,10 @@ $primaryFontColor: #4b4961;
     span {
       color: #fff;
     }
+  }
+
+  &_hidden {
+    display: none;
   }
 }
 .filter__item-name {

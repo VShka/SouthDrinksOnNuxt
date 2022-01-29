@@ -102,23 +102,13 @@
       </div>
     </section>
 
-    <div style="position: relative; overflow: hidden">
-      <a
-        href="https://yandex.ru/maps?utm_medium=mapframe&utm_source=maps"
-        style="color: #eee; font-size: 12px; position: absolute; top: 0px"
-        >Яндекс.Карты</a
-      ><a
-        href="https://yandex.ru/maps/10995/krasnodar-krai/house/krasnodarskaya_ulitsa_15a/Z0AYdAVhTkQFQFpvfX5xcnpgYg==/?ll=39.223491%2C45.203594&utm_medium=mapframe&utm_source=maps&z=17.11"
-        style="color: #eee; font-size: 12px; position: absolute; top: 14px"
-        >Яндекс.Карты</a
-      ><iframe
-        src="https://yandex.ru/map-widget/v1/-/CCUyz2b7lD"
-        width="100%"
-        height="596"
-        frameborder="1"
-        allowfullscreen="true"
-        style="position: relative"
-      ></iframe>
+    <div class="ymap" style="position: relative; overflow: hidden">
+      <script
+        type="text/javascript"
+        charset="utf-8"
+        async
+        src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A0a220d3ce1e2e203a62c8182b6266a0a13804b8e5cde4aa79df0951578a59951&amp;width=100%25&amp;height=491&amp;lang=ru_RU&amp;scroll=false"
+      ></script>
     </div>
   </main>
 </template>

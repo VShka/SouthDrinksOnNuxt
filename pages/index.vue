@@ -137,15 +137,17 @@
           v-for="product in products"
           :key="product.id"
           class="products-list__item"
-          @click="goTo(product)"
+          @click="saveProductToLocalStorage(product)"
         >
-          <img
-            :src="require(`../assets/img/${product.img.toLowerCase()}.png`)"
-            alt="Вид продукции"
-            class="products__item-img"
-          />
+          <nuxt-link class="link" to="/product" exact-active-class="link-active">
+            <img
+              :src="require(`../assets/img/${product.img.toLowerCase()}.png`)"
+              alt="Вид продукции"
+              class="products__item-img"
+            />
 
-          <p class="products__item-text">{{ product.text }}</p>
+            <p class="products__item-text">{{ product.text }}</p>
+          </nuxt-link>
         </li>
       </ul>
 
@@ -284,9 +286,8 @@ export default {
   },
 
   methods: {
-    goTo(product) {
+    saveProductToLocalStorage(product) {
       localStorage.setItem('product', JSON.stringify(product));
-      this.$router.push('/Product');
     },
   },
 };
