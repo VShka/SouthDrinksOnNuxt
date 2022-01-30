@@ -112,6 +112,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.juice__detail {
+  width: 1450px;
+}
 .juice__detail-top {
   display: flex;
   align-items: center;

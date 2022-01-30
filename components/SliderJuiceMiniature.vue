@@ -44,7 +44,17 @@ export default {
 
   cursor: pointer;
 
-  transition: 1s;
+  transition: transform 1s;
+
+  &_is-current {
+    border: 2px solid #ffc52b;
+    transform: translateX(30px);
+    pointer-events: none;
+
+    .juice__tooltip {
+      opacity: 1;
+    }
+  }
 
   &:hover {
     transform: translateX(30px);
