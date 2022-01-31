@@ -189,20 +189,47 @@
       </ul>
     </section>
     <section class="slider">
-      <Flicking
-        ref="flicking"
-        class="slick"
-        :options="{ defaultIndex: 0, align: 'center', circular: false, horizontal: false }"
-      >
-        <template v-for="(juice, index) in sortingJuicesByType">
-          <SliderJuiceMiniature
-            :key="juice.tooltip"
-            :juice-miniature="juice.slideMiniature"
-            :juice-tooltip="juice.tooltip"
-            @chooseSlide="chooseSlide(juice, index)"
-          />
-        </template>
-      </Flicking>
+      <div class="slider__container">
+        <swiper ref="swiper" class="swiper" :options="swiperOption">
+          <swiper-slide v-for="(juice, index) in sortingJuicesByType" :key="juice.id">
+            <SliderJuiceMiniature
+              :juice-miniature="juice.slideMiniature"
+              :juice-tooltip="juice.tooltip"
+              @chooseSlide="chooseSlide(juice, index)"
+            />
+          </swiper-slide>
+        </swiper>
+
+        <div class="button-prev">
+          <svg
+            width="27"
+            height="17"
+            viewBox="0 0 27 17"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M11.3121 1.33199C12.4972 0.0688275 14.5028 0.068826 15.6879 1.33198L25.6471 11.9474C27.4445 13.8631 26.0861 17 23.4593 17H3.54071C0.913862 17 -0.444463 13.8631 1.35285 11.9474L11.3121 1.33199Z"
+              fill="#C4C4C4"
+            />
+          </svg>
+        </div>
+
+        <div class="button-next">
+          <svg
+            width="27"
+            height="17"
+            viewBox="0 0 27 17"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M11.3121 15.668C12.4972 16.9312 14.5028 16.9312 15.6879 15.668L25.6471 5.05264C27.4445 3.13692 26.0861 0 23.4593 0H3.54071C0.913862 0 -0.444463 3.13691 1.35285 5.05263L11.3121 15.668Z"
+              fill="#C4C4C4"
+            />
+          </svg>
+        </div>
+      </div>
 
       <ChosenJuiceDetailInfo :juice="chosenJuice" />
 
@@ -222,7 +249,8 @@
 </template>
 
 <script>
-import { Flicking } from '@egjs/vue-flicking';
+import { Swiper, SwiperSlide } from 'vue-awesome-swiper';
+import 'swiper/css/swiper.css';
 import SliderJuiceMiniature from '~/components/SliderJuiceMiniature';
 import ChosenJuiceDetailInfo from '~/components/ChosenJuiceDetailInfo';
 
@@ -268,7 +296,8 @@ export default {
   name: 'Product',
 
   components: {
-    Flicking,
+    Swiper,
+    SwiperSlide,
     SliderJuiceMiniature,
     ChosenJuiceDetailInfo,
   },
@@ -1874,6 +1903,17 @@ export default {
       filterByVolume: {},
       filterByType: '',
       chosenJuice: {},
+
+      swiperOption: {
+        direction: 'vertical',
+        slidesPerView: 5,
+        initialSlide: 0,
+        centeredSlides: true,
+        navigation: {
+          nextEl: '.button-next',
+          prevEl: '.button-prev',
+        },
+      },
     };
   },
 
@@ -1887,6 +1927,9 @@ export default {
     },
     sortingJuicesByType() {
       return this.sortingJuicesByVolume.filter((juice) => juice.type === this.filterByType.type);
+    },
+    swiper() {
+      return this.$refs.swiper.$swiper;
     },
   },
 
@@ -1909,6 +1952,13 @@ export default {
     }
   },
 
+  mounted() {
+    this.swiper.on('slideChange', () => {
+      this.updateCarousel(this.swiper.activeIndex);
+      this.swiper.update();
+    });
+  },
+
   methods: {
     selectVolume(item) {
       this.filterByVolume = item;
@@ -1918,10 +1968,12 @@ export default {
         this.filterByType = this.typeFilters[0];
         this.chosenJuice = this.sortingJuicesByType[0];
       }
+      this.swiper.slideTo(0, 500, true);
     },
     selectType(item) {
       this.filterByType = item;
       this.chosenJuice = this.sortingJuicesByType[0];
+      this.swiper.slideTo(0, 500, true);
     },
     selectSyrupType() {
       this.filterByType = {
@@ -1930,21 +1982,16 @@ export default {
         type: 'syrup',
       };
       this.chosenJuice = this.sortingJuicesByType[0];
+      this.swiper.slideTo(0, 500, true);
     },
-
-    slidePrev() {
-      this.$refs.carousel.slidePrev();
-    },
-    slideNext() {
-      this.$refs.carousel.slideNext();
-    },
-    updateCarousel(payload) {
-      this.juices.forEach((juice, index) => {
-        if (index === payload.currentSlide) this.chosenJuice = juice;
+    updateCarousel(currIndex) {
+      this.sortingJuicesByType.forEach((juice, index) => {
+        if (index === currIndex) this.chosenJuice = juice;
       });
     },
     chooseSlide(juice, index) {
-      this.$refs.flicking.moveTo(index);
+      this.swiper.slideTo(index, 500, true);
+      // console.log(this.swiper.activeIndex);
       this.chosenJuice = juice;
     },
   },
@@ -1952,11 +1999,14 @@ export default {
 </script>
 
 <style lang="scss">
-@import url('node_modules/@egjs/vue-flicking/dist/flicking.css');
 $primaryFontColor: #4b4961;
-.slick {
-  width: 480px;
-  height: 940px;
+.swiper {
+  width: 290px;
+  height: 676px;
+  margin-top: 120px;
+}
+.slider__container {
+  position: relative;
 }
 .main {
   font-family: Montserrat Alternates;
@@ -2152,6 +2202,7 @@ $primaryFontColor: #4b4961;
 .slider {
   position: relative;
   display: flex;
+  align-items: flex-start;
 
   margin-top: 20px;
   padding: 0 100px 160px;
@@ -2168,34 +2219,28 @@ $primaryFontColor: #4b4961;
   z-index: -1;
 }
 
-.flicking-viewport.vertical > .flicking-camera {
-  gap: 24px;
+.swiper-slide-active {
+  .juice-miniature {
+    border: 2px solid #ffc52b;
+    transform: translateX(30px);
+    pointer-events: none;
+  }
+  .juice__tooltip {
+    opacity: 1;
+  }
 }
-//.slider-arrow {
-//  background-color: transparent;
-//  padding: 10px;
-//}
-//.slider-prev {
-//  position: absolute;
-//  left: 16px;
-//  top: -40px;
-//}
-//.slider-next {
-//  position: absolute;
-//  left: 14px;
-//  top: 690px;
-//}
-//.hooper {
-//  margin-top: 120px;
-//}
-//.hooper-slide.is-current {
-//  .juice-miniature {
-//    border: 2px solid #ffc52b;
-//    transform: translateX(30px);
-//    pointer-events: none;
-//  }
-//  .juice__tooltip {
-//    opacity: 1;
-//  }
-//}
+.button-prev,
+.button-next {
+  position: absolute;
+  z-index: 100;
+  cursor: pointer;
+}
+.button-prev {
+  top: 70px;
+  left: 27px;
+}
+.button-next {
+  bottom: 0;
+  left: 25px;
+}
 </style>
