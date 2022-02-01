@@ -1908,7 +1908,7 @@ export default {
         direction: 'vertical',
         slidesPerView: 5,
         initialSlide: 0,
-        centeredSlides: true,
+        watchOverflow: true,
         navigation: {
           nextEl: '.button-next',
           prevEl: '.button-prev',
@@ -1935,8 +1935,15 @@ export default {
 
   created() {
     if (!JSON.parse(localStorage.getItem('product'))) {
-      this.selectVolume(this.volumeFilters[0]);
-      this.selectType(this.typeFilters[0]);
+      this.filterByType = {
+        name: typeFilters[0].name,
+        type: typeFilters[0].type,
+      };
+      this.filterByVolume = {
+        id: volumeFilters[0].id,
+        value: volumeFilters[0].value,
+      };
+      this.chosenJuice = this.sortingJuicesByType[0];
     } else {
       const product = JSON.parse(localStorage.getItem('product'));
 
