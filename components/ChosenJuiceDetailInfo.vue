@@ -5,6 +5,7 @@
         :src="require(`../assets/img/juices/${juice.image.toLowerCase()}.png`)"
         :alt="juice.tooltip"
         class="juice__image"
+        @mousedown.prevent.stop
       />
 
       <div class="juice__info">

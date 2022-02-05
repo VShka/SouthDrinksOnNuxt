@@ -188,10 +188,16 @@
         </li>
       </ul>
     </section>
+
     <section class="slider">
       <div class="slider__container">
         <swiper ref="swiper" class="swiper" :options="swiperOption">
-          <swiper-slide v-for="(juice, index) in sortingJuicesByType" :key="juice.id">
+          <swiper-slide
+            v-for="(juice, index) in sortingJuicesByType"
+            :key="juice.id"
+            :class="{ 'juice-miniature_active': currentJuiceMiniature === juice }"
+            @click.native="currentJuiceMiniature = juice"
+          >
             <SliderJuiceMiniature
               :juice-miniature="juice.slideMiniature"
               :juice-tooltip="juice.tooltip"
@@ -1903,12 +1909,11 @@ export default {
       filterByVolume: {},
       filterByType: '',
       chosenJuice: {},
+      currentJuiceMiniature: '',
 
       swiperOption: {
         direction: 'vertical',
         slidesPerView: 5,
-        initialSlide: 0,
-        watchOverflow: true,
         navigation: {
           nextEl: '.button-next',
           prevEl: '.button-prev',
@@ -1944,6 +1949,7 @@ export default {
         value: volumeFilters[0].value,
       };
       this.chosenJuice = this.sortingJuicesByType[0];
+      this.currentJuiceMiniature = this.chosenJuice;
     } else {
       const product = JSON.parse(localStorage.getItem('product'));
 
@@ -1956,30 +1962,27 @@ export default {
         value: product.value,
       };
       this.chosenJuice = this.sortingJuicesByType[0];
+      this.currentJuiceMiniature = this.chosenJuice;
     }
-  },
-
-  mounted() {
-    this.swiper.on('slideChange', () => {
-      this.updateCarousel(this.swiper.activeIndex);
-      this.swiper.update();
-    });
   },
 
   methods: {
     selectVolume(item) {
       this.filterByVolume = item;
       this.chosenJuice = this.sortingJuicesByType[0];
+      this.currentJuiceMiniature = this.chosenJuice;
 
       if (this.filterByType.type === 'syrup') {
         this.filterByType = this.typeFilters[0];
         this.chosenJuice = this.sortingJuicesByType[0];
+        this.currentJuiceMiniature = this.chosenJuice;
       }
       this.swiper.slideTo(0, 500, true);
     },
     selectType(item) {
       this.filterByType = item;
       this.chosenJuice = this.sortingJuicesByType[0];
+      this.currentJuiceMiniature = this.chosenJuice;
       this.swiper.slideTo(0, 500, true);
     },
     selectSyrupType() {
@@ -1989,16 +1992,11 @@ export default {
         type: 'syrup',
       };
       this.chosenJuice = this.sortingJuicesByType[0];
+      this.currentJuiceMiniature = this.chosenJuice;
       this.swiper.slideTo(0, 500, true);
     },
-    updateCarousel(currIndex) {
-      this.sortingJuicesByType.forEach((juice, index) => {
-        if (index === currIndex) this.chosenJuice = juice;
-      });
-    },
     chooseSlide(juice, index) {
-      this.swiper.slideTo(index, 500, true);
-      // console.log(this.swiper.activeIndex);
+      // this.swiper.slideTo(index, 500, false);
       this.chosenJuice = juice;
     },
   },
@@ -2008,7 +2006,7 @@ export default {
 <style lang="scss">
 $primaryFontColor: #4b4961;
 .swiper {
-  width: 290px;
+  width: 280px;
   height: 676px;
   margin-top: 120px;
 }
@@ -2226,7 +2224,7 @@ $primaryFontColor: #4b4961;
   z-index: -1;
 }
 
-.swiper-slide-active {
+.juice-miniature_active {
   .juice-miniature {
     border: 2px solid #ffc52b;
     transform: translateX(30px);
@@ -2249,5 +2247,8 @@ $primaryFontColor: #4b4961;
 .button-next {
   bottom: 0;
   left: 25px;
+}
+.swiper-button-disabled {
+  display: none;
 }
 </style>

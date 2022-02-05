@@ -46,19 +46,9 @@ export default {
 
   transition: transform 1s;
 
-  &_is-current {
-    border: 2px solid #ffc52b;
-    transform: translateX(30px);
-    pointer-events: none;
-
-    .juice__tooltip {
-      opacity: 1;
-    }
-  }
-
   &:hover {
     transform: translateX(30px);
-    transition: 0.5s;
+    transition: transform 0.5s;
 
     .juice__tooltip {
       opacity: 1;
@@ -69,6 +59,7 @@ export default {
   }
 }
 .juice__tooltip {
+  display: inline-block;
   position: absolute;
   left: 70px;
   bottom: 25px;
@@ -77,6 +68,7 @@ export default {
   border-radius: 6px;
   color: #fff;
   font-family: Rubik;
+  white-space: nowrap;
   font-size: 18px;
   padding: 3px 18px;
   transition: all 0.6s;
