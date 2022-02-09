@@ -6,13 +6,18 @@
       <div class="header__leaflet_2"></div>
       <div class="header__leaflet_3"></div>
       <div class="header__leaflet_4"></div>
-      <div class="header__leaflet_5"></div>
       <div class="header__bg-juice"></div>
 
       <h1 class="header__title">
         Все витамины Кубани <br />
         в каждой упаковке!
       </h1>
+
+      <img
+        class="header__juice-img"
+        src="~/assets/img/main_page_juice_view.png"
+        alt="Сок апельсиновый в бутылке объёмом пол литра"
+      />
 
       <p class="header__description">
         Наша компания производит и реализует оптом и в розницу соки, натуральные напитки из
@@ -161,8 +166,9 @@
       <ul class="partners__list">
         <li v-for="partner in partners" :key="partner.id" class="partners-list__item">
           <img
-            :src="require(`../assets/img/${partner.icon.toLowerCase()}.svg`)"
+            :src="require(`../assets/img/${partner.icon.toLowerCase()}.png`)"
             :alt="partner.name"
+            class="partners-list__item-image"
           />
         </li>
       </ul>
@@ -264,6 +270,16 @@ const partners = [
     icon: 'partner_ambar',
     name: 'Амбар',
   },
+  {
+    id: 6,
+    icon: 'partner_nahodka',
+    name: 'Находка',
+  },
+  {
+    id: 7,
+    icon: 'partner_pobeda',
+    name: 'Победа',
+  },
 ];
 export default {
   name: 'Home',
@@ -297,8 +313,8 @@ export default {
 .header {
   position: relative;
   text-align: left;
-  padding: 258px 100px 0;
-  height: 948px;
+  padding: 140px 100px 0;
+  height: 830px;
 }
 .header__title {
   font-family: Montserrat Alternates;
@@ -345,7 +361,7 @@ export default {
 
 .header__bg {
   position: absolute;
-  top: -144px;
+  top: -260px;
   left: 0;
   right: 0;
   bottom: 0;
@@ -359,7 +375,7 @@ export default {
 }
 .header__leaflet_1 {
   position: absolute;
-  top: 100px;
+  top: 0;
   left: -67px;
 
   width: 241px;
@@ -409,33 +425,22 @@ export default {
   background-position: center;
   background-repeat: no-repeat;
 }
-.header__leaflet_5 {
+.header__bg-juice {
   position: absolute;
-  top: 147px;
-  right: 643px;
+  bottom: 25px;
+  right: 235px;
 
-  width: 155px;
-  height: 168px;
+  width: 630px;
+  height: 925px;
 
-  background-image: url('~/assets/img/main_page_leaflet_3.svg');
-  background-size: auto;
+  background-image: url('~/assets/img/main_page_juice_view.png');
+  background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
   z-index: -1;
 }
-.header__bg-juice {
-  position: absolute;
-  bottom: 0;
-  right: 225px;
-
-  width: 580px;
-  height: 1083px;
-
-  background-image: url('~/assets/img/main_page_juice_view.png');
-  background-size: auto;
-  background-position: center;
-  background-repeat: no-repeat;
-  z-index: -1;
+.header__juice-img {
+  display: none;
 }
 
 .guarantee {
@@ -525,7 +530,7 @@ export default {
   font-family: Raleway;
   font-style: normal;
   font-weight: normal;
-  font-size: 36px;
+  font-size: 30px;
   line-height: 150%;
   color: #6a6a6a;
 
@@ -643,17 +648,17 @@ export default {
   font-style: normal;
   font-weight: bold;
   font-size: 72px;
-  line-height: 88px;
+  line-height: 50px;
   color: #484848;
 
-  margin-bottom: 130px;
+  margin-bottom: 60px;
 }
 .products__list {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   column-gap: 30px;
-  row-gap: 90px;
+  row-gap: 70px;
 }
 .products-list__item {
   box-sizing: border-box;
@@ -718,10 +723,13 @@ export default {
 }
 .partners__list {
   display: flex;
-  column-gap: 150px;
+  column-gap: 70px;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
+}
+.partners-list__item-image {
+  width: 180px;
 }
 .partners__title {
   font-family: Montserrat Alternates;
@@ -743,6 +751,147 @@ export default {
   }
   .guarantee__slide-img_2 {
     margin-right: 0;
+  }
+
+  .partners__list {
+    justify-content: space-between;
+  }
+}
+@media (max-width: 1900px) {
+  .header__title {
+    font-size: 47px;
+  }
+  .header__description {
+    font-size: 26px;
+    max-width: 790px;
+  }
+  .header__bg-juice {
+    right: 30px;
+  }
+}
+@media (max-width: 1440px) {
+  .header {
+    padding: 90px 60px 0;
+    height: 620px;
+  }
+  .header__bg-juice {
+    display: none;
+  }
+  .header__leaflet_1 {
+    top: -30px;
+  }
+  .header__leaflet_3 {
+    bottom: 25px;
+    left: -103px;
+  }
+  .header__leaflet_4 {
+    bottom: 120px;
+  }
+  .header__juice-img {
+    display: block;
+    width: 420px;
+    float: right;
+    margin-top: -220px;
+  }
+  .header__title {
+    font-size: 36px;
+  }
+  .header__description {
+    font-size: 24px;
+  }
+  .header__leaflet_2 {
+    width: 150px;
+    height: 120px;
+    background-size: contain;
+  }
+}
+@media (max-width: 1024px) {
+  .header {
+    height: 440px;
+    padding: 40px 25px 0;
+  }
+  .header__title {
+    font-size: 30px;
+  }
+  .header__description {
+    font-size: 16px;
+  }
+  .header__juice-img {
+    width: 300px;
+    margin-top: -150px;
+  }
+  .header__button {
+    font-size: 16px;
+    padding: 16px;
+    margin-top: 60px;
+  }
+  .header__leaflet_1 {
+    display: none;
+  }
+  .header__leaflet_2 {
+    width: 115px;
+    height: 95px;
+  }
+  .header__leaflet_3 {
+    display: none;
+  }
+  .header__leaflet_4 {
+    width: 100px;
+    height: 180px;
+    background-size: contain;
+    bottom: 65px;
+  }
+}
+@media (max-width: 767px) {
+  .header {
+    height: 750px;
+  }
+  .header__title {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  .header__description {
+    line-height: 18px;
+  }
+  .header__button {
+    margin-top: 20px;
+  }
+  .header__juice-img {
+    float: none;
+    width: 293px;
+    margin-top: -65px;
+  }
+  .header__leaflet_3 {
+    display: block;
+    width: 235px;
+    height: 120px;
+    bottom: 290px;
+    transform: rotate(-42deg);
+    background-size: contain;
+  }
+  .header__leaflet_4 {
+    bottom: 240px;
+  }
+  .header__leaflet_2 {
+    top: 120px;
+  }
+}
+@media (max-width: 425px) {
+  .header {
+    padding: 40px 15px 0;
+  }
+  .header__juice-img {
+    margin: -65px auto 0;
+  }
+  .header__button {
+    width: 100%;
+    text-align: center;
+  }
+  .header__leaflet_2 {
+    width: 90px;
+  }
+  .header__leaflet_4 {
+    width: 75px;
   }
 }
 </style>
