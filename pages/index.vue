@@ -32,14 +32,8 @@
 
       <h2 class="guarantee__title">Годы опыта — гарантии качества</h2>
 
-      <hooper
-        style="height: 889px"
-        :wheel-control="false"
-        :auto-play="true"
-        :play-speed="10000"
-        :transition="2000"
-      >
-        <slide>
+      <swiper :options="swiperOption">
+        <swiper-slide>
           <div class="guarantee__slide-container">
             <img
               src="~/assets/img/main_page_slide-img.png"
@@ -59,11 +53,11 @@
           </div>
 
           <div class="guarantee__slide-img-bg"></div>
-        </slide>
+        </swiper-slide>
 
-        <slide>
-          <div class="guarantee__slide-container guarantee__slide-container_space-between">
-            <p class="guarantee__slide-text guarantee__slide-text_pl">
+        <swiper-slide>
+          <div class="guarantee__slide-container">
+            <p class="guarantee__slide-text">
               <span>ООО «Кубань Агро-продукт»</span> использует не только сырье лучшего качества, но
               и итальянские технологии производства, упаковки и хранения продукции. Современное
               оборудование позволяет сохранить максимум витаминов и полезных веществ. Для готовых
@@ -80,10 +74,10 @@
           </div>
 
           <div class="guarantee__slide-img-bg_1"></div>
-        </slide>
+        </swiper-slide>
 
-        <hooper-pagination slot="hooper-addons"></hooper-pagination>
-      </hooper>
+        <div slot="pagination" class="swiper-pagination"></div>
+      </swiper>
     </section>
 
     <section class="successful">
@@ -177,8 +171,8 @@
 </template>
 
 <script>
-import { Hooper, Slide, Pagination as HooperPagination } from 'hooper';
-import 'hooper/dist/hooper.css';
+import { Swiper, SwiperSlide } from 'vue-awesome-swiper';
+import 'swiper/css/swiper.css';
 const products = [
   {
     id: 1,
@@ -285,15 +279,29 @@ export default {
   name: 'Home',
 
   components: {
-    Hooper,
-    Slide,
-    HooperPagination,
+    Swiper,
+    SwiperSlide,
   },
 
   data() {
     return {
       products: [...products],
       partners: [...partners],
+
+      swiperOption: {
+        grabCursor: true,
+        speed: 1000,
+        autoplay: {
+          delay: 5500,
+          disableOnInteraction: false,
+          pauseOnMouseEnter: true,
+        },
+        pagination: {
+          el: '.swiper-pagination',
+          dynamicBullets: true,
+          clickable: true,
+        },
+      },
     };
   },
 
@@ -467,7 +475,7 @@ export default {
   font-family: Montserrat Alternates;
   font-style: normal;
   font-weight: bold;
-  font-size: 72px;
+  font-size: 64px;
   line-height: 88px;
   color: #484848;
 
@@ -476,36 +484,29 @@ export default {
 .guarantee__slide-container {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  height: 889px;
-}
-.guarantee__slide-container_space-between {
-  justify-content: space-between;
-  gap: 0;
+  justify-content: center;
+  height: 730px;
 }
 .guarantee__slide-img {
-  width: 727px;
-  height: 667px;
-
+  width: 600px;
   filter: drop-shadow(18px 21px 51px rgba(255, 204, 68, 0.2));
 }
 .guarantee__slide-img_1 {
-  border-radius: 0 10px 10px 0;
+  border-radius: 10px;
 }
 .guarantee__slide-img_2 {
-  border-radius: 10px 0 0 10px;
-  margin-right: -63px;
+  transform: scale(-1, 1);
 }
 .guarantee__slide-img-bg {
   position: absolute;
   bottom: 0;
-  left: -32px;
+  left: -20px;
 
-  width: 889px;
-  height: 889px;
+  width: 800px;
+  height: 800px;
 
   background-image: url('~/assets/img/slide_img_bg.png');
-  background-size: auto;
+  background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
 
@@ -514,13 +515,13 @@ export default {
 .guarantee__slide-img-bg_1 {
   position: absolute;
   bottom: 0;
-  right: -110px;
+  right: -30px;
 
-  width: 889px;
-  height: 889px;
+  width: 730px;
+  height: 730px;
 
   background-image: url('~/assets/img/slide_img_bg_1.png');
-  background-size: auto;
+  background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
 
@@ -530,7 +531,7 @@ export default {
   font-family: Raleway;
   font-style: normal;
   font-weight: normal;
-  font-size: 30px;
+  font-size: 28px;
   line-height: 150%;
   color: #6a6a6a;
 
@@ -539,9 +540,6 @@ export default {
   span {
     font-weight: 500;
   }
-}
-.guarantee__slide-text_pl {
-  padding-left: 70px;
 }
 
 .successful {
@@ -897,40 +895,9 @@ export default {
 </style>
 
 <style lang="scss">
-.guarantee .hooper {
-  margin-top: 20px;
-}
-.hooper-slide {
-  position: relative;
-}
-.hooper-indicators {
-  li:not(:last-child) {
-    margin-right: 35px;
-  }
-}
-.hooper-indicator {
+.swiper-pagination-bullet {
   width: 24px;
   height: 24px;
-
-  border: 1px solid #ffd25a;
-  border-radius: 20px;
-
-  margin: 0;
-
-  &.is-active {
-    width: 30px;
-    height: 30px;
-    background: linear-gradient(269.21deg, #ffd25a 0.49%, #ffc52b 100%);
-  }
-
-  &:hover {
-    background-color: #ffd25a;
-  }
-}
-
-@media (min-width: 2000px) {
-  .hooper-slide {
-    padding: 0 200px;
-  }
+  background: linear-gradient(269.21deg, #ffd25a 0.49%, #ffc52b 100%);
 }
 </style>
