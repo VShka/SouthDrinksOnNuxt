@@ -66,9 +66,9 @@
             <p class="h4">Юр. Адрес</p>
             <p class="p">
               Краснодарский край,<br />
-              г. Геленджик, ул. Кирова, 117
+              г. Геленджик, ул. Курзальная, 19
             </p>
-            <p><a href="" class="link">klohkonikita@mail.ru</a></p>
+            <p><a class="link" href="mailto:ooo_kap@mail.ru">ooo_kap@mail.ru</a></p>
           </div>
 
           <div class="footer__item1">
@@ -77,7 +77,7 @@
               Краснодарский край, Динской р-н,<br />
               ст. Динская, ул. Краснодарская, 15 а.
             </p>
-            <p><a href="" class="link">ooo_kap@mail.ru</a></p>
+            <p><a class="link" href="mailto:kap_sklad@mail.ru">kap_sklad@mail.ru</a></p>
           </div>
         </div>
         <div class="main__footer-right">

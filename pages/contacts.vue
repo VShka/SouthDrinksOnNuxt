@@ -30,9 +30,9 @@
         <div class="address__info">
           <h2 class="address__title">Юридический и почтовый адрес</h2>
 
-          <p class="address__text address__text_height">
-            353460, Краснодарский край, г. Геленджик, ул. Кирова, 117
-          </p>
+          <p class="address__text">353460, Краснодарский край, г. Геленджик, ул. Курзальная, 19</p>
+
+          <p class="address__text">353460, Краснодарский край, Динской район, ст. Динская А/Я 10</p>
 
           <p class="address__text address__email">
             email: <a class="email" href="mailto:ooo_kap@mail.ru">ooo_kap@mail.ru</a>
@@ -49,7 +49,7 @@
           </p>
 
           <p class="address__text address__email">
-            email: <a class="email" href="mailto:ooo_kap@mail.ru">klohkonikita@mail.ru</a>
+            email: <a class="email" href="mailto:kap_sklad@mail.ru">kap_sklad@mail.ru</a>
           </p>
 
           <a class="address__phone" href="tel:89182893779">8 (918) 289-37-79</a>
@@ -74,29 +74,29 @@
 
           <p class="company-info__text">
             <span class="company-info__title">ОКВЭД</span>
-            15.98.2 ОКПО 68485693 ОКТМО 03708000
+            11/07/2 ОКПО 68485693 ОКТМО 03708000
           </p>
 
           <p class="company-info__text">
             <span class="company-info__title">ОКОГУ</span>
-            49013 ОКФС 16 ОКОПФ 65
+            4210014 ОКФС 16 ОКОПФ 12300
           </p>
         </div>
 
         <div class="company__info">
           <p class="company-info__text">
             <span class="company-info__title">р/сч</span>
-            40702810830070002703 в отделении № 8619 Сбербанка России г.Краснодар
+            40702810826020006795 "РОСТОВСКИЙ" филиал АО "АЛЬФА-БАНК" г. Ростов-на-Дону
           </p>
 
           <p class="company-info__text">
             <span class="company-info__title">к/сч</span>
-            30101810100000000602
+            30101810500000000207
           </p>
 
           <p class="company-info__text">
             <span class="company-info__title">БИК</span>
-            040349602
+            046015207
           </p>
         </div>
       </div>
@@ -268,9 +268,6 @@ export default {
   font-size: 24px;
   line-height: 28px;
   color: #95979b;
-}
-.address__text_height {
-  height: 56px;
 }
 .address__text_middle {
   width: 545px;
