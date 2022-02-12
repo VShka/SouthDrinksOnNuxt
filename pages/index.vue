@@ -8,7 +8,7 @@
       <div class="header__leaflet_4"></div>
       <div class="header__bg-juice"></div>
 
-      <h1 class="header__title">
+      <h1 class="title_main header__title">
         Все витамины Кубани <br />
         в каждой упаковке!
       </h1>
@@ -30,7 +30,7 @@
     <section class="guarantee">
       <div class="guarantee__some-bg"></div>
 
-      <h2 class="guarantee__title">Годы опыта — гарантии качества</h2>
+      <h2 class="title_main guarantee__title">Годы опыта — гарантии качества</h2>
 
       <swiper :options="swiperOption">
         <swiper-slide>
@@ -84,7 +84,7 @@
       <div class="successful__bg_peach"></div>
       <div class="successful__bg"></div>
 
-      <h2 class="successful__title">Наш залог успеха</h2>
+      <h2 class="title_main successful__title">Наш залог успеха</h2>
 
       <ul class="successful__list">
         <li class="successful-list__item">
@@ -129,7 +129,7 @@
     </section>
 
     <section id="products" class="products">
-      <h2 class="products__title">Продукция</h2>
+      <h2 class="title_main products__title">Продукция</h2>
 
       <ul class="products__list">
         <li
@@ -155,7 +155,7 @@
     </section>
 
     <section class="partners">
-      <h2 class="partners__title">Наши партнеры</h2>
+      <h2 class="title_main partners__title">Наши партнеры</h2>
 
       <ul class="partners__list">
         <li v-for="partner in partners" :key="partner.id" class="partners-list__item">
@@ -291,11 +291,11 @@ export default {
       swiperOption: {
         grabCursor: true,
         speed: 1000,
-        autoplay: {
-          delay: 5500,
-          disableOnInteraction: false,
-          pauseOnMouseEnter: true,
-        },
+        // autoplay: {
+        //   delay: 5500,
+        //   disableOnInteraction: false,
+        //   pauseOnMouseEnter: true,
+        // },
         pagination: {
           el: '.swiper-pagination',
           dynamicBullets: true,
@@ -318,6 +318,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.title_main {
+  font-family: Montserrat Alternates;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 64px;
+  line-height: 120%;
+  color: #484848;
+}
+
 .header {
   position: relative;
   text-align: left;
@@ -325,11 +334,6 @@ export default {
   height: 830px;
 }
 .header__title {
-  font-family: Montserrat Alternates;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 64px;
-  line-height: 119.41%;
   color: #4b4961;
   margin-bottom: 20px;
 }
@@ -472,13 +476,6 @@ export default {
   z-index: -2;
 }
 .guarantee__title {
-  font-family: Montserrat Alternates;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 64px;
-  line-height: 88px;
-  color: #484848;
-
   padding-left: 100px;
 }
 .guarantee__slide-container {
@@ -578,19 +575,13 @@ export default {
   background-repeat: no-repeat;
 }
 .successful__title {
-  font-family: Montserrat Alternates;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 72px;
-  line-height: 88px;
-  color: #484848;
-
   margin-bottom: 127px;
 }
 .successful__list {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 .successful-list__item {
   display: flex;
@@ -642,13 +633,6 @@ export default {
   margin-bottom: 167px;
 }
 .products__title {
-  font-family: Montserrat Alternates;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 72px;
-  line-height: 50px;
-  color: #484848;
-
   margin-bottom: 60px;
 }
 .products__list {
@@ -730,22 +714,27 @@ export default {
   width: 180px;
 }
 .partners__title {
-  font-family: Montserrat Alternates;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 72px;
-  line-height: 88px;
-  color: #484848;
-
   margin-bottom: 130px;
 }
 
 @media (min-width: 2000px) {
+  .guarantee__some-bg {
+    top: -780px;
+  }
+  .guarantee__slide-container {
+    gap: 300px;
+    height: 900px;
+  }
+  .guarantee__slide-img {
+    width: 700px;
+  }
   .guarantee__slide-img-bg {
     left: 200px;
+    bottom: 80px;
   }
   .guarantee__slide-img-bg_1 {
     right: 230px;
+    bottom: 115px;
   }
   .guarantee__slide-img_2 {
     margin-right: 0;
@@ -756,7 +745,7 @@ export default {
   }
 }
 @media (max-width: 1900px) {
-  .header__title {
+  .title_main {
     font-size: 47px;
   }
   .header__description {
@@ -766,8 +755,28 @@ export default {
   .header__bg-juice {
     right: 30px;
   }
+
+  .guarantee__slide-container {
+    margin: 0 auto;
+    max-width: 90%;
+  }
+  .guarantee__slide-text {
+    font-size: 26px;
+  }
+  .guarantee__slide-img {
+    width: 550px;
+  }
+  .guarantee__slide-img-bg {
+    width: 700px;
+    height: 700px;
+    bottom: 20px;
+  }
 }
 @media (max-width: 1440px) {
+  .title_main {
+    font-size: 42px;
+  }
+
   .header {
     padding: 90px 60px 0;
     height: 620px;
@@ -802,8 +811,38 @@ export default {
     height: 120px;
     background-size: contain;
   }
+
+  .guarantee {
+    margin: 110px 0 80px;
+  }
+  .guarantee__title {
+    padding-left: 60px;
+  }
+  .guarantee__slide-container {
+    height: 580px;
+  }
+  .guarantee__slide-text {
+    font-size: 22px;
+  }
+  .guarantee__slide-img {
+    width: 490px;
+  }
+  .guarantee__slide-img-bg {
+    width: 550px;
+    height: 550px;
+    bottom: 10px;
+  }
+  .guarantee__slide-img-bg_1 {
+    width: 550px;
+    height: 550px;
+    bottom: 20px;
+  }
 }
 @media (max-width: 1024px) {
+  .title_main {
+    font-size: 36px;
+  }
+
   .header {
     height: 440px;
     padding: 40px 25px 0;
@@ -838,6 +877,33 @@ export default {
     height: 180px;
     background-size: contain;
     bottom: 65px;
+  }
+
+  .guarantee {
+    height: 700px;
+    margin: 50px 0 0;
+  }
+  .guarantee__title {
+    padding-left: 25px;
+  }
+  .guarantee__slide-container {
+    height: 470px;
+  }
+  .guarantee__slide-img {
+    width: 340px;
+  }
+  .guarantee__slide-img-bg {
+    width: 430px;
+    height: 430px;
+    bottom: 20px;
+  }
+  .guarantee__slide-img-bg_1 {
+    width: 440px;
+    height: 440px;
+    bottom: 24px;
+  }
+  .guarantee__slide-text {
+    font-size: 16px;
   }
 }
 @media (max-width: 767px) {
