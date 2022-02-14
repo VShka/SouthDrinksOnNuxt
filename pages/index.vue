@@ -6,13 +6,18 @@
       <div class="header__leaflet_2"></div>
       <div class="header__leaflet_3"></div>
       <div class="header__leaflet_4"></div>
-      <div class="header__leaflet_5"></div>
       <div class="header__bg-juice"></div>
 
-      <h1 class="header__title">
+      <h1 class="title_main header__title">
         Все витамины Кубани <br />
         в каждой упаковке!
       </h1>
+
+      <img
+        class="header__juice-img"
+        src="~/assets/img/main_page_juice_view.png"
+        alt="Сок апельсиновый в бутылке объёмом пол литра"
+      />
 
       <p class="header__description">
         Наша компания производит и реализует оптом и в розницу соки, натуральные напитки из
@@ -25,21 +30,21 @@
     <section class="guarantee">
       <div class="guarantee__some-bg"></div>
 
-      <h2 class="guarantee__title">Годы опыта — гарантии качества</h2>
+      <h2 class="title_main guarantee__title">Годы опыта — гарантии качества</h2>
 
-      <hooper
-        style="height: 889px"
-        :wheel-control="false"
-        :auto-play="true"
-        :play-speed="10000"
-        :transition="2000"
-      >
-        <slide>
+      <swiper :options="swiperOption">
+        <swiper-slide>
           <div class="guarantee__slide-container">
             <img
               src="~/assets/img/main_page_slide-img.png"
               alt="Картинка слайда"
-              class="guarantee__slide-img guarantee__slide-img_1"
+              class="guarantee__slide-img"
+            />
+
+            <img
+              src="~/assets/img/main_page_slide-img_mobile.png"
+              alt="Картинка слайда"
+              class="guarantee__slide-img_mobile"
             />
 
             <p class="guarantee__slide-text">
@@ -54,11 +59,17 @@
           </div>
 
           <div class="guarantee__slide-img-bg"></div>
-        </slide>
+        </swiper-slide>
 
-        <slide>
-          <div class="guarantee__slide-container guarantee__slide-container_space-between">
-            <p class="guarantee__slide-text guarantee__slide-text_pl">
+        <swiper-slide>
+          <div class="guarantee__slide-container">
+            <img
+              src="~/assets/img/main_page_slide-img_mobile.png"
+              alt="Картинка слайда"
+              class="guarantee__slide-img_mobile"
+            />
+
+            <p class="guarantee__slide-text">
               <span>ООО «Кубань Агро-продукт»</span> использует не только сырье лучшего качества, но
               и итальянские технологии производства, упаковки и хранения продукции. Современное
               оборудование позволяет сохранить максимум витаминов и полезных веществ. Для готовых
@@ -75,17 +86,18 @@
           </div>
 
           <div class="guarantee__slide-img-bg_1"></div>
-        </slide>
+        </swiper-slide>
 
-        <hooper-pagination slot="hooper-addons"></hooper-pagination>
-      </hooper>
+        <div slot="pagination" class="swiper-pagination"></div>
+      </swiper>
     </section>
 
     <section class="successful">
       <div class="successful__bg_peach"></div>
       <div class="successful__bg"></div>
+      <div class="successful__bg_mobile"></div>
 
-      <h2 class="successful__title">Наш залог успеха</h2>
+      <h2 class="title_main successful__title">Наш залог успеха</h2>
 
       <ul class="successful__list">
         <li class="successful-list__item">
@@ -130,7 +142,7 @@
     </section>
 
     <section id="products" class="products">
-      <h2 class="products__title">Продукция</h2>
+      <h2 class="title_main products__title">Продукция</h2>
 
       <ul class="products__list">
         <li
@@ -156,13 +168,14 @@
     </section>
 
     <section class="partners">
-      <h2 class="partners__title">Наши партнеры</h2>
+      <h2 class="title_main partners__title">Наши партнеры</h2>
 
       <ul class="partners__list">
         <li v-for="partner in partners" :key="partner.id" class="partners-list__item">
           <img
-            :src="require(`../assets/img/${partner.icon.toLowerCase()}.svg`)"
+            :src="require(`../assets/img/${partner.icon.toLowerCase()}.png`)"
             :alt="partner.name"
+            class="partners-list__item-image"
           />
         </li>
       </ul>
@@ -171,8 +184,8 @@
 </template>
 
 <script>
-import { Hooper, Slide, Pagination as HooperPagination } from 'hooper';
-import 'hooper/dist/hooper.css';
+import { Swiper, SwiperSlide } from 'vue-awesome-swiper';
+import 'swiper/css/swiper.css';
 const products = [
   {
     id: 1,
@@ -264,20 +277,44 @@ const partners = [
     icon: 'partner_ambar',
     name: 'Амбар',
   },
+  {
+    id: 6,
+    icon: 'partner_nahodka',
+    name: 'Находка',
+  },
+  {
+    id: 7,
+    icon: 'partner_pobeda',
+    name: 'Победа',
+  },
 ];
 export default {
   name: 'Home',
 
   components: {
-    Hooper,
-    Slide,
-    HooperPagination,
+    Swiper,
+    SwiperSlide,
   },
 
   data() {
     return {
       products: [...products],
       partners: [...partners],
+
+      swiperOption: {
+        grabCursor: true,
+        speed: 1000,
+        autoplay: {
+          delay: 5500,
+          disableOnInteraction: false,
+          pauseOnMouseEnter: true,
+        },
+        pagination: {
+          el: '.swiper-pagination',
+          dynamicBullets: true,
+          clickable: true,
+        },
+      },
     };
   },
 
@@ -294,18 +331,22 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.header {
-  position: relative;
-  text-align: left;
-  padding: 258px 100px 0;
-  height: 948px;
-}
-.header__title {
+.title_main {
   font-family: Montserrat Alternates;
   font-style: normal;
   font-weight: bold;
   font-size: 64px;
-  line-height: 119.41%;
+  line-height: 120%;
+  color: #484848;
+}
+
+.header {
+  position: relative;
+  text-align: left;
+  padding: 140px 100px 0;
+  height: 830px;
+}
+.header__title {
   color: #4b4961;
   margin-bottom: 20px;
 }
@@ -345,7 +386,7 @@ export default {
 
 .header__bg {
   position: absolute;
-  top: -144px;
+  top: -260px;
   left: 0;
   right: 0;
   bottom: 0;
@@ -359,7 +400,7 @@ export default {
 }
 .header__leaflet_1 {
   position: absolute;
-  top: 100px;
+  top: 0;
   left: -67px;
 
   width: 241px;
@@ -409,39 +450,28 @@ export default {
   background-position: center;
   background-repeat: no-repeat;
 }
-.header__leaflet_5 {
+.header__bg-juice {
   position: absolute;
-  top: 147px;
-  right: 643px;
+  bottom: 25px;
+  right: 235px;
 
-  width: 155px;
-  height: 168px;
+  width: 630px;
+  height: 925px;
 
-  background-image: url('~/assets/img/main_page_leaflet_3.svg');
-  background-size: auto;
+  background-image: url('~/assets/img/main_page_juice_view.png');
+  background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
   z-index: -1;
 }
-.header__bg-juice {
-  position: absolute;
-  bottom: 0;
-  right: 225px;
-
-  width: 580px;
-  height: 1083px;
-
-  background-image: url('~/assets/img/main_page_juice_view.png');
-  background-size: auto;
-  background-position: center;
-  background-repeat: no-repeat;
-  z-index: -1;
+.header__juice-img {
+  display: none;
 }
 
 .guarantee {
   position: relative;
   margin: 230px 0 400px;
-  height: 923px;
+  height: 700px;
 }
 .guarantee__some-bg {
   position: absolute;
@@ -459,48 +489,34 @@ export default {
   z-index: -2;
 }
 .guarantee__title {
-  font-family: Montserrat Alternates;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 72px;
-  line-height: 88px;
-  color: #484848;
-
   padding-left: 100px;
 }
 .guarantee__slide-container {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  height: 889px;
-}
-.guarantee__slide-container_space-between {
-  justify-content: space-between;
-  gap: 0;
+  justify-content: center;
+  height: 730px;
 }
 .guarantee__slide-img {
-  width: 727px;
-  height: 667px;
-
+  width: 600px;
   filter: drop-shadow(18px 21px 51px rgba(255, 204, 68, 0.2));
 }
-.guarantee__slide-img_1 {
-  border-radius: 0 10px 10px 0;
+.guarantee__slide-img_mobile {
+  display: none;
 }
 .guarantee__slide-img_2 {
-  border-radius: 10px 0 0 10px;
-  margin-right: -63px;
+  transform: scale(-1, 1);
 }
 .guarantee__slide-img-bg {
   position: absolute;
   bottom: 0;
-  left: -32px;
+  left: -20px;
 
-  width: 889px;
-  height: 889px;
+  width: 800px;
+  height: 800px;
 
   background-image: url('~/assets/img/slide_img_bg.png');
-  background-size: auto;
+  background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
 
@@ -508,14 +524,14 @@ export default {
 }
 .guarantee__slide-img-bg_1 {
   position: absolute;
-  bottom: 0;
-  right: -110px;
+  bottom: 45px;
+  right: -30px;
 
-  width: 889px;
-  height: 889px;
+  width: 678px;
+  height: 668px;
 
   background-image: url('~/assets/img/slide_img_bg_1.png');
-  background-size: auto;
+  background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
 
@@ -525,7 +541,7 @@ export default {
   font-family: Raleway;
   font-style: normal;
   font-weight: normal;
-  font-size: 36px;
+  font-size: 28px;
   line-height: 150%;
   color: #6a6a6a;
 
@@ -534,9 +550,6 @@ export default {
   span {
     font-weight: 500;
   }
-}
-.guarantee__slide-text_pl {
-  padding-left: 70px;
 }
 
 .successful {
@@ -561,6 +574,9 @@ export default {
 
   z-index: -1;
 }
+.successful__bg_mobile {
+  display: none;
+}
 .successful__bg_peach {
   position: absolute;
   top: -430px;
@@ -570,24 +586,18 @@ export default {
   height: 758px;
 
   background-image: url('~/assets/img/peach_bg.png');
-  background-size: auto;
+  background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
 }
 .successful__title {
-  font-family: Montserrat Alternates;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 72px;
-  line-height: 88px;
-  color: #484848;
-
   margin-bottom: 127px;
 }
 .successful__list {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 .successful-list__item {
   display: flex;
@@ -619,7 +629,7 @@ export default {
   width: 102px;
   height: 102px;
 
-  background-size: auto;
+  background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
 }
@@ -639,21 +649,14 @@ export default {
   margin-bottom: 167px;
 }
 .products__title {
-  font-family: Montserrat Alternates;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 72px;
-  line-height: 88px;
-  color: #484848;
-
-  margin-bottom: 130px;
+  margin-bottom: 60px;
 }
 .products__list {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   column-gap: 30px;
-  row-gap: 90px;
+  row-gap: 70px;
 }
 .products-list__item {
   box-sizing: border-box;
@@ -713,75 +716,504 @@ export default {
 }
 
 .partners {
-  padding: 0 100px;
-  margin-bottom: 150px;
+  padding: 0 100px 150px;
+  border-bottom: 1px solid #eaeaea;
 }
 .partners__list {
   display: flex;
-  column-gap: 150px;
+  column-gap: 70px;
+  row-gap: 35px;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
 }
+.partners-list__item-image {
+  width: 180px;
+}
 .partners__title {
-  font-family: Montserrat Alternates;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 72px;
-  line-height: 88px;
-  color: #484848;
-
   margin-bottom: 130px;
 }
 
 @media (min-width: 2000px) {
+  .guarantee {
+    height: 800px;
+  }
+  .guarantee__some-bg {
+    top: -780px;
+  }
+  .guarantee__slide-container {
+    gap: 300px;
+    height: 900px;
+  }
+  .guarantee__slide-img {
+    width: 700px;
+  }
   .guarantee__slide-img-bg {
     left: 200px;
+    bottom: 80px;
   }
   .guarantee__slide-img-bg_1 {
     right: 230px;
+    bottom: 115px;
   }
   .guarantee__slide-img_2 {
     margin-right: 0;
+  }
+
+  .partners__list {
+    justify-content: space-between;
+  }
+}
+@media (max-width: 1900px) {
+  .title_main {
+    font-size: 47px;
+  }
+  .header__description {
+    font-size: 26px;
+    max-width: 790px;
+  }
+  .header__bg-juice {
+    right: 30px;
+  }
+
+  .guarantee {
+    height: 600px;
+  }
+  .guarantee__slide-container {
+    margin: 0 auto;
+    max-width: 90%;
+  }
+  .guarantee__slide-text {
+    font-size: 26px;
+  }
+  .guarantee__slide-img {
+    width: 550px;
+  }
+  .guarantee__slide-img-bg {
+    width: 700px;
+    height: 700px;
+    bottom: 20px;
+  }
+
+  .successful__bg_peach {
+    width: 440px;
+    height: 585px;
+    top: -308px;
+  }
+  .successful__list {
+    gap: 30px;
+  }
+  .successful-list__info {
+    max-width: 350px;
+  }
+  .successful-list__item {
+    gap: 10px;
+  }
+  .successful-list__icon {
+    width: 73px;
+    height: 73px;
+  }
+}
+@media (max-width: 1440px) {
+  .title_main {
+    font-size: 42px;
+  }
+
+  .header {
+    padding: 90px 60px 0;
+    height: 620px;
+  }
+  .header__bg-juice {
+    display: none;
+  }
+  .header__leaflet_1 {
+    top: -30px;
+  }
+  .header__leaflet_3 {
+    bottom: 25px;
+    left: -103px;
+  }
+  .header__leaflet_4 {
+    bottom: 120px;
+  }
+  .header__juice-img {
+    display: block;
+    width: 420px;
+    float: right;
+    margin-top: -220px;
+  }
+  .header__title {
+    font-size: 36px;
+  }
+  .header__description {
+    font-size: 24px;
+  }
+  .header__leaflet_2 {
+    width: 150px;
+    height: 120px;
+    background-size: contain;
+  }
+
+  .guarantee {
+    margin: 110px 0 180px;
+  }
+  .guarantee__some-bg {
+    top: -725px;
+    width: 253px;
+    height: 845px;
+    background-size: contain;
+  }
+  .guarantee__title {
+    padding-left: 60px;
+  }
+  .guarantee__slide-container {
+    height: 580px;
+  }
+  .guarantee__slide-text {
+    font-size: 22px;
+  }
+  .guarantee__slide-img {
+    width: 490px;
+  }
+  .guarantee__slide-img-bg {
+    width: 550px;
+    height: 550px;
+    bottom: 10px;
+  }
+  .guarantee__slide-img-bg_1 {
+    width: 550px;
+    height: 550px;
+    bottom: 20px;
+  }
+
+  .successful {
+    padding: 0 60px;
+  }
+  .successful__bg_peach {
+    width: 360px;
+    height: 495px;
+    top: -225px;
+  }
+  .successful-list__title {
+    font-size: 24px;
+    margin-bottom: 5px;
+  }
+  .successful-list__text {
+    font-size: 16px;
+  }
+
+  .products {
+    padding: 0 60px;
+  }
+  .partners {
+    padding: 0 60px 150px;
+  }
+}
+@media (max-width: 1024px) {
+  .title_main {
+    font-size: 36px;
+  }
+
+  .header {
+    height: 440px;
+    padding: 40px 25px 0;
+  }
+  .header__title {
+    font-size: 30px;
+  }
+  .header__description {
+    font-size: 16px;
+  }
+  .header__juice-img {
+    width: 300px;
+    margin-top: -150px;
+  }
+  .header__button {
+    font-size: 16px;
+    padding: 16px;
+    margin-top: 60px;
+  }
+  .header__leaflet_1 {
+    display: none;
+  }
+  .header__leaflet_2 {
+    width: 115px;
+    height: 95px;
+  }
+  .header__leaflet_3 {
+    display: none;
+  }
+  .header__leaflet_4 {
+    width: 100px;
+    height: 180px;
+    background-size: contain;
+    bottom: 65px;
+  }
+
+  .guarantee {
+    margin: 30px 0 0;
+  }
+  .guarantee__some-bg {
+    top: -315px;
+    width: 117px;
+    height: 387px;
+  }
+  .guarantee__title {
+    padding-left: 25px;
+  }
+  .guarantee__slide-container {
+    height: 470px;
+  }
+  .guarantee__slide-img {
+    width: 340px;
+  }
+  .guarantee__slide-img-bg {
+    width: 430px;
+    height: 430px;
+    bottom: 20px;
+  }
+  .guarantee__slide-img-bg_1 {
+    width: 440px;
+    height: 440px;
+    bottom: 24px;
+  }
+  .guarantee__slide-text {
+    font-size: 15px;
+  }
+
+  .successful {
+    padding: 0 25px;
+  }
+  .successful__bg_peach {
+    width: 295px;
+    height: 390px;
+    top: -150px;
+  }
+  .successful__list {
+    justify-content: center;
+  }
+  .successful-list__item {
+    gap: 30px;
+  }
+
+  .products {
+    padding: 0 25px;
+  }
+  .products__item-img {
+    width: 330px;
+  }
+  .products__item-text {
+    font-size: 16px;
+    padding: 18px 20px;
+  }
+
+  .partners {
+    padding: 0 25px 70px;
+  }
+  .partners__title {
+    margin-bottom: 50px;
+  }
+  .partners-list__item-image {
+    width: 120px;
+  }
+}
+@media (max-width: 768px) {
+  .successful__title {
+    margin-bottom: 34px;
+  }
+}
+@media (max-width: 767px) {
+  .title_main {
+    font-size: 30px;
+  }
+
+  .header {
+    height: 750px;
+  }
+  .header__title {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  .header__description {
+    line-height: 18px;
+  }
+  .header__button {
+    margin-top: 20px;
+  }
+  .header__juice-img {
+    float: none;
+    width: 293px;
+    margin-top: -65px;
+  }
+  .header__leaflet_3 {
+    display: block;
+    width: 235px;
+    height: 120px;
+    bottom: 290px;
+    transform: rotate(-42deg);
+    background-size: contain;
+  }
+  .header__leaflet_4 {
+    bottom: 240px;
+  }
+  .header__leaflet_2 {
+    top: 120px;
+  }
+
+  .guarantee {
+    height: 600px;
+    margin: 30px 0 150px;
+  }
+  .guarantee__some-bg {
+    top: -270px;
+    width: 85px;
+    height: 288px;
+    z-index: 1;
+  }
+  .guarantee__slide-container {
+    flex-direction: column;
+    justify-content: normal;
+    margin: 0 25px;
+    max-width: 100%;
+  }
+  .guarantee__slide-img {
+    display: none;
+  }
+  .guarantee__slide-img_mobile {
+    display: block;
+  }
+  .guarantee__slide-img-bg {
+    display: none;
+  }
+  .guarantee__slide-img-bg_1 {
+    display: none;
+  }
+
+  .successful__bg_peach {
+    display: none;
+  }
+  .successful__bg {
+    display: none;
+  }
+  .successful__bg_mobile {
+    display: block;
+    position: absolute;
+    top: -68px;
+    left: 0;
+
+    width: 100%;
+    height: 620px;
+
+    background-image: url('~/assets/img/successful_bg_mobile.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    z-index: -1;
+  }
+  .successful-list__icon {
+    flex-shrink: 0;
+    width: 58px;
+    height: 58px;
+  }
+  .successful-list__title {
+    font-size: 20px;
+  }
+  .successful-list__text {
+    font-size: 14px;
+  }
+  .successful-list__item {
+    gap: 10px;
+  }
+
+  .products {
+    margin-bottom: 60px;
+  }
+  .products__title {
+    margin-bottom: 20px;
+  }
+  .products__list {
+    gap: 14px;
+  }
+  .products__raspberries-bg {
+    display: none;
+  }
+  .products__leaflet-bg {
+    display: none;
+  }
+
+  .swiper-container {
+    height: 100%;
+  }
+}
+@media (max-width: 425px) {
+  .title_main {
+    font-size: 24px;
+  }
+
+  .header {
+    padding: 40px 15px 0;
+  }
+  .header__juice-img {
+    margin: -65px auto 0;
+  }
+  .header__button {
+    width: 100%;
+    text-align: center;
+  }
+  .header__leaflet_2 {
+    width: 90px;
+  }
+  .header__leaflet_4 {
+    width: 75px;
+  }
+
+  .guarantee {
+    height: 600px;
+    margin: 0 0 150px;
+  }
+  .guarantee__title {
+    padding-left: 15px;
+  }
+  .guarantee__slide-container {
+    margin: 0 15px;
+  }
+  .guarantee__some-bg {
+    top: -130px;
+    width: 40px;
+    height: 130px;
+  }
+
+  .successful {
+    padding: 0 15px;
+  }
+
+  .products {
+    padding: 0 15px;
+  }
+  .partners {
+    padding: 0 15px 70px;
+  }
+  .partners__title {
+    margin-bottom: 32px;
+  }
+  .partners-list__item-image {
+    width: 110px;
   }
 }
 </style>
 
 <style lang="scss">
-.guarantee .hooper {
-  margin-top: 20px;
-}
-.hooper-slide {
-  position: relative;
-}
-.hooper-indicators {
-  li:not(:last-child) {
-    margin-right: 35px;
-  }
-}
-.hooper-indicator {
+.swiper-pagination-bullet {
   width: 24px;
   height: 24px;
-
-  border: 1px solid #ffd25a;
-  border-radius: 20px;
-
-  margin: 0;
-
-  &.is-active {
-    width: 30px;
-    height: 30px;
-    background: linear-gradient(269.21deg, #ffd25a 0.49%, #ffc52b 100%);
-  }
-
-  &:hover {
-    background-color: #ffd25a;
-  }
+  background: linear-gradient(269.21deg, #ffd25a 0.49%, #ffc52b 100%);
 }
 
-@media (min-width: 2000px) {
-  .hooper-slide {
-    padding: 0 200px;
+@media (max-width: 425px) {
+  .swiper-pagination-bullet {
+    width: 19px;
+    height: 19px;
   }
 }
 </style>

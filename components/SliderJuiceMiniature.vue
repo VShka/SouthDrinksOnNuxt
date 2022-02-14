@@ -41,6 +41,7 @@ export default {
   background-color: #faf5e9;
 
   border-radius: 100px;
+  border: 2px solid transparent;
 
   cursor: pointer;
 
@@ -52,8 +53,8 @@ export default {
 
     .juice__tooltip {
       opacity: 1;
-      left: 100px;
-      transform: translateX(-5px);
+      left: 95px;
+      transform: translateX(-10px);
       transition: all 0.6s;
     }
   }
@@ -61,7 +62,7 @@ export default {
 .juice__tooltip {
   display: inline-block;
   position: absolute;
-  left: 70px;
+  left: 92px;
   bottom: 25px;
   opacity: 0;
   background: #20b84f;
@@ -72,7 +73,7 @@ export default {
   font-size: 18px;
   padding: 3px 18px;
   transition: all 0.6s;
-  transform: translateX(20px);
+  //transform: translateX(20px);
 
   span {
     position: relative;

@@ -66,9 +66,9 @@
             <p class="h4">Юр. Адрес</p>
             <p class="p">
               Краснодарский край,<br />
-              г. Геленджик, ул. Кирова, 117
+              г. Геленджик, ул. Курзальная, 19
             </p>
-            <p><a href="" class="link">klohkonikita@mail.ru</a></p>
+            <p><a class="link" href="mailto:ooo_kap@mail.ru">ooo_kap@mail.ru</a></p>
           </div>
 
           <div class="footer__item1">
@@ -77,7 +77,7 @@
               Краснодарский край, Динской р-н,<br />
               ст. Динская, ул. Краснодарская, 15 а.
             </p>
-            <p><a href="" class="link">ooo_kap@mail.ru</a></p>
+            <p><a class="link" href="mailto:kap_sklad@mail.ru">kap_sklad@mail.ru</a></p>
           </div>
         </div>
         <div class="main__footer-right">
@@ -320,7 +320,7 @@ export default {
 .footer__policy {
   color: #a9a9a9;
 }
-@media screen and (max-width: 1600px) {
+@media (max-width: 1600px) {
   .main__footer-container {
     flex-direction: column;
     gap: 40px;
@@ -331,7 +331,7 @@ export default {
     margin: 0 40px;
   }
 }
-@media screen and (max-width: 1440px) {
+@media (max-width: 1440px) {
   .footer__container {
     flex-direction: column;
   }
@@ -348,24 +348,31 @@ export default {
     display: flex;
     justify-content: center;
     text-align: center;
+    flex-wrap: wrap;
   }
 }
 
-@media screen and (max-width: 1024px) {
+@media (max-width: 1024px) {
   .footer__down-container {
     flex-direction: column;
     text-align: center;
     gap: 20px;
   }
+  .container {
+    margin: 0 25px;
+  }
 }
-@media screen and (max-width: 768px) {
+@media (max-width: 768px) {
   .footer__nav-phone {
     display: block;
     text-align: center;
   }
 }
-@media screen and (max-width: 425px) {
+@media (max-width: 425px) {
+  .container {
+    margin: 0 15px;
+  }
 }
-@media screen and (max-width: 375px) {
+@media (max-width: 375px) {
 }
 </style>
