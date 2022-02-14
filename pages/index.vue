@@ -38,7 +38,13 @@
             <img
               src="~/assets/img/main_page_slide-img.png"
               alt="Картинка слайда"
-              class="guarantee__slide-img guarantee__slide-img_1"
+              class="guarantee__slide-img"
+            />
+
+            <img
+              src="~/assets/img/main_page_slide-img_mobile.png"
+              alt="Картинка слайда"
+              class="guarantee__slide-img_mobile"
             />
 
             <p class="guarantee__slide-text">
@@ -57,6 +63,12 @@
 
         <swiper-slide>
           <div class="guarantee__slide-container">
+            <img
+              src="~/assets/img/main_page_slide-img_mobile.png"
+              alt="Картинка слайда"
+              class="guarantee__slide-img_mobile"
+            />
+
             <p class="guarantee__slide-text">
               <span>ООО «Кубань Агро-продукт»</span> использует не только сырье лучшего качества, но
               и итальянские технологии производства, упаковки и хранения продукции. Современное
@@ -83,6 +95,7 @@
     <section class="successful">
       <div class="successful__bg_peach"></div>
       <div class="successful__bg"></div>
+      <div class="successful__bg_mobile"></div>
 
       <h2 class="title_main successful__title">Наш залог успеха</h2>
 
@@ -458,7 +471,7 @@ export default {
 .guarantee {
   position: relative;
   margin: 230px 0 400px;
-  height: 923px;
+  height: 700px;
 }
 .guarantee__some-bg {
   position: absolute;
@@ -488,8 +501,8 @@ export default {
   width: 600px;
   filter: drop-shadow(18px 21px 51px rgba(255, 204, 68, 0.2));
 }
-.guarantee__slide-img_1 {
-  border-radius: 10px;
+.guarantee__slide-img_mobile {
+  display: none;
 }
 .guarantee__slide-img_2 {
   transform: scale(-1, 1);
@@ -511,11 +524,11 @@ export default {
 }
 .guarantee__slide-img-bg_1 {
   position: absolute;
-  bottom: 0;
+  bottom: 45px;
   right: -30px;
 
-  width: 730px;
-  height: 730px;
+  width: 678px;
+  height: 668px;
 
   background-image: url('~/assets/img/slide_img_bg_1.png');
   background-size: contain;
@@ -561,6 +574,9 @@ export default {
 
   z-index: -1;
 }
+.successful__bg_mobile {
+  display: none;
+}
 .successful__bg_peach {
   position: absolute;
   top: -430px;
@@ -570,7 +586,7 @@ export default {
   height: 758px;
 
   background-image: url('~/assets/img/peach_bg.png');
-  background-size: auto;
+  background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
 }
@@ -718,6 +734,9 @@ export default {
 }
 
 @media (min-width: 2000px) {
+  .guarantee {
+    height: 800px;
+  }
   .guarantee__some-bg {
     top: -780px;
   }
@@ -756,6 +775,9 @@ export default {
     right: 30px;
   }
 
+  .guarantee {
+    height: 600px;
+  }
   .guarantee__slide-container {
     margin: 0 auto;
     max-width: 90%;
@@ -770,6 +792,12 @@ export default {
     width: 700px;
     height: 700px;
     bottom: 20px;
+  }
+
+  .successful__bg_peach {
+    width: 440px;
+    height: 585px;
+    top: -308px;
   }
 }
 @media (max-width: 1440px) {
@@ -813,7 +841,13 @@ export default {
   }
 
   .guarantee {
-    margin: 110px 0 80px;
+    margin: 110px 0 180px;
+  }
+  .guarantee__some-bg {
+    top: -725px;
+    width: 253px;
+    height: 845px;
+    background-size: contain;
   }
   .guarantee__title {
     padding-left: 60px;
@@ -836,6 +870,12 @@ export default {
     width: 550px;
     height: 550px;
     bottom: 20px;
+  }
+
+  .successful__bg_peach {
+    width: 360px;
+    height: 495px;
+    top: -225px;
   }
 }
 @media (max-width: 1024px) {
@@ -880,8 +920,12 @@ export default {
   }
 
   .guarantee {
-    height: 700px;
-    margin: 50px 0 0;
+    margin: 30px 0 0;
+  }
+  .guarantee__some-bg {
+    top: -315px;
+    width: 117px;
+    height: 387px;
   }
   .guarantee__title {
     padding-left: 25px;
@@ -903,10 +947,20 @@ export default {
     bottom: 24px;
   }
   .guarantee__slide-text {
-    font-size: 16px;
+    font-size: 15px;
+  }
+
+  .successful__bg_peach {
+    width: 295px;
+    height: 390px;
+    top: -150px;
   }
 }
 @media (max-width: 767px) {
+  .title_main {
+    font-size: 30px;
+  }
+
   .header {
     height: 750px;
   }
@@ -939,8 +993,68 @@ export default {
   .header__leaflet_2 {
     top: 120px;
   }
+
+  .guarantee {
+    height: 600px;
+    margin: 30px 0 150px;
+  }
+  .guarantee__some-bg {
+    top: -270px;
+    width: 85px;
+    height: 288px;
+    z-index: 1;
+  }
+  .guarantee__slide-container {
+    flex-direction: column;
+    justify-content: normal;
+    margin: 0 25px;
+    max-width: 100%;
+  }
+  .guarantee__slide-img {
+    display: none;
+  }
+  .guarantee__slide-img_mobile {
+    display: block;
+  }
+  .guarantee__slide-img-bg {
+    display: none;
+  }
+  .guarantee__slide-img-bg_1 {
+    display: none;
+  }
+
+  .successful__bg_peach {
+    display: none;
+  }
+  .successful__bg {
+    display: none;
+  }
+  .successful__bg_mobile {
+    display: block;
+    position: absolute;
+    top: -123px;
+    left: 0;
+
+    width: 100%;
+    height: 1010px;
+
+    background-image: url('~/assets/img/successful_bg_mobile.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    z-index: -1;
+  }
+
+  .swiper-container {
+    height: 100%;
+  }
 }
 @media (max-width: 425px) {
+  .title_main {
+    font-size: 24px;
+  }
+
   .header {
     padding: 40px 15px 0;
   }
@@ -957,6 +1071,22 @@ export default {
   .header__leaflet_4 {
     width: 75px;
   }
+
+  .guarantee {
+    height: 600px;
+    margin: 0 0 150px;
+  }
+  .guarantee__title {
+    padding-left: 15px;
+  }
+  .guarantee__slide-container {
+    margin: 0 15px;
+  }
+  .guarantee__some-bg {
+    top: -130px;
+    width: 40px;
+    height: 130px;
+  }
 }
 </style>
 
@@ -965,5 +1095,12 @@ export default {
   width: 24px;
   height: 24px;
   background: linear-gradient(269.21deg, #ffd25a 0.49%, #ffc52b 100%);
+}
+
+@media (max-width: 425px) {
+  .swiper-pagination-bullet {
+    width: 19px;
+    height: 19px;
+  }
 }
 </style>
