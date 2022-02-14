@@ -5,7 +5,6 @@
         :src="require(`../assets/img/juices/${juice.image.toLowerCase()}.png`)"
         :alt="juice.tooltip"
         class="juice__image"
-        @mousedown.prevent.stop
       />
 
       <div class="juice__info">
@@ -33,10 +32,7 @@
           <div class="juice__additional_first">
             <div class="juice__additional-icon juice__additional-icon_first"></div>
 
-            <span class="juice__additional-text">
-              Без красителей,<br />
-              консервантов и ГМО
-            </span>
+            <span class="juice__additional-text">Без ГМО</span>
           </div>
 
           <div class="juice__additional_second">
@@ -53,10 +49,14 @@
 
     <div class="juice__detail-bottom">
       <div class="juice__composition">
-        <h3 class="juice__composition-title">Состав</h3>
+        <h3 class="juice__composition-title">Состав:</h3>
 
-        <p class="juice__composition-info">
-          {{ juice.composition }}
+        <p class="juice__composition-info juice__composition-info_main">
+          {{ juice.composition.main }}
+        </p>
+
+        <p v-if="juice.composition && juice.composition.additional" class="juice__composition-info">
+          {{ juice.composition.additional }}
         </p>
 
         <h4 class="juice__composition-microelement-title">
@@ -188,7 +188,7 @@ export default {
 }
 .juice__additional {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   gap: 70px;
 
   margin-top: 70px;
@@ -237,6 +237,9 @@ export default {
   font-size: 24px;
   line-height: 28px;
   color: #a6a6a6;
+}
+.juice__composition-info_main {
+  margin-bottom: 20px;
 }
 .juice__composition-microelement-title {
   font-family: Raleway;

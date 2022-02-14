@@ -50,42 +50,44 @@
       </div>
     </div>
 
-    <div v-show="isBurgerMenuOpen" class="mobile-menu">
-      <transition name="fade" mode="out-in">
+    <transition name="fade" mode="out-in">
+      <div v-show="isBurgerMenuOpen" class="mobile-menu">
         <nav class="mobile-menu__navigation">
-          <ul v-show="isBurgerMenuOpen" class="mobile-menu__list">
-            <li class="mobile-menu__item mobile-menu__header">
-              <h3 class="mobile-menu__title">Меню</h3>
-              <div class="mobile-menu__close-btn" @click="closeBurgerMenu"></div>
-            </li>
+          <transition name="slide-fade">
+            <ul v-show="isBurgerMenuOpen" class="mobile-menu__list">
+              <li class="mobile-menu__item mobile-menu__header">
+                <h3 class="mobile-menu__title">Меню</h3>
+                <div class="mobile-menu__close-btn" @click="closeBurgerMenu"></div>
+              </li>
 
-            <li class="mobile-menu__item">
-              <nuxt-link class="mobile-menu__link" to="/">О компании</nuxt-link>
+              <li class="mobile-menu__item" @click="closeBurgerMenu">
+                <nuxt-link class="mobile-menu__link" to="/">О компании</nuxt-link>
 
-              <div v-show="$route.path === '/'" class="mobile-menu__link-active"></div>
-            </li>
-            <li class="mobile-menu__item">
-              <nuxt-link class="mobile-menu__link" to="/product">Продукция</nuxt-link>
+                <div v-show="$route.path === '/'" class="mobile-menu__link-active"></div>
+              </li>
+              <li class="mobile-menu__item" @click="closeBurgerMenu">
+                <nuxt-link class="mobile-menu__link" to="/product">Продукция</nuxt-link>
 
-              <div v-show="$route.path === '/product'" class="mobile-menu__link-active"></div>
-            </li>
-            <li class="mobile-menu__item">
-              <nuxt-link class="mobile-menu__link" to="/contacts">Контакты</nuxt-link>
+                <div v-show="$route.path === '/product'" class="mobile-menu__link-active"></div>
+              </li>
+              <li class="mobile-menu__item" @click="closeBurgerMenu">
+                <nuxt-link class="mobile-menu__link" to="/contacts">Контакты</nuxt-link>
 
-              <div v-show="$route.path === '/contacts'" class="mobile-menu__link-active"></div>
-            </li>
+                <div v-show="$route.path === '/contacts'" class="mobile-menu__link-active"></div>
+              </li>
 
-            <li class="mobile-menu__item mobile-menu__item_column">
-              <p class="mobile-menu__description">Мы на связи:</p>
-              <a class="mobile-menu__link-phone" href="tel:88616265015">8 (86162) 6-50-15</a>
-            </li>
-            <li class="mobile-menu__item">
-              <a class="mobile-menu__link-phone" href="tel:+79182893779">8 (918) 289-37-79</a>
-            </li>
-          </ul>
+              <li class="mobile-menu__item mobile-menu__item_column">
+                <p class="mobile-menu__description">Мы на связи:</p>
+                <a class="mobile-menu__link-phone" href="tel:88616265015">8 (86162) 6-50-15</a>
+              </li>
+              <li class="mobile-menu__item">
+                <a class="mobile-menu__link-phone" href="tel:+79182893779">8 (918) 289-37-79</a>
+              </li>
+            </ul>
+          </transition>
         </nav>
-      </transition>
-    </div>
+      </div>
+    </transition>
   </header>
 </template>
 
@@ -111,12 +113,35 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.fade-enter-active,
+.fade-leave-active {
+  transition: 0.5s ease;
+}
+.fade-enter,
+.fade-leave-to {
+  transform: translateX(-250px);
+  opacity: 0;
+}
+
+.slide-fade-enter-active {
+  transition: all 0.3s ease;
+}
+.slide-fade-leave-active {
+  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.slide-fade-enter,
+.slide-fade-leave-to {
+  transform: translateX(-50px);
+  opacity: 0;
+}
+
 .header-p {
   font-size: 18px;
   font-family: 'Raleway';
 }
 body {
   background-color: #faf5e9;
+  position: relative;
 }
 
 .section {
@@ -163,7 +188,6 @@ body {
 }
 
 .header {
-  position: relative;
   background-color: #faf4e8;
 }
 .header__container {
@@ -339,7 +363,7 @@ body {
 
   .mobile-menu {
     display: block;
-    position: absolute;
+    position: fixed;
     top: 0;
     bottom: 0;
     right: 0;
@@ -347,7 +371,7 @@ body {
     width: 100%;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.3);
-    z-index: 1;
+    z-index: 2;
   }
   .mobile-menu__navigation {
     position: absolute;
@@ -459,6 +483,19 @@ body {
   }
   .mobile-menu__item:first-child {
     padding-bottom: 15px;
+  }
+}
+
+@media (orientation: landscape) and (max-width: 900px) and (min-width: 425px) {
+  .mobile-menu__item:first-child {
+    padding-bottom: 0;
+  }
+  .mobile-menu__navigation {
+    width: 250px;
+    height: 360px;
+  }
+  .mobile-menu__list {
+    padding: 10px 15px 20px 20px;
   }
 }
 </style>
