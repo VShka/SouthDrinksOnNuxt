@@ -124,6 +124,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
+main {
+  overflow-x: hidden;
+}
 .contacts {
   position: relative;
   padding: 100px 100px;
