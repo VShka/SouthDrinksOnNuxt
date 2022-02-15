@@ -119,7 +119,7 @@ export default {
 }
 .fade-enter,
 .fade-leave-to {
-  transform: translateX(-250px);
+  transform: translateX(250px);
   opacity: 0;
 }
 
@@ -127,11 +127,11 @@ export default {
   transition: all 0.3s ease;
 }
 .slide-fade-leave-active {
-  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+  transition: all 0.8s ease;
 }
 .slide-fade-enter,
 .slide-fade-leave-to {
-  transform: translateX(-50px);
+  transform: translateX(50px);
   opacity: 0;
 }
 
@@ -313,7 +313,7 @@ body {
   }
   .header__nav-item {
     font-size: 18px;
-    margin-right: 10px;
+    margin-right: 15px;
   }
   .header__right {
     gap: 20px;
@@ -332,7 +332,6 @@ body {
   }
   .header__nav-item {
     font-size: 16px;
-    margin-right: 7px;
   }
   .header__nav-phone {
     font-size: 16px;

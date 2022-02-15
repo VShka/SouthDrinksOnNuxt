@@ -1,6 +1,8 @@
 <template>
   <div class="juice__detail">
     <div class="juice__detail-top">
+      <h2 class="juice__title_mobile">{{ juice.name.toLowerCase() }}</h2>
+
       <img
         :src="require(`../assets/img/juices/${juice.image.toLowerCase()}.png`)"
         :alt="juice.tooltip"
@@ -10,7 +12,7 @@
       <div class="juice__info">
         <h2 class="juice__title">{{ juice.name.toLowerCase() }}</h2>
 
-        <p class="juice__description">{{ juice.description }}</p>
+        <p v-if="juice.description" class="juice__description">{{ juice.description }}</p>
 
         <p class="juice__benefit">{{ juice.benefit }}</p>
 
@@ -49,9 +51,12 @@
 
     <div class="juice__detail-bottom">
       <div class="juice__composition">
-        <h3 class="juice__composition-title">Состав:</h3>
+        <h3 v-if="juice.composition.main" class="juice__composition-title">Состав:</h3>
 
-        <p class="juice__composition-info juice__composition-info_main">
+        <p
+          v-if="juice.composition.main"
+          class="juice__composition-info juice__composition-info_main"
+        >
           {{ juice.composition.main }}
         </p>
 
@@ -129,6 +134,9 @@ export default {
 
   margin-bottom: 24px;
 }
+.juice__title_mobile {
+  display: none;
+}
 .juice__description {
   margin-bottom: 30px;
 }
@@ -199,6 +207,7 @@ export default {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
+  margin-bottom: 10px;
 
   &_first {
     background-image: url('~/assets/img/additional_first.svg');
@@ -317,5 +326,301 @@ export default {
   color: #a6a6a6;
 
   margin-top: 14px;
+}
+
+@media (max-width: 1440px) {
+  .juice__image {
+    width: 370px;
+  }
+  .juice__fruit-image {
+    width: 375px;
+    height: 375px;
+  }
+  .juice__detail-top {
+    gap: 75px;
+  }
+  .juice__title {
+    font-size: 26px;
+    line-height: 35px;
+  }
+  .juice__benefit {
+    font-size: 20px;
+  }
+  .juice__macronutrients {
+    width: 420px;
+    gap: 75px;
+    padding: 7px 0;
+  }
+  .juice__detail {
+    width: 100%;
+  }
+  .juice__macronutrient-item-info {
+    font-size: 20px;
+    line-height: 110%;
+  }
+  .juice__additional {
+    margin-top: 40px;
+  }
+  .juice__additional-icon {
+    width: 50px;
+    height: 50px;
+  }
+  .juice__additional-text {
+    font-size: 18px;
+    line-height: 130%;
+  }
+  .juice__composition-title {
+    font-size: 26px;
+    line-height: 16px;
+    margin-bottom: 10px;
+  }
+  .juice__composition-info {
+    font-size: 20px;
+  }
+  .juice__detail-bottom {
+    margin: 50px 0 0;
+    gap: 30px;
+  }
+  .juice__composition-microelement-title {
+    margin-top: 45px;
+  }
+  .juice__microelements {
+    margin-top: 20px;
+  }
+
+  .juice__detail-bottom__additional {
+    margin-top: 105px;
+    gap: 160px;
+  }
+  .juice__detail-bottom-title {
+    font-size: 20px;
+  }
+  .juice__detail-bottom-text {
+    font-size: 18px;
+  }
+}
+@media (max-width: 1200px) {
+  .juice__image {
+    width: 295px;
+  }
+  .juice__title {
+    font-size: 24px;
+    line-height: 30px;
+    margin-bottom: 15px;
+  }
+  .juice__description {
+    font-size: 18px;
+  }
+  .juice__benefit {
+    font-size: 18px;
+  }
+  .juice__detail-top {
+    gap: 40px;
+  }
+  .juice__fruit-image {
+    width: 300px;
+    height: 300px;
+  }
+  .juice__detail-bottom {
+    gap: 20px;
+  }
+  .juice__detail-bottom__additional {
+    margin-top: 120px;
+  }
+  .juice__macronutrients {
+    max-width: 100%;
+    width: 100%;
+  }
+  .juice__macronutrient-item-title {
+    font-size: 14px;
+  }
+  .juice__macronutrient-item-info {
+    font-size: 18px;
+  }
+  .juice__macronutrient-inscription {
+    font-size: 12px;
+  }
+  .juice__additional-text {
+    font-size: 16px;
+  }
+  .juice__additional-icon {
+    margin-bottom: 5px;
+  }
+  .juice__microelement-item {
+    width: 120px;
+    height: 120px;
+    font-size: 16px;
+  }
+
+  .juice__composition-title {
+    font-size: 24px;
+  }
+  .juice__composition-info {
+    font-size: 18px;
+  }
+  .juice__composition-microelement-title {
+    margin-top: 25px;
+  }
+  .juice__composition-microelement-title {
+    font-size: 18px;
+  }
+  .juice__detail-bottom-title {
+    font-size: 18px;
+  }
+  .juice__detail-bottom-text {
+    font-size: 16px;
+    line-height: 15px;
+    margin-top: 10px;
+  }
+}
+@media (max-width: 1023px) {
+  .juice__fruit-image {
+    display: none;
+  }
+  .juice__detail-top {
+    flex-direction: column;
+    gap: 0;
+  }
+  .juice__image {
+    margin: 20px 0;
+  }
+  .juice__title {
+    display: none;
+  }
+  .juice__title_mobile {
+    display: block;
+    font-weight: bold;
+    color: #4b4961;
+    font-size: 24px;
+    line-height: 30px;
+    margin-bottom: 0;
+    margin-top: 15px;
+    text-align: center;
+  }
+  .juice__info {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .juice__macronutrients {
+    justify-content: center;
+  }
+  .juice__microelements {
+    gap: 0;
+    justify-content: space-evenly;
+  }
+  .juice__additional {
+    justify-content: center;
+  }
+  .juice__description {
+    font-size: 16px;
+    line-height: 19px;
+    text-align: center;
+  }
+  .juice__benefit {
+    font-size: 16px;
+    line-height: 19px;
+    text-align: center;
+  }
+  .juice__composition {
+    width: 100%;
+  }
+  .juice__composition-title {
+    font-size: 20px;
+  }
+  .juice__composition-info {
+    font-size: 16px;
+  }
+  .juice__macronutrient-inscription {
+    align-self: flex-start;
+  }
+  .juice__additional-icon {
+    width: 40px;
+    height: 40px;
+  }
+  .juice__additional_first {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .juice__additional_second {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .juice__detail-bottom {
+    margin: 30px 0 0;
+  }
+  .juice__detail-bottom__additional {
+    margin-top: 80px;
+    gap: 70px;
+  }
+  .juice__detail-bottom-title {
+    line-height: 22px;
+  }
+  .juice__detail-bottom-text {
+    font-size: 14px;
+  }
+}
+@media (max-width: 767px) {
+  .juice__title_mobile {
+    font-size: 18px;
+    line-height: 25px;
+  }
+  .juice__image {
+    width: 200px;
+  }
+  .juice__macronutrient-item {
+    gap: 0;
+  }
+  .juice__macronutrient-item-title {
+    font-size: 12px;
+    line-height: 18px;
+  }
+  .juice__macronutrient-item-info {
+    font-size: 14px;
+    line-height: 21px;
+  }
+  .juice__macronutrient-inscription {
+    font-size: 10px;
+  }
+  .juice__additional-icon {
+    width: 30px;
+    height: 30px;
+  }
+  .juice__additional-text {
+    font-size: 12px;
+    line-height: 18px;
+  }
+  .juice__composition-title {
+    font-size: 18px;
+  }
+  .juice__composition-info {
+    line-height: 22px;
+  }
+  .juice__detail-bottom__additional {
+    margin-top: 120px;
+  }
+}
+@media (max-width: 425px) {
+  .juice__detail-bottom {
+    display: none;
+  }
+  .juice__detail-bottom__additional {
+    margin-top: 80px;
+    flex-direction: column-reverse;
+    text-align: center;
+    gap: 40px;
+  }
+  .juice__detail-bottom-title {
+    padding-bottom: 10px;
+    &::after {
+      height: 2px;
+      left: 33%;
+    }
+  }
 }
 </style>

@@ -187,6 +187,113 @@
           <span class="filter__item-name"> Сиропы </span>
         </li>
       </ul>
+
+      <div class="filter__container_mobile">
+        <div class="filter-dropdown" :class="{ 'filter-dropdown_opened': isVolumeFilterOpened }">
+          <button class="filter-dropdown__toggle" @click="toggleVolumeFilter">
+            <span> {{ filterByVolume.value }} л </span>
+
+            <span class="filter-dropdown__icon"></span>
+          </button>
+
+          <transition name="fade" mode="out-in">
+            <div v-if="isVolumeFilterOpened" class="filter-dropdown__menu" role="listbox">
+              <button
+                v-for="item in volumeFilters"
+                :id="item.id"
+                :key="item.id"
+                class="filter-dropdown__item"
+                @click="selectVolume(item)"
+              >
+                {{ item.volume }} {{ item.container }}
+              </button>
+            </div>
+          </transition>
+        </div>
+
+        <div class="filter-dropdown" :class="{ 'filter-dropdown_opened': isTypeFilterOpened }">
+          <button
+            class="filter-dropdown__toggle filter-dropdown__toggle_second"
+            @click="isTypeFilterOpened = !isTypeFilterOpened"
+          >
+            <span> {{ filterByType.name }} </span>
+
+            <span class="filter-dropdown__icon filter-dropdown__icon_second"></span>
+          </button>
+          <transition name="fade" mode="out-in">
+            <div
+              v-if="isTypeFilterOpened"
+              class="filter-dropdown__menu filter-dropdown__menu_second"
+              role="listbox"
+            >
+              <button
+                v-for="item in typeFilters"
+                :id="item.id"
+                :key="item.id"
+                class="filter-dropdown__item filter-dropdown__item_second"
+                @click="selectType(item)"
+              >
+                {{ item.name }}
+              </button>
+
+              <button
+                v-if="filterByVolume.id === 'bottleMiddle'"
+                class="filter-dropdown__item filter-dropdown__item_second"
+                @click="selectSyrupType"
+              >
+                Сиропы
+              </button>
+            </div>
+          </transition>
+        </div>
+      </div>
+
+      <div class="slider__container_mobile">
+        <swiper ref="swiper" class="swiper" :options="swiperOption">
+          <swiper-slide
+            v-for="(juice, index) in sortingJuicesByType"
+            :key="juice.id"
+            :class="{ 'juice-miniature_active': currentJuiceMiniature === juice }"
+            @click.native="currentJuiceMiniature = juice"
+          >
+            <SliderJuiceMiniature
+              :juice-miniature="juice.slideMiniature"
+              :juice-tooltip="juice.tooltip"
+              @chooseSlide="chooseSlide(juice, index)"
+            />
+          </swiper-slide>
+        </swiper>
+
+        <div class="button-prev" @mousedown.prevent.stop>
+          <svg
+            width="27"
+            height="17"
+            viewBox="0 0 27 17"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M11.3121 1.33199C12.4972 0.0688275 14.5028 0.068826 15.6879 1.33198L25.6471 11.9474C27.4445 13.8631 26.0861 17 23.4593 17H3.54071C0.913862 17 -0.444463 13.8631 1.35285 11.9474L11.3121 1.33199Z"
+              fill="#C4C4C4"
+            />
+          </svg>
+        </div>
+
+        <div class="button-next" @mousedown.prevent.stop>
+          <svg
+            width="27"
+            height="17"
+            viewBox="0 0 27 17"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M11.3121 15.668C12.4972 16.9312 14.5028 16.9312 15.6879 15.668L25.6471 5.05264C27.4445 3.13692 26.0861 0 23.4593 0H3.54071C0.913862 0 -0.444463 3.13691 1.35285 5.05263L11.3121 15.668Z"
+              fill="#C4C4C4"
+            />
+          </svg>
+        </div>
+      </div>
     </section>
 
     <section class="slider">
@@ -235,6 +342,10 @@
             />
           </svg>
         </div>
+      </div>
+
+      <div class="slider__tooltip_mobile">
+        <span>{{ chosenJuice.tooltip }}</span>
       </div>
 
       <ChosenJuiceDetailInfo :juice="chosenJuice" />
@@ -1938,13 +2049,24 @@ export default {
       filterByType: '',
       chosenJuice: {},
       currentJuiceMiniature: '',
+      isVolumeFilterOpened: false,
+      isTypeFilterOpened: false,
 
       swiperOption: {
-        direction: 'vertical',
-        slidesPerView: 5,
+        direction: 'horizontal',
+        slidesPerView: 3,
         navigation: {
           nextEl: '.button-next',
           prevEl: '.button-prev',
+        },
+        breakpoints: {
+          1200: {
+            direction: 'vertical',
+            slidesPerView: 5,
+          },
+          720: {
+            slidesPerView: 5,
+          },
         },
       },
     };
@@ -1999,6 +2121,7 @@ export default {
       this.filterByVolume = item;
       this.chosenJuice = this.sortingJuicesByType[0];
       this.currentJuiceMiniature = this.chosenJuice;
+      this.isVolumeFilterOpened = false;
 
       if (this.filterByType.type === 'syrup') {
         this.filterByType = this.typeFilters[0];
@@ -2011,6 +2134,7 @@ export default {
       this.filterByType = item;
       this.chosenJuice = this.sortingJuicesByType[0];
       this.currentJuiceMiniature = this.chosenJuice;
+      this.isTypeFilterOpened = false;
       this.swiper.slideTo(0, 500, true);
     },
     selectSyrupType() {
@@ -2021,7 +2145,12 @@ export default {
       };
       this.chosenJuice = this.sortingJuicesByType[0];
       this.currentJuiceMiniature = this.chosenJuice;
+      this.isTypeFilterOpened = false;
       this.swiper.slideTo(0, 500, true);
+    },
+    toggleVolumeFilter() {
+      this.isVolumeFilterOpened = !this.isVolumeFilterOpened;
+      this.isTypeFilterOpened = false;
     },
     chooseSlide(juice, index) {
       // this.swiper.slideTo(index, 500, false);
@@ -2095,7 +2224,7 @@ $primaryFontColor: #4b4961;
 }
 .filter__title {
   font-weight: bold;
-  font-size: 72px;
+  font-size: 64px;
   line-height: 87px;
   color: $primaryFontColor;
 }
@@ -2243,6 +2372,9 @@ $primaryFontColor: #4b4961;
   border-bottom: 1px solid #eaeaea;
   overflow-y: hidden;
 }
+.slider__container_mobile {
+  display: none;
+}
 .slider__bottom-bg {
   width: 100%;
   position: absolute;
@@ -2250,6 +2382,18 @@ $primaryFontColor: #4b4961;
   left: 0;
 
   z-index: -1;
+}
+.slider__tooltip_mobile {
+  display: none;
+  background: #20b84f;
+  border-radius: 6px;
+  color: #fff;
+  font-family: Rubik;
+  white-space: nowrap;
+  font-size: 18px;
+  padding: 3px 18px;
+  transition: all 0.6s;
+  margin: 0 auto;
 }
 
 .juice-miniature_active {
@@ -2278,5 +2422,335 @@ $primaryFontColor: #4b4961;
 }
 .swiper-button-disabled {
   display: none;
+}
+
+.filter-dropdown {
+  position: relative;
+  display: none;
+}
+.filter-dropdown__toggle {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+  background: linear-gradient(269.21deg, #ffd25a 0.49%, #ffc52b 100%);
+  border: none;
+  border-radius: 10px;
+
+  padding: 12px 11px 10px 15px;
+
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 28px;
+  color: #fff;
+  text-align: center;
+
+  transition-duration: 0.2s;
+  transition-property: background-color, fill, color;
+
+  outline: none;
+  box-shadow: none;
+  cursor: pointer;
+  text-decoration: none;
+}
+.filter-dropdown__icon {
+  transform: none;
+  background: url('~@/assets/img/chevron-down.svg') no-repeat;
+  background-size: contain;
+  width: 30px;
+  height: 30px;
+  transition: 0.2s transform;
+}
+.filter-dropdown_opened .filter-dropdown__toggle {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.filter-dropdown_opened .filter-dropdown__toggle .filter-dropdown__icon {
+  transform: rotate(180deg);
+}
+.filter-dropdown__menu {
+  margin: 0;
+  width: 100%;
+  padding: 0;
+  left: 0;
+  z-index: 95;
+  background-clip: padding-box;
+  display: none;
+  flex-direction: column;
+  border: 2px solid var(--blue);
+  border-top: none;
+  overflow: hidden;
+}
+.filter-dropdown_opened .filter-dropdown__menu {
+  display: flex;
+  position: absolute;
+  transform: translate3d(0px, 52px, 0px);
+  top: -1px;
+  left: 0;
+  will-change: transform;
+  right: auto;
+  bottom: auto;
+  transition: 0.5s ease;
+}
+.filter-dropdown__item {
+  padding: 16px 12px;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 28px;
+  background-color: #fff;
+  box-shadow: none;
+  border-left: 1px solid #ffd25a;
+  border-right: 1px solid #ffd25a;
+  cursor: pointer;
+  text-align: left;
+  transition-duration: 0.2s;
+  transition-property: background-color, border-color, color;
+  outline: none;
+  text-decoration: none;
+
+  &:first-child {
+    border-top: 1px solid #ffd25a;
+  }
+  &:last-child {
+    border-bottom: 1px solid #ffd25a;
+    border-radius: 0 0 10px 10px;
+  }
+  &:hover {
+    background-color: #ffd25a;
+  }
+}
+
+.filter-dropdown__toggle_second {
+  background: #fff;
+  border: 1px solid #ffd25a;
+  color: #4b4961;
+  font-weight: 500;
+}
+.filter-dropdown__icon_second {
+  background: url('~@/assets/img/chevron-down_gold.svg') no-repeat;
+  width: 30px;
+  height: 30px;
+  background-size: contain;
+}
+.filter-dropdown__menu_second {
+  z-index: 80;
+}
+.filter-dropdown__item_second {
+  border-left: 1px solid #ffd25a;
+  border-right: 1px solid #ffd25a;
+
+  &:last-child {
+    border-bottom: 1px solid #ffd25a;
+  }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: 0.3s linear;
+}
+.fade-enter,
+.fade-leave-to {
+  transform: translateX(-250px);
+  opacity: 0;
+}
+
+@media (min-width: 2000px) {
+  .slider {
+    justify-content: space-evenly;
+  }
+}
+@media (max-width: 1440px) {
+  .filter {
+    padding: 60px;
+    height: 470px;
+    margin-bottom: 0;
+  }
+  .filter__title {
+    font-size: 50px;
+    line-height: 35px;
+  }
+  .filter__list {
+    margin-top: 35px;
+  }
+  .filter__list_second {
+    margin-top: 50px;
+  }
+  .filter__leaflets-bg_2 {
+    display: none;
+  }
+
+  .slider {
+    padding: 0 60px 70px;
+  }
+  .slider__bottom-bg {
+    bottom: -930px;
+  }
+  .swiper {
+    width: 290px;
+  }
+}
+@media (max-width: 1200px) {
+  .filter__list-item {
+    width: 200px;
+  }
+  .slider {
+    flex-direction: column;
+  }
+  .slider__container {
+    width: 100%;
+  }
+  .slider__bottom-bg {
+    bottom: 0;
+    height: 540px;
+  }
+  .slider__tooltip_mobile {
+    display: inline-block;
+  }
+  .swiper {
+    height: 110px;
+    width: 90%;
+    margin-top: 0;
+  }
+  .swiper .swiper-wrapper {
+    padding-left: 20px;
+  }
+  .button-next {
+    left: unset;
+    bottom: unset;
+    top: 30px;
+    right: 20px;
+    transform: rotate(-90deg);
+  }
+  .button-prev {
+    top: 30px;
+    left: 5px;
+    transform: rotate(-90deg);
+  }
+
+  .juice-miniature_active {
+    .juice-miniature {
+      transform: translateX(0);
+    }
+  }
+}
+@media (max-width: 1024px) {
+  .filter {
+    padding: 40px 25px;
+  }
+  .filter__title {
+    font-size: 36px;
+  }
+  .filter__item-juice-volume {
+    font-size: 24px;
+  }
+  .filter__item-juice-container {
+    font-size: 20px;
+  }
+  .filter__item-name {
+    font-size: 20px;
+  }
+  .filter__leaflets-bg_1 {
+    display: none;
+  }
+  .slider {
+    padding: 0 25px 70px;
+  }
+}
+@media (max-width: 1023px) {
+  .slider__bottom-bg {
+    bottom: 50px;
+  }
+  .filter {
+    height: 425px;
+  }
+  .filter__list {
+    gap: 20px;
+  }
+  .filter__list-item {
+    width: 160px;
+  }
+}
+@media (max-width: 767px) {
+  .button-next {
+    right: 0;
+    z-index: 10;
+  }
+  .button-prev {
+    z-index: 10;
+  }
+  .slider {
+    margin-top: 20px;
+  }
+  .slider__container {
+    display: none;
+  }
+  .slider__container_mobile {
+    display: block;
+    position: relative;
+    margin-top: 100px;
+  }
+  .slider__bottom-bg {
+    height: 580px;
+    bottom: 135px;
+  }
+  .filter {
+    height: 400px;
+  }
+  .filter__title {
+    font-size: 24px;
+    line-height: 30px;
+  }
+  .filter__wave-bg {
+    height: 500px;
+    top: -187px;
+  }
+  .filter__list {
+    display: none;
+  }
+  .filter__list_second {
+    display: none;
+  }
+  .filter-dropdown {
+    display: inline-block;
+  }
+
+  .filter__container_mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 25px;
+  }
+}
+@media (max-width: 425px) {
+  .juice__image {
+    width: 140px;
+  }
+  .slider {
+    margin-top: 0;
+  }
+  .slider__bottom-bg {
+    bottom: 225px;
+  }
+  .slider__tooltip_mobile {
+    font-size: 14px;
+    padding: 3px 10px;
+  }
+  .slider__container_mobile {
+    margin-top: 105px;
+  }
+  .filter-dropdown__toggle {
+    font-size: 16px;
+  }
+  .filter-dropdown__item {
+    font-size: 16px;
+  }
+}
+@media (max-width: 375px) {
+  .button-next {
+    right: -13px;
+  }
+  .button-prev {
+    left: -4px;
+  }
 }
 </style>
