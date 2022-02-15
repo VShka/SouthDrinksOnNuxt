@@ -12,21 +12,32 @@
         </div>
 
         <div id="form" class="footer__form">
-          <form @submit.prevent>
+          <form @submit.prevent="sendForm">
             <div class="form__align">
               <div class="form__align-row">
-                <input type="text" placeholder="Ваше имя" class="input input__up" />
-                <input type="text" placeholder="Номер телефона" class="input input__up" />
+                <input
+                  v-model="formField.name"
+                  type="text"
+                  placeholder="Ваше имя"
+                  class="input input__up"
+                />
+                <input
+                  v-model="formField.phone"
+                  type="text"
+                  placeholder="Номер телефона"
+                  class="input input__up"
+                />
               </div>
 
               <textarea
+                v-model="formField.comment"
                 style="height: 110px; width: 100%"
                 placeholder="Комментарий"
                 class="input textarea"
               />
 
               <div class="form__checkbox-align">
-                <input type="checkbox" class="checkbox" />
+                <input v-model="formField.accept" type="checkbox" class="checkbox" />
                 <p>
                   Даю согласие на обработку персональных данных и подтверждаю свое ознакомление с
                   <a href="" class="link__orange">политикой обработки персональных данных</a>
@@ -34,7 +45,7 @@
                 </p>
               </div>
 
-              <button class="button footer__button">Отправить</button>
+              <button :disabled="formBtnDisabled" class="button footer__button">Отправить</button>
             </div>
           </form>
         </div>
@@ -107,6 +118,48 @@
 <script>
 export default {
   name: 'Footer',
+
+  data() {
+    return {
+      formField: {
+        name: '',
+        phone: '',
+        comment: '',
+        accept: false,
+      },
+    };
+  },
+
+  computed: {
+    formBtnDisabled() {
+      return this.formField.name && this.formField.phone && !this.formField.accept;
+    },
+  },
+
+  methods: {
+    sendForm() {
+      fetch('https://formspree.io/f/xdobgeyz', {
+        method: 'POST',
+        body: JSON.stringify(this.formField),
+        headers: {
+          Accept: 'application/json',
+        },
+      })
+        .then((res) => {
+          if (res.ok) {
+            this.formField.name = '';
+            this.formField.phone = '';
+            this.formField.comment = '';
+            this.formField.accept = false;
+
+            alert('Форма отправлена');
+          } else {
+            alert('Попробуйте ещё раз');
+          }
+        })
+        .catch(() => alert('Возникла проблема при отправке формы.'));
+    },
+  },
 };
 </script>
 
@@ -237,6 +290,14 @@ export default {
     box-shadow: 0px 0px 15px rgba(255, 210, 90, 0.4), inset 0px 4px 4px rgba(0, 0, 0, 0.1);
     transition-duration: 0s;
     background: linear-gradient(269.21deg, #ffd25a 0.49%, #ffc52b 100%);
+  }
+
+  &:disabled {
+    background: #efefef;
+
+    &:hover {
+      box-shadow: none;
+    }
   }
 }
 
