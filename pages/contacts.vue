@@ -30,7 +30,9 @@
         <div class="address__info">
           <h2 class="address__title">Юридический и почтовый адрес</h2>
 
-          <p class="address__text">353460, Краснодарский край, г. Геленджик, ул. Курзальная, 19</p>
+          <p class="address__text address__text_mb">
+            353460, Краснодарский край, г. Геленджик, ул. Курзальная, 19
+          </p>
 
           <p class="address__text">353460, Краснодарский край, Динской район, ст. Динская А/Я 10</p>
 
@@ -107,7 +109,7 @@
         type="text/javascript"
         charset="utf-8"
         async
-        src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A0a220d3ce1e2e203a62c8182b6266a0a13804b8e5cde4aa79df0951578a59951&amp;width=100%25&amp;height=491&amp;lang=ru_RU&amp;scroll=false"
+        src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A0a220d3ce1e2e203a62c8182b6266a0a13804b8e5cde4aa79df0951578a59951&amp;width=100%25&amp;height=100%&amp;lang=ru_RU&amp;scroll=false"
       ></script>
     </div>
   </main>
@@ -124,6 +126,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
+main {
+  overflow-x: hidden;
+}
 .contacts {
   position: relative;
   padding: 100px 100px;
@@ -185,7 +190,7 @@ export default {
   font-family: Montserrat Alternates;
   font-style: normal;
   font-weight: bold;
-  font-size: 72px;
+  font-size: 62px;
   line-height: 88px;
   color: #4b4961;
 
@@ -195,7 +200,7 @@ export default {
   font-family: Montserrat Alternates;
   font-style: normal;
   font-weight: bold;
-  font-size: 36px;
+  font-size: 30px;
   line-height: 44px;
   color: #4b4961;
 }
@@ -245,19 +250,19 @@ export default {
 .address__container {
   display: flex;
   align-items: baseline;
-  gap: 135px;
+  gap: 65px;
 }
 .address__info {
-  flex: 1 0 0;
+  flex: 1 0 50%;
 }
 .address__production {
-  flex: 1 0 0;
+  flex: 1 0 50%;
 }
 .address__email {
   margin: 12px 0 14px;
 }
 .email {
-  text-decoration-line: underline;
+  border-bottom: 1px solid #95979b;
   color: #95979b;
   font-weight: normal;
 }
@@ -308,11 +313,266 @@ export default {
   color: #5b5b5b;
 }
 
+.ymap {
+  height: 491px;
+}
+
 hr {
   width: 90%;
   height: 2px;
   background: #efefef;
 
   margin: 90px 0;
+}
+@media (min-width: 2000px) {
+  .contacts__title {
+    font-size: 72px;
+  }
+  .contacts__phone {
+    font-size: 36px;
+  }
+  .contacts__text {
+    font-size: 28px;
+  }
+}
+@media (max-width: 1440px) {
+  .contacts {
+    padding: 100px 60px;
+  }
+  .contacts__title {
+    font-size: 46px;
+  }
+  .contacts__phone {
+    font-size: 30px;
+  }
+  .contacts__text {
+    font-size: 20px;
+  }
+  .contacts__leaflet_bg1 {
+    background-size: contain;
+    right: 330px;
+  }
+  .contacts__leaflet_bg2 {
+    background-size: contain;
+    top: 130px;
+  }
+  .contacts__leaflet_bg3 {
+    background-size: contain;
+    width: 200px;
+  }
+
+  .address {
+    padding: 0 60px;
+  }
+  .address__title {
+    font-size: 30px;
+    margin-bottom: 20px;
+  }
+  .address__text {
+    font-size: 20px;
+  }
+  .address__phone {
+    font-size: 20px;
+  }
+  .address__container {
+    gap: 55px;
+  }
+  .address__juice-bg {
+    background-size: contain;
+    top: 100px;
+    width: 182px;
+    height: 424px;
+  }
+
+  .company-info__text {
+    font-size: 20px;
+  }
+  .company-info__title {
+    font-size: 20px;
+  }
+
+  hr {
+    margin: 60px 0;
+  }
+}
+@media (max-width: 1024px) {
+  .contacts {
+    padding: 60px 25px;
+  }
+  .contacts__leaflet_bg3 {
+    width: 155px;
+  }
+  .contacts__leaflet_bg2 {
+    top: 118px;
+  }
+  .contacts__leaflet_bg1 {
+    display: none;
+  }
+  .contacts__title {
+    font-size: 36px;
+    margin-bottom: 0;
+  }
+  .contacts__phone {
+    font-size: 24px;
+  }
+  .contacts__text {
+    font-size: 16px;
+    line-height: 22px;
+  }
+
+  .address {
+    padding: 0 25px;
+  }
+  .address__container {
+    gap: 40px;
+  }
+  .address__title {
+    font-size: 24px;
+    line-height: 36px;
+  }
+  .address__text {
+    font-size: 16px;
+    width: 90%;
+  }
+  .address__email {
+    margin: 10px 0;
+  }
+  .address__juice-bg {
+    width: 140px;
+    height: 365px;
+  }
+
+  hr {
+    margin: 40px 0;
+  }
+
+  .company {
+    gap: 100px;
+  }
+  .company-info__text {
+    font-size: 16px;
+  }
+  .company-info__title {
+    font-size: 16px;
+  }
+}
+@media (max-width: 768px) {
+  .contacts {
+    padding: 20px 25px;
+  }
+  .contacts__title {
+    font-size: 30px;
+    line-height: 55px;
+  }
+  .contacts__phone {
+    font-size: 20px;
+    line-height: 30px;
+  }
+  .contacts__leaflet_bg3 {
+    top: -25px;
+  }
+  .contacts__leaflet_bg2 {
+    top: 30px;
+  }
+
+  .address__container {
+    gap: 35px;
+  }
+
+  .ymap {
+    height: 400px;
+  }
+}
+@media (max-width: 767px) {
+  .contacts__leaflet_bg2 {
+    display: none;
+  }
+  .contacts__leaflet_bg3 {
+    display: none;
+  }
+
+  .address__juice-bg {
+    display: none;
+  }
+}
+@media (max-width: 550px) {
+  .contacts {
+    padding: 10px 25px;
+    margin-bottom: 65px;
+  }
+  .contacts__title {
+    font-size: 24px;
+    line-height: 38px;
+    margin-bottom: 5px;
+  }
+  .contacts__phone {
+    line-height: 15px;
+    font-size: 18px;
+  }
+  .contacts__text {
+    font-size: 14px;
+  }
+  .contacts__info {
+    flex-direction: column;
+    gap: 5px;
+  }
+  .contacts__bg {
+    height: 540px;
+  }
+
+  .address__title {
+    font-size: 20px;
+    line-height: 25px;
+    margin-bottom: 15px;
+  }
+  .address__container {
+    flex-direction: column;
+  }
+  .address__text {
+    line-height: 18px;
+  }
+  .address__text_mb {
+    margin-bottom: 15px;
+  }
+  .address__phone {
+    font-size: 16px;
+    line-height: 20px;
+  }
+
+  .company {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    margin-bottom: 30px;
+  }
+  .company-info__text {
+    font-size: 14px;
+    line-height: 26px;
+  }
+  .company-info__title {
+    font-size: 14px;
+    line-height: 26px;
+  }
+
+  .ymap {
+    height: 280px;
+  }
+}
+@media (max-width: 425px) {
+  .contacts {
+    padding: 10px 15px;
+    margin-bottom: 45px;
+  }
+  .contacts__bg {
+    height: 580px;
+  }
+
+  .address {
+    padding: 0 15px;
+  }
+
+  hr {
+    margin: 30px 0;
+  }
 }
 </style>

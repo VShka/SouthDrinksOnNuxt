@@ -29,7 +29,7 @@
                 <input type="checkbox" class="checkbox" />
                 <p>
                   Даю согласие на обработку персональных данных и подтверждаю свое ознакомление с
-                  <a href="" class="link link__orange">политикой обработки персональных данных</a>
+                  <a href="" class="link__orange">политикой обработки персональных данных</a>
                   компании
                 </p>
               </div>
@@ -48,47 +48,49 @@
             ><img src="~/assets/img/logo.png" alt="" class="footer__logo"
           /></nuxt-link>
 
-          <nav>
-            <ol class="footer__nav">
-              <li class="footer__nav-item">
-                <nuxt-link class="link" to="/">О компании ></nuxt-link>
-              </li>
-              <li class="footer__nav-item">
-                <nuxt-link class="link" to="/product">Продукция ></nuxt-link>
-              </li>
-              <li class="footer__nav-item">
-                <nuxt-link class="link" to="/contacts">Контакты ></nuxt-link>
-              </li>
-            </ol>
-          </nav>
+          <ol class="footer__nav">
+            <li class="footer__nav-item">
+              <nuxt-link class="link" to="/">О компании</nuxt-link>
+            </li>
+            <li class="footer__nav-item">
+              <nuxt-link class="link" to="/product">Продукция</nuxt-link>
+            </li>
+            <li class="footer__nav-item">
+              <nuxt-link class="link" to="/contacts">Контакты</nuxt-link>
+            </li>
+          </ol>
 
-          <div class="footer__item1">
-            <p class="h4">Юр. Адрес</p>
-            <p class="p">
-              Краснодарский край,<br />
-              г. Геленджик, ул. Курзальная, 19
-            </p>
-            <p><a class="link" href="mailto:ooo_kap@mail.ru">ooo_kap@mail.ru</a></p>
-          </div>
+          <div class="main__footer-address">
+            <div class="footer__item1">
+              <p class="h4">Юр. Адрес</p>
+              <p class="p">
+                Краснодарский край,<br />
+                г. Геленджик, ул. Курзальная, 19
+              </p>
+              <p class="mail-link">
+                <a class="link" href="mailto:ooo_kap@mail.ru">ooo_kap@mail.ru</a>
+              </p>
+            </div>
 
-          <div class="footer__item1">
-            <p class="h4">Производство</p>
-            <p class="p">
-              Краснодарский край, Динской р-н,<br />
-              ст. Динская, ул. Краснодарская, 15 а.
-            </p>
-            <p><a class="link" href="mailto:kap_sklad@mail.ru">kap_sklad@mail.ru</a></p>
+            <div class="footer__item1">
+              <p class="h4">Производство</p>
+              <p class="p">
+                Краснодарский край, Динской р-н,<br />
+                ст. Динская, ул. Краснодарская, 15 а.
+              </p>
+              <p class="mail-link">
+                <a class="link" href="mailto:kap_sklad@mail.ru">kap_sklad@mail.ru</a>
+              </p>
+            </div>
           </div>
         </div>
         <div class="main__footer-right">
-          <ol>
-            <li class="footer__nav-phone">
-              <a class="link__phone" href="tel:88616265015">8 (86162) 6-50-15</a>
-            </li>
-            <li class="footer__nav-phone">
-              <a class="link__phone" href="tel:+79182893779">8 (918) 289-37-79</a>
-            </li>
-          </ol>
+          <p class="footer__nav-phone">
+            <a class="link__phone" href="tel:88616265015">8 (86162) 6-50-15</a>
+          </p>
+          <p class="footer__nav-phone">
+            <a class="link__phone" href="tel:+79182893779">8 (918) 289-37-79</a>
+          </p>
         </div>
       </div>
     </div>
@@ -195,6 +197,7 @@ export default {
 }
 
 .checkbox {
+  flex-shrink: 0;
   height: 24px;
   width: 24px;
 }
@@ -205,6 +208,10 @@ export default {
 .form__checkbox-align {
   display: flex;
   gap: 15px;
+
+  p {
+    color: #c7c7c7;
+  }
 }
 
 .link__orange {
@@ -238,7 +245,6 @@ export default {
 }
 .main__footer-container {
   display: flex;
-  flex-direction: row;
   align-items: center;
   justify-content: space-between;
   padding: 30px 0;
@@ -250,22 +256,18 @@ export default {
   gap: 100px;
 }
 
-.main__footer-right {
-  display: flex;
-  flex-direction: row;
-  gap: 100px;
-}
-
 .footer__logo {
   width: 186px;
 }
 .footer__nav {
   list-style: none;
+  display: flex;
+  flex-direction: column;
 }
 
 .footer__nav-item {
   font-weight: 400;
-  padding: 7px 0;
+  padding: 9px 0;
   font-size: 18px;
 }
 
@@ -320,15 +322,18 @@ export default {
 .footer__policy {
   color: #a9a9a9;
 }
+.mail-link {
+  text-decoration: underline;
+}
+.main__footer-address {
+  display: flex;
+  align-items: center;
+  gap: 100px;
+}
 @media (max-width: 1600px) {
   .main__footer-container {
     flex-direction: column;
     gap: 40px;
-  }
-
-  .footer__nav-phone {
-    display: inline-flex;
-    margin: 0 40px;
   }
 }
 @media (max-width: 1440px) {
@@ -339,27 +344,77 @@ export default {
     margin-top: 0px;
   }
   .main__footer-left {
-    flex-direction: column;
     gap: 40px;
   }
-  .h4,
-  p,
   link {
     display: flex;
     justify-content: center;
     text-align: center;
     flex-wrap: wrap;
   }
+
+  .h3 {
+    font-size: 42px;
+  }
+
+  .container {
+    margin: 0 60px;
+  }
+  .footer__text {
+    text-align: left;
+  }
+
+  .link__phone {
+    font-size: 16px;
+  }
+  .p {
+    font-size: 16px;
+  }
+  .footer__nav-item {
+    font-size: 16px;
+  }
+  .main__footer-right {
+    display: flex;
+    gap: 20px;
+  }
 }
 
+@media (max-width: 1025px) {
+  .footer__nav {
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+  }
+  .main__footer-address {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
 @media (max-width: 1024px) {
+  .main__footer-left {
+    flex-direction: column;
+  }
   .footer__down-container {
     flex-direction: column;
     text-align: center;
     gap: 20px;
+    padding: 20px 25px;
   }
   .container {
     margin: 0 25px;
+  }
+
+  .main__footer-left {
+    gap: 20px;
+  }
+  .h4 {
+    margin-bottom: 5px;
+  }
+  .h3 {
+    font-size: 36px;
+  }
+  .footer__text {
+    font-size: 18px;
   }
 }
 @media (max-width: 768px) {
@@ -367,10 +422,58 @@ export default {
     display: block;
     text-align: center;
   }
+  .main__footer-address {
+    gap: 50px;
+  }
+  .h3 {
+    font-size: 30px;
+  }
+  .footer__text {
+    font-size: 16px;
+  }
+  .input {
+    font-size: 16px;
+    padding: 10px;
+    border: 1px solid #828282;
+
+    &::placeholder {
+      font-size: 16px;
+      line-height: 28px;
+    }
+  }
+  .form__checkbox-align {
+    p {
+      font-size: 16px;
+    }
+  }
 }
 @media (max-width: 425px) {
   .container {
     margin: 0 15px;
+  }
+  .main__footer-address {
+    gap: 20px;
+  }
+  .h3 {
+    font-size: 22px;
+    margin-bottom: 15px;
+    margin-top: 20px;
+  }
+  .footer__text {
+    font-size: 14px;
+  }
+  .form__align {
+    gap: 10px;
+  }
+  .form__align-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .button {
+    font-size: 16px;
+    padding: 16px;
+    margin-bottom: 36px;
+    margin-top: 10px;
   }
 }
 @media (max-width: 375px) {
