@@ -5,6 +5,7 @@
       alt="Миниатюра сока"
       class="miniature"
     />
+
     <div class="juice__tooltip">
       <span>{{ juiceTooltip }}</span>
     </div>
@@ -73,7 +74,6 @@ export default {
   font-size: 18px;
   padding: 3px 18px;
   transition: all 0.6s;
-  //transform: translateX(20px);
 
   span {
     position: relative;
@@ -88,6 +88,25 @@ export default {
       background-color: #20b84f;
       transform: rotate(45deg);
     }
+  }
+}
+@media (max-width: 1200px) {
+  .juice-miniature {
+    &:hover {
+      transform: translateX(0);
+    }
+  }
+  .juice__tooltip {
+    display: none;
+  }
+}
+@media (max-width: 425px) {
+  .juice-miniature {
+    width: 68px;
+    height: 68px;
+  }
+  .miniature {
+    height: 50px;
   }
 }
 </style>
