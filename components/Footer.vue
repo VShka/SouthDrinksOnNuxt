@@ -48,6 +48,14 @@
               <button :disabled="formBtnDisabled" class="button footer__button">Отправить</button>
             </div>
           </form>
+
+          <p v-if="isFormSend" class="form__result-text form__result-text_accept">
+            Форма успешно отправлена!
+          </p>
+
+          <p v-if="isFormNotSend" class="form__result-text form__result-text_decline">
+            Попробуйте отправить форму повторно.
+          </p>
         </div>
       </div>
     </div>
@@ -127,6 +135,9 @@ export default {
         comment: '',
         accept: false,
       },
+      formSending: false,
+      isFormSend: false,
+      isFormNotSend: false,
     };
   },
 
@@ -138,26 +149,38 @@ export default {
 
   methods: {
     sendForm() {
-      fetch('https://formspree.io/f/xdobgeyz', {
-        method: 'POST',
-        body: JSON.stringify(this.formField),
-        headers: {
-          Accept: 'application/json',
-        },
-      })
-        .then((res) => {
-          if (res.ok) {
-            this.formField.name = '';
-            this.formField.phone = '';
-            this.formField.comment = '';
-            this.formField.accept = false;
-
-            alert('Форма отправлена');
-          } else {
-            alert('Попробуйте ещё раз');
-          }
+      this.isFormSend = false;
+      this.isFormNotSend = false;
+      if (!this.formSending) {
+        this.formSending = true;
+        fetch('https://formspree.io/f/xdobgeyz', {
+          method: 'POST',
+          body: JSON.stringify(this.formField),
+          headers: {
+            Accept: 'application/json',
+          },
         })
-        .catch(() => alert('Возникла проблема при отправке формы.'));
+          .then((res) => {
+            if (res.ok) {
+              this.isFormSend = true;
+
+              this.formField.name = '';
+              this.formField.phone = '';
+              this.formField.comment = '';
+              this.formField.accept = false;
+            } else {
+              this.isFormNotSend = true;
+              this.formSending = false;
+            }
+          })
+          .catch(() => {
+            this.isFormNotSend = true;
+            this.formSending = false;
+          })
+          .finally(() => {
+            this.formSending = false;
+          });
+      }
     },
   },
 };
@@ -216,6 +239,19 @@ export default {
   flex-direction: row;
   gap: 30px;
   justify-content: space-between;
+}
+
+.form__result-text {
+  font-family: Raleway;
+  font-size: 20px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.form__result-text_accept {
+  color: #79b30c;
+}
+.form__result-text_decline {
+  color: #d44747;
 }
 
 .input__up {
@@ -279,7 +315,7 @@ export default {
   border-radius: 10px;
   font-size: 20px;
   transition-duration: 0.5s;
-  margin-bottom: 75px;
+  margin-bottom: 55px;
 
   &:hover {
     box-shadow: 0px 0px 15px rgba(255, 210, 90, 0.6);
@@ -535,6 +571,9 @@ export default {
     padding: 16px;
     margin-bottom: 36px;
     margin-top: 10px;
+  }
+  .form__result-text {
+    font-size: 14px;
   }
 }
 @media (max-width: 375px) {

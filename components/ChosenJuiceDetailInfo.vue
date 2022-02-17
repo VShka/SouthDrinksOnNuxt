@@ -613,9 +613,12 @@ export default {
     margin-top: 80px;
     flex-direction: column-reverse;
     text-align: center;
-    gap: 40px;
-    column-gap: 40px;
-    grid-gap: 40px;
+    gap: 0;
+  }
+  .juice__detail-bottom-container {
+    &:not(:first-child) {
+      margin-bottom: 40px;
+    }
   }
   .juice__detail-bottom-title {
     padding-bottom: 10px;
