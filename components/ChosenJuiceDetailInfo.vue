@@ -614,6 +614,8 @@ export default {
     flex-direction: column-reverse;
     text-align: center;
     gap: 40px;
+    column-gap: 40px;
+    grid-gap: 40px;
   }
   .juice__detail-bottom-title {
     padding-bottom: 10px;
