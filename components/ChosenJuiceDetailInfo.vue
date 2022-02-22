@@ -51,24 +51,27 @@
 
     <div class="juice__detail-bottom">
       <div class="juice__composition">
-        <h3 v-if="juice.composition.main" class="juice__composition-title">Состав:</h3>
+        <h3 v-show="juice.composition.main" class="juice__composition-title">Состав:</h3>
 
         <p
-          v-if="juice.composition.main"
+          v-show="juice.composition.main"
           class="juice__composition-info juice__composition-info_main"
         >
           {{ juice.composition.main }}
         </p>
 
-        <p v-if="juice.composition && juice.composition.additional" class="juice__composition-info">
+        <p
+          v-show="juice.composition && juice.composition.additional"
+          class="juice__composition-info"
+        >
           {{ juice.composition.additional }}
         </p>
 
-        <h4 class="juice__composition-microelement-title">
+        <h4 v-show="juice.type !== 'syrup'" class="juice__composition-microelement-title">
           Один стакан напитка (250мл) содержит витамины:
         </h4>
 
-        <ul class="juice__microelements">
+        <ul v-show="juice.type !== 'syrup'" class="juice__microelements">
           <li
             v-for="item in juice.microelements"
             :key="item.element"
@@ -80,6 +83,7 @@
       </div>
 
       <img
+        v-show="juice.type !== 'syrup'"
         :src="require(`../assets/img/fruits/${juice.fruitImage.toLowerCase()}.png`)"
         alt="Изображение сока"
         class="juice__fruit-image"
@@ -353,6 +357,7 @@ export default {
   }
   .juice__detail {
     width: 100%;
+    margin-top: 20px;
   }
   .juice__macronutrient-item-info {
     font-size: 20px;
@@ -378,7 +383,7 @@ export default {
     font-size: 20px;
   }
   .juice__detail-bottom {
-    margin: 50px 0 0;
+    margin: 170px 0 0;
     gap: 30px;
   }
   .juice__composition-microelement-title {
@@ -422,6 +427,7 @@ export default {
     height: 300px;
   }
   .juice__detail-bottom {
+    margin: 50px 0 0;
     gap: 20px;
   }
   .juice__detail-bottom__additional {

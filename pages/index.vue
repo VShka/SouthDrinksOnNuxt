@@ -287,6 +287,11 @@ const partners = [
     icon: 'partner_pobeda',
     name: 'Победа',
   },
+  {
+    id: 8,
+    icon: 'partner_svetofor',
+    name: 'Светофор',
+  },
 ];
 export default {
   name: 'Home',
@@ -728,7 +733,7 @@ export default {
   flex-wrap: wrap;
 }
 .partners-list__item-image {
-  width: 180px;
+  width: 200px;
 }
 .partners__title {
   margin-bottom: 130px;
